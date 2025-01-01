@@ -1,0 +1,1682 @@
+openapi: 3.0.1
+info:
+  title: ValkyrAI API
+
+  description: The API for accessing the ValkyrAI Developer Portal
+  termsOfService: http://valkyrai.pro/tos/
+  contact:
+    email: info@valkyrai.pro
+  license:
+    name: AGPL 3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+  version: 0.9.25
+
+externalDocs:
+  description: Learn more about Valkyr Labs Inc
+  url: https://docs.valkyrai.pro/docs
+
+servers:
+  - url: /
+
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: users
+    description: Operations available to regular users
+
+paths:
+
+
+
+  /User:
+    get:
+      tags:
+        - User
+      summary: Retrieve a list of Users
+      description: Retrieves a list of Users.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of Users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: No Users were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - User
+      summary: Create a new User
+      description: Creates a new User.
+      requestBody:
+        description: User details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input.
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
+
+
+  /User/{id}:
+    get:
+      tags:
+        - User
+      summary: Retrieve a User
+      description: Retrieves a User for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the User.
+
+      responses:
+        '200':
+          description: Successfully retrieved Users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - User
+      summary: Update an existingUser
+      description: Updates an existing User.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the User.
+
+      requestBody:
+        description: Updated User details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input.
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - User
+      summary: Delete a User.
+      description: Deletes a specific User.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the User.
+
+      responses:
+        '204':
+          description: User deleted successfully.
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /Organization:
+    get:
+      tags:
+        - Organization
+      summary: Retrieve a list of Organizations
+      description: Retrieves a list of Organizations.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of Organizations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+        '404':
+          description: No Organizations were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - Organization
+      summary: Create a new Organization
+      description: Creates a new Organization.
+      requestBody:
+        description: Organization details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '201':
+          description: Organization created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Organization not found.
+        '500':
+          description: Internal server error.
+
+
+  /Organization/{id}:
+    get:
+      tags:
+        - Organization
+      summary: Retrieve a Organization
+      description: Retrieves a Organization for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Organization.
+
+      responses:
+        '200':
+          description: Successfully retrieved Organizations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '404':
+          description: Organization not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - Organization
+      summary: Update an existingOrganization
+      description: Updates an existing Organization.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the Organization.
+
+      requestBody:
+        description: Updated Organization details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '200':
+          description: Organization updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Organization not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - Organization
+      summary: Delete a Organization.
+      description: Deletes a specific Organization.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Organization.
+
+      responses:
+        '204':
+          description: Organization deleted successfully.
+        '404':
+          description: Organization not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /Address:
+    get:
+      tags:
+        - Address
+      summary: Retrieve a list of Addresss
+      description: Retrieves a list of Addresss.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of Addresss.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+        '404':
+          description: No Addresss were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - Address
+      summary: Create a new Address
+      description: Creates a new Address.
+      requestBody:
+        description: Address details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '201':
+          description: Address created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Address not found.
+        '500':
+          description: Internal server error.
+
+
+  /Address/{id}:
+    get:
+      tags:
+        - Address
+      summary: Retrieve a Address
+      description: Retrieves a Address for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Address.
+
+      responses:
+        '200':
+          description: Successfully retrieved Addresss.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '404':
+          description: Address not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - Address
+      summary: Update an existingAddress
+      description: Updates an existing Address.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the Address.
+
+      requestBody:
+        description: Updated Address details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '200':
+          description: Address updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Address not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - Address
+      summary: Delete a Address.
+      description: Deletes a specific Address.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Address.
+
+      responses:
+        '204':
+          description: Address deleted successfully.
+        '404':
+          description: Address not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /Track:
+    get:
+      tags:
+        - Track
+      summary: Retrieve a list of Tracks
+      description: Retrieves a list of Tracks.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of Tracks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Track'
+        '404':
+          description: No Tracks were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - Track
+      summary: Create a new Track
+      description: Creates a new Track.
+      requestBody:
+        description: Track details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '201':
+          description: Track created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Track not found.
+        '500':
+          description: Internal server error.
+
+
+  /Track/{id}:
+    get:
+      tags:
+        - Track
+      summary: Retrieve a Track
+      description: Retrieves a Track for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Track.
+
+      responses:
+        '200':
+          description: Successfully retrieved Tracks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '404':
+          description: Track not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - Track
+      summary: Update an existingTrack
+      description: Updates an existing Track.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the Track.
+
+      requestBody:
+        description: Updated Track details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '200':
+          description: Track updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Invalid input.
+        '404':
+          description: Track not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - Track
+      summary: Delete a Track.
+      description: Deletes a specific Track.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the Track.
+
+      responses:
+        '204':
+          description: Track deleted successfully.
+        '404':
+          description: Track not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /TrackSetting:
+    get:
+      tags:
+        - TrackSetting
+      summary: Retrieve a list of TrackSettings
+      description: Retrieves a list of TrackSettings.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of TrackSettings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrackSetting'
+        '404':
+          description: No TrackSettings were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - TrackSetting
+      summary: Create a new TrackSetting
+      description: Creates a new TrackSetting.
+      requestBody:
+        description: TrackSetting details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackSetting'
+      responses:
+        '201':
+          description: TrackSetting created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackSetting'
+        '400':
+          description: Invalid input.
+        '404':
+          description: TrackSetting not found.
+        '500':
+          description: Internal server error.
+
+
+  /TrackSetting/{id}:
+    get:
+      tags:
+        - TrackSetting
+      summary: Retrieve a TrackSetting
+      description: Retrieves a TrackSetting for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the TrackSetting.
+
+      responses:
+        '200':
+          description: Successfully retrieved TrackSettings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackSetting'
+        '404':
+          description: TrackSetting not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - TrackSetting
+      summary: Update an existingTrackSetting
+      description: Updates an existing TrackSetting.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the TrackSetting.
+
+      requestBody:
+        description: Updated TrackSetting details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackSetting'
+      responses:
+        '200':
+          description: TrackSetting updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackSetting'
+        '400':
+          description: Invalid input.
+        '404':
+          description: TrackSetting not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - TrackSetting
+      summary: Delete a TrackSetting.
+      description: Deletes a specific TrackSetting.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the TrackSetting.
+
+      responses:
+        '204':
+          description: TrackSetting deleted successfully.
+        '404':
+          description: TrackSetting not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /SpatialAudioEvent:
+    get:
+      tags:
+        - SpatialAudioEvent
+      summary: Retrieve a list of SpatialAudioEvents
+      description: Retrieves a list of SpatialAudioEvents.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of SpatialAudioEvents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpatialAudioEvent'
+        '404':
+          description: No SpatialAudioEvents were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - SpatialAudioEvent
+      summary: Create a new SpatialAudioEvent
+      description: Creates a new SpatialAudioEvent.
+      requestBody:
+        description: SpatialAudioEvent details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpatialAudioEvent'
+      responses:
+        '201':
+          description: SpatialAudioEvent created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpatialAudioEvent'
+        '400':
+          description: Invalid input.
+        '404':
+          description: SpatialAudioEvent not found.
+        '500':
+          description: Internal server error.
+
+
+  /SpatialAudioEvent/{id}:
+    get:
+      tags:
+        - SpatialAudioEvent
+      summary: Retrieve a SpatialAudioEvent
+      description: Retrieves a SpatialAudioEvent for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the SpatialAudioEvent.
+
+      responses:
+        '200':
+          description: Successfully retrieved SpatialAudioEvents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpatialAudioEvent'
+        '404':
+          description: SpatialAudioEvent not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - SpatialAudioEvent
+      summary: Update an existingSpatialAudioEvent
+      description: Updates an existing SpatialAudioEvent.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the SpatialAudioEvent.
+
+      requestBody:
+        description: Updated SpatialAudioEvent details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpatialAudioEvent'
+      responses:
+        '200':
+          description: SpatialAudioEvent updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpatialAudioEvent'
+        '400':
+          description: Invalid input.
+        '404':
+          description: SpatialAudioEvent not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - SpatialAudioEvent
+      summary: Delete a SpatialAudioEvent.
+      description: Deletes a specific SpatialAudioEvent.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the SpatialAudioEvent.
+
+      responses:
+        '204':
+          description: SpatialAudioEvent deleted successfully.
+        '404':
+          description: SpatialAudioEvent not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /ThorUXMeta:
+    get:
+      tags:
+        - ThorUXMeta
+      summary: Retrieve a list of ThorUXMetas
+      description: Retrieves a list of ThorUXMetas.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of ThorUXMetas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThorUXMeta'
+        '404':
+          description: No ThorUXMetas were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - ThorUXMeta
+      summary: Create a new ThorUXMeta
+      description: Creates a new ThorUXMeta.
+      requestBody:
+        description: ThorUXMeta details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThorUXMeta'
+      responses:
+        '201':
+          description: ThorUXMeta created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXMeta'
+        '400':
+          description: Invalid input.
+        '404':
+          description: ThorUXMeta not found.
+        '500':
+          description: Internal server error.
+
+
+  /ThorUXMeta/{id}:
+    get:
+      tags:
+        - ThorUXMeta
+      summary: Retrieve a ThorUXMeta
+      description: Retrieves a ThorUXMeta for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the ThorUXMeta.
+
+      responses:
+        '200':
+          description: Successfully retrieved ThorUXMetas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXMeta'
+        '404':
+          description: ThorUXMeta not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - ThorUXMeta
+      summary: Update an existingThorUXMeta
+      description: Updates an existing ThorUXMeta.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the ThorUXMeta.
+
+      requestBody:
+        description: Updated ThorUXMeta details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThorUXMeta'
+      responses:
+        '200':
+          description: ThorUXMeta updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXMeta'
+        '400':
+          description: Invalid input.
+        '404':
+          description: ThorUXMeta not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - ThorUXMeta
+      summary: Delete a ThorUXMeta.
+      description: Deletes a specific ThorUXMeta.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the ThorUXMeta.
+
+      responses:
+        '204':
+          description: ThorUXMeta deleted successfully.
+        '404':
+          description: ThorUXMeta not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+  /ThorUXComponent:
+    get:
+      tags:
+        - ThorUXComponent
+      summary: Retrieve a list of ThorUXComponents
+      description: Retrieves a list of ThorUXComponents.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of ThorUXComponents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThorUXComponent'
+        '404':
+          description: No ThorUXComponents were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - ThorUXComponent
+      summary: Create a new ThorUXComponent
+      description: Creates a new ThorUXComponent.
+      requestBody:
+        description: ThorUXComponent details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThorUXComponent'
+      responses:
+        '201':
+          description: ThorUXComponent created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXComponent'
+        '400':
+          description: Invalid input.
+        '404':
+          description: ThorUXComponent not found.
+        '500':
+          description: Internal server error.
+
+
+  /ThorUXComponent/{id}:
+    get:
+      tags:
+        - ThorUXComponent
+      summary: Retrieve a ThorUXComponent
+      description: Retrieves a ThorUXComponent for a specific uid.
+      x-spring-cacheable: true
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the ThorUXComponent.
+
+      responses:
+        '200':
+          description: Successfully retrieved ThorUXComponents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXComponent'
+        '404':
+          description: ThorUXComponent not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - ThorUXComponent
+      summary: Update an existingThorUXComponent
+      description: Updates an existing ThorUXComponent.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: false
+          description: Unique identifier for the ThorUXComponent.
+
+      requestBody:
+        description: Updated ThorUXComponent details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThorUXComponent'
+      responses:
+        '200':
+          description: ThorUXComponent updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorUXComponent'
+        '400':
+          description: Invalid input.
+        '404':
+          description: ThorUXComponent not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - ThorUXComponent
+      summary: Delete a ThorUXComponent.
+      description: Deletes a specific ThorUXComponent.
+      parameters:
+        - name: id
+          schema:
+            type: string
+          format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the ThorUXComponent.
+
+      responses:
+        '204':
+          description: ThorUXComponent deleted successfully.
+        '404':
+          description: ThorUXComponent not found.
+        '500':
+          description: Internal server error.
+
+
+
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object to retrieve.
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+
+## Basic Functionality Section
+
+    User:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name of user (encrypted)
+          example: Karena
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true
+        middleName:
+          type: string
+          description: middle name of user
+          example: Jane
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true          
+        lastName:
+          type: string
+          description: last name of user (encrypted)
+          example: Harmony
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true
+        userName:
+          maxLength: 50
+          minLength: 4
+          type: string
+          description: Your account Username
+          example: Sparky
+          x-thorapi-dataField: fieldGroup=personal-details, unique=true
+        password:
+          maxLength: 35
+          minLength: 8
+          type: string
+          description: Your account Password
+          format: password
+          example: HardToGuess1980
+          x-thorapi-dataField: hidden=true, advanced=true
+          x-thorapi-secureField: true, Type=HASHED, strength=5
+        fingerprint:
+          type: string
+          description: Encrypted identity (Facial Recognition, Fingerprint Scanner,
+            etc.)
+          readOnly: true
+          example: DK$DFSJaraDD
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        federalIdentification:
+          minLength: 11
+          maxLength: 11
+          pattern: ^\d{3}-\d{2}-\d{4}$
+          default: 333-22-4444
+          type: string
+          description: SSN or a 10 digit federal government ID (encrypted)
+          example: "111-22-3333"
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        residenceCountry:
+          minLength: 3
+          maxLength: 3
+          type: string
+          description: Country of residence 3-character code
+          example: USA
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        stateIdentification:
+          minLength: 10
+          maxLength: 10
+          pattern: ^\d{10}$
+          type: string
+          description: Driver's License or a 10 digit state government ID
+          example: 3333333333
+          default: 2222222222
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        residenceState:
+          minLength: 2
+          maxLength: 2
+          type: string
+          description: State of residence 2-character code (USA)
+          example: CA
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        email:
+          pattern: ^.+@[^.].*.[a-z]{2,}$
+          type: string
+          description: The main email address for the user (encrypted)
+          format: email
+          example: wiley.coyote@acme-corp.com
+          x-thorapi-dataField: fieldGroup=personal-details, unique=true
+          x-thorapi-secureField: true
+        social:
+          type: string
+          description: The username for your primary social account (if any)
+          format: url
+          example: https://twitter.com/ValkyrAI
+        bio:
+          type: string
+          description: More in-depth information about you and your account
+          format: url
+          example: https://twitter.com/ValkyrAI
+        avatar_url:
+          type: string
+          description: URL for user avatar image
+          format: url
+          example: https://img.com/mypic.png
+        
+        # for now one per user
+        organizationId:
+          type: integer
+          format: int64
+        organization:
+          $ref: '#/components/schemas/Organization'
+        
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+
+        # Spring Security section
+        enabled:
+          type: boolean
+          description: Spring Security User field whether the user is enabled
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        credentialNonExpired:
+          type: boolean
+          description: Spring Security User field whether the user's login credentials
+            have expired
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountEnabled:
+          type: boolean
+          description: Spring Security User field whether the user account is enabled
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountNonLocked:
+          type: boolean
+          description: Spring Security User field whether the user account is locked
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountNonExpired:
+          type: boolean
+          description: Spring Security User field whether the user account has expired
+          default: false
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+
+        roles:
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+          description: the granted roles (or <code>null</code> if the granted authority cannot be expressed as a <code>String</code> with sufficient precision).
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+
+        authorities:
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+          description: the granted authorities (or <code>null</code> if the granted authority cannot be expressed as a <code>String</code> with sufficient precision).
+          type: array
+          items:
+            $ref: '#/components/schemas/Authority'
+          
+      xml:
+        name: User
+        
+    Organization:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: ACME Corp Inc.
+        homePage:
+          type: string
+          format: url
+          example: https://www.acme-corp.com
+        phone:
+          type: string
+          example: 415-867-5309
+        addressId:
+          type: integer
+          format: int64
+      xml:
+        name: Organization
+
+    Address:
+      required:
+        - city
+        - name
+        - state
+        - street1
+        - zip
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        addressType:
+          type: string
+          description: The type of address
+          enum:
+            - home
+            - mailing
+            - work
+            - school
+            - other
+          example: "home"          
+        name:
+          type: string
+          description: full name of addressee
+          example: Henry Johnson
+        street1:
+          type: string
+          description: street address line 1
+          example: 123 Daydream Blvd.
+        street2:
+          type: string
+          description: street address line 2
+          example: Apt. 7
+        city:
+          type: string
+          description: full name of city
+          example: San Francisco
+        state:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: 2 character state code (upper case)
+        zip:
+          maxLength: 10
+          minLength: 10
+          type: string
+          pattern: ^\d{5}-\d{4}$
+          description: 5+4 digit zip code
+          example: "94210-0000"
+      xml:
+        name: Address
+
+## Audio Section
+
+    Track:
+      required:
+        - settings
+      type: object
+      properties:
+        name:
+          type: string
+          description: A unique display name for the media track.
+          example: "Microphone 1"
+        
+        settings:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackSetting'
+        
+        spatialAudioEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpatialAudioEvent'            
+      description: Represents the configuration settings over time for a media track.
+      xml:
+        name: Track
+
+    TrackSetting:
+      required:
+        - trackId
+      type: object
+      properties:
+        trackId:
+          type: number
+          format: int64
+          description: The unique identifier for the track configuration.
+        timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the media event.
+          example: "2023-08-21T18:25:43.511Z"
+        inputGainDB:
+          type: number
+          format: double
+          minimum: -10.0
+          maximum: 10.0
+          description: Decibel based gain adjustment for the track, from -10 dB to +10 dB.
+          example: 3.23
+        outputGainRel:
+          type: number
+          description: Relative gain adjustment for the track, from 0 dB to 1 dB.
+          example: 0.5
+          minimum: 0.0
+          maximum: 1.0
+
+      description: Represents the settings for a media track.
+      xml:
+        name: TrackSetting
+
+    # 3D audio event represents the motion and "size" of a sound input
+    SpatialAudioEvent:
+      required:
+        - trackId
+      type: object
+      properties:
+        trackId:
+          type: number
+          format: int64
+          description: The unique identifier for the track configuration.
+        timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the audio event.
+          example: "2023-08-21T18:25:43.511Z"
+        
+        # TODO: create a cooler object
+        X:           
+          type: number
+          format: double
+          minimum: -1.0.
+          maximum: 1.0,
+          description: 1-based audio node X position, from -1.0 x to +1.0 x.
+          example: 0.22
+        Y:           
+          type: number
+          format: double
+          minimum: -1.0.
+          maximum: 1.0,
+          description: 1-based audio node Y position, from -1.0 y to +1.0 y.
+          example: 0.22
+        Z:           
+          type: number
+          format: double
+          minimum: -1.0.
+          maximum: 1.0,
+          description: 1-based audio node Z position, from -1.0 z to +1.0 z.
+          example: 0.22  
+        L:           
+          type: number
+          format: double
+          minimum: 0.0
+          description: 1-based audio node length dimension in relative units, 0.0 to 2,147,483,647.
+          example: 0.22
+        W:           
+          type: number
+          format: double
+          minimum: 0.0
+          description: 1-based audio node width dimension in relative units, 0.0 to 2,147,483,647.
+          example: 0.23
+        H:           
+          type: number
+          format: double
+          minimum: 0.0
+          description: 1-based audio node height dimension in relative units, 0.0 to 2,147,483,647.
+          example: 0.24  
+
+        spatialEffect:
+          type: string
+          description: The audio effect.
+          enum:
+            - distortion
+            - saturation
+            - reverb
+            - flange
+            - echo
+          example: "reverb"
+        effectAmount:
+          type: integer
+          description: Level of selected effect, from 0 (none) to 1 (maximum).
+          example: 50
+      description: Represents the configuration settings for a spatial audio node.
+      xml:
+        name: SpatialAudioEvent
+
+    ## THORUX Section    
+    ThorUXMeta:
+      type: object
+      description: Metadata for ThorUX components.
+      properties:
+        thoruxComponents:
+          type: string
+          description: Temporary string holder for config data.
+          example: "theme: odin, locale: en"
+
+    ThorUXComponent:
+      type: object
+      properties:
+        componentType:
+          type: string
+          description: The type of the UX component.
+          example: "button"
+        status:
+          type: string
+          description: The status of the component in the UX.
+          enum:
+            - ready
+            - pending
+            - disabled 
+            - hidden
+          example: "ready"
+        settings:
+          type: string
+          description: The option for the component in the UX.
+          enum:
+            - opt1
+            - opt2
+            - opt3 
+            - opt4
+          example: "opt1"
+
+## Spring Security section
+
+    PersistentLogin:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 64
+        series:
+          type: string
+          maxLength: 64
+        token:
+          type: string
+          maxLength: 64
+        last_used:
+          type: string
+          format: date-time
+      required:
+        - username
+        - series
+        - token
+        - last_used
+
+    Role:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        roleName:
+          type: string
+          description: the role
+          enum:
+            - ANONYMOUS
+            - CUSTOMER
+            - STAFF 
+            - ADMIN
+          default: "ANONYMOUS"
+          
+    Authority:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+          maxLength: 50
+        authority:
+          type: string
+          maxLength: 50
+      required:
+        - username
+        - authority
+
+    AclSid:
+      type: object
+      properties:
+        sid:
+          type: string
+          maxLength: 245
+          nullable: true
+        principal:
+          type: integer
+          format: int32
+          nullable: true
+
+    AclClass:
+      type: object
+      properties:
+        class:
+          type: string
+          maxLength: 245
+          nullable: true
+
+    AclObjectIdentity:
+      type: object
+      properties:
+        object_id_class:
+          type: integer
+          format: int64
+          nullable: true
+        object_id_identity:
+          type: integer
+          format: int64
+          nullable: true
+        parent_object:
+          type: integer
+          format: int64
+          nullable: true
+        owner_sid:
+          type: integer
+          format: int64
+          nullable: true
+        entries_inheriting:
+          type: integer
+          format: int32
+          nullable: true
+
+    AclEntry:
+      type: object
+      properties:
+        acl_object_identity:
+          type: integer
+          format: int64
+          nullable: true
+        ace_order:
+          type: integer
+          format: int32
+          nullable: true
+        sid:
+          type: integer
+          format: int64
+          nullable: true
+        mask:
+          type: integer
+          format: int32
+          nullable: true
+        granting:
+          type: integer
+          format: int32
+          nullable: true
+        audit_success:
+          type: integer
+          format: int32
+          nullable: true
+        audit_failure:
+          type: integer
+          format: int32
+          nullable: true
+
+
+  securitySchemes:
+
+    thorapi_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://{username}.valkyrai.pro:{port}/oauth
+          scopes:
+            write:items: modify owned items
+            read:items: read owned items

@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: ValkyrAI API
+
+  description: The API for accessing the ValkyrAI Developer Portal
+  termsOfService: http://valkyrai.pro/tos/
+  contact:
+    email: info@valkyrai.pro
+  license:
+    name: AGPL 3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+  version: 0.9.25
+
+externalDocs:
+  description: Learn more about Valkyr Labs
+  url: https://docs.valkyrai.pro/docs
+
+servers:
+  - url: /
+
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: users
+    description: Operations available to regular users
+
+paths:
+
+  /UserAccount:
+    get:
+      tags:
+        - UserAccount
+      summary: Retrieve a list of UserAccounts
+      description: Retrieves a list of UserAccounts.
+      x-spring-cacheable: true
+      responses:
+        '200':
+          description: Successfully retrieved the list of UserAccounts.
+
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object to retrieve.
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+
+## Basic Functionality Section
+
+    UserAccount:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name of person (encrypted)
+          example: Karena
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true
+        lastName:
+          type: string
+          description: last name of person (encrypted)
+          example: Jones
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true
