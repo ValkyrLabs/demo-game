@@ -1,0 +1,174 @@
+package com.valkyrlabs.model;
+
+import com.valkyrlabs.api.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.valkyrlabs.api.ThorGrantedAuthority;
+import com.valkyrlabs.api.ThorUserService;
+
+import jakarta.persistence.Entity;
+
+/**
+ * SYSTEM USER information retrieved by {@link ThorUserService}.
+ * 
+ * Note that this implementation is not immutable. It implements the
+ * {@code CredentialsContainer} interface, in order to allow the password to be erased
+ * after authentication. This may cause side-effects if you are storing instances
+ * in-memory and reusing them. If so, make sure you return a copy from your
+ * {@code UserDetailsService} each time it is invoked.
+ *
+ */
+ @Entity
+public class ThorUser extends com.valkyrlabs.model.Principal implements UserDetails, CredentialsContainer {
+
+	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+	protected static final Logger logger = LoggerFactory.getLogger(ThorUser.class);
+
+	public Collection<GrantedAuthority> getAuthorities() {
+		// convert to
+		Collection<GrantedAuthority> returnlist = new ArrayList<GrantedAuthority>();
+		List<Authority> authorities = super.getAuthorityList();
+		for (Authority auth : authorities) {
+			logger.info("initializing Authority: {}", auth);
+			returnlist.add(new ThorGrantedAuthority(auth));
+		}
+		return returnlist;
+	}
+
+	public void eraseCredentials() {
+		logger.info("Erase Credentials called on: " + this.toString());
+		super.setPassword(null);
+		// super.setAuthorities(null);
+		// super.setCredentials(null);
+		// TOOD: persist?
+	}
+
+	private String keyHash = "";
+
+	/**
+	 * Returns the keyHash for the key used to encrypt the user Secure Fields.
+	 * Cannot return <code>null</code>.
+	 * 
+	 * @return the keyHash
+	 */
+	public String getKeyHash() {
+		return keyHash;
+	}
+	
+	/**
+	 * Indicates whether the user's account has expired. An expired account cannot
+	 * be authenticated.
+	 * 
+	 * @return <code>true</code> if the user's account is valid (ie non-expired),
+	 *         <code>false</code> if no longer valid (ie expired)
+	 */
+	public boolean isAccountNonExpired() {
+		return super.getAccountNonExpired();
+	}
+
+	/**
+	 * Indicates whether the user is locked or unlocked. A locked user cannot be
+	 * authenticated.
+	 * 
+	 * @return <code>true</code> if the user is not locked, <code>false</code>
+	 *         otherwise
+	 */
+	public boolean isAccountNonLocked() {
+		return super.getAccountNonLocked();
+	}
+
+	/**
+	 * Indicates whether the user's credentials (password) has expired. Expired
+	 * credentials prevent authentication.
+	 * 
+	 * @return <code>true</code> if the user's credentials are valid (ie
+	 *         non-expired), <code>false</code> if no longer valid (ie expired)
+	 */
+	public boolean isCredentialsNonExpired() {
+		return super.getCredentialNonExpired();
+	}
+
+	/**
+	 * Indicates whether the user is enabled or disabled. A disabled user cannot be
+	 * authenticated.
+	 * 
+	 * @return <code>true</code> if the user is enabled, <code>false</code>
+	 *         otherwise
+	 */
+	public boolean isEnabled() {
+		return super.getEnabled();
+	}
+
+	/*
+	 * Validate and sort the authorities per UserDetails.getAuthorities()* contract
+	 * and SEC-717)
+	 * 
+	 * static Set<GrantedAuthority> sortAuthorities(Set<GrantedAuthority>
+	 * authorities) {
+	 * logger.info("TODO: SANITIZE AUHTORITIES {} AND VALIDATE AGAINST KNOWN LIST",
+	 * authorities.toString()); if (authorities == null) {
+	 * logger.warn("Attempting to sort a null Authority List. Skipping"); return
+	 * null; } // Ensure array iteration order is predictable
+	 * SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new
+	 * AuthorityComparator()); for (GrantedAuthority grantedAuthority : authorities)
+	 * {
+	 * 
+	 * if (grantedAuthority == null) {
+	 * logger.error("GrantedAuthority list cannot contain any null elements"); }
+	 * else { logger.info("Adding {} to GrantedAuthority list.", grantedAuthority);
+	 * sortedAuthorities.add(grantedAuthority); } } return sortedAuthorities; }
+	 */
+	/**
+	 * Returns {@code true} if the supplied object is a {@code Principal} instance with
+	 * the same {@code username} value.
+	 * <p>
+	 * In other words, the objects are equal if they have the same username,
+	 * representing the same principal.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ThorUser) {
+			return getUsername().equals(((ThorUser) obj).getUsername());
+		}
+		return false;
+	}
+
+	/**
+	 * Returns the hashcode of the {@code username}.
+	 */
+	@Override
+	public int hashCode() {
+		return getUsername().hashCode();
+	}
+
+	private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
+
+		private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+
+		@Override
+		public int compare(GrantedAuthority g1, GrantedAuthority g2) {
+			// Neither should ever be null as each entry is checked before adding it to
+			// the set. If the authority is null, it is a custom authority and should
+			// precede others.
+			if (g2.getAuthority() == null) {
+				return -1;
+			}
+			if (g1.getAuthority() == null) {
+				return 1;
+			}
+			return g1.getAuthority().compareTo(g2.getAuthority());
+		}
+	}
+}

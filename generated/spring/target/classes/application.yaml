@@ -1,0 +1,98 @@
+# Spring Framework Configuration
+
+# Database
+spring:
+
+  datasource:
+    url: {spring.datasource.url}
+    username: {spring.datasource.username}
+    password: {spring.datasource.password}
+    driver-class-name: {spring.datasource.driver-class-name}
+    hikari:
+      register-mbeans: true
+      idle-timeout: 9000000
+      # allow_update_outside_transaction: true
+      minimum-idle: 5 # Minimum number of idle connections
+      maximum-pool-size: 30 # Maximum pool size
+      max-lifetime: 1800000 # 30 minutes, maximum connection lifetime
+      connection-timeout: 30000 # 30 seconds timeout to get a connection
+      auto-commit: true # Enable autocommit
+      # isolation-level: TRANSACTION_READ_COMMITTED # Recommended default isolation level
+      pool-name: HikariCP-Pool # Name the pool for easier debugging
+
+  # JPA Properties for Default Data Source
+  jpa:
+    show-sql: false 
+    open-in-view: true
+    properties:
+      hibernate:
+        generate_statistics: false
+        format_sql: false
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        ddl-auto: update
+
+  # Redis Configuration
+  data:
+  
+    redis:
+      host: localhost
+      port: 6379
+      password: redis_pass
+  
+  # Jackson Configuration
+  jackson:
+    date-format: org.openapitools.RFC3339DateFormat
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # Main Configuration
+  main:
+    web-application-type: servlet  
+    allow-bean-definition-overriding: true
+
+  # Cache Configuration (if using EhCache)
+  cache:
+    type: ehcache
+
+# JWT Configuration
+jwt:
+  secret: {jwt.secret:SETME}
+
+# Springdoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v1/api-docs
+  swagger-ui:
+    path: /v1/swagger-ui.html
+
+# Logging
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: INFO
+
+
+# Management Endpoints (for Prometheus)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+
+
+# Valkyr Configuration
+valkyrai:
+  service:
+    allowedOrigins: [ "http://localhost:5173" , "http://localhost:3000" ]
+  file-storage:
+    base-dir: /public/userfiles

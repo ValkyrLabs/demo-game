@@ -21,39 +21,7 @@ import  ApplicationGrid from '../grid/ApplicationGrid';
 
 
 
-import  BackupConfigGrid from '../grid/BackupConfigGrid';
-
-
-
-import  BlankRangeGrid from '../grid/BlankRangeGrid';
-
-
-
-import  BorderGrid from '../grid/BorderGrid';
-
-
-
-import  BuildGrid from '../grid/BuildGrid';
-
-
-
-import  BuildOutputGrid from '../grid/BuildOutputGrid';
-
-
-
-import  CampaignGrid from '../grid/CampaignGrid';
-
-
-
-import  CellGrid from '../grid/CellGrid';
-
-
-
-import  ChartGrid from '../grid/ChartGrid';
-
-
-
-import  ChartSeriesGrid from '../grid/ChartSeriesGrid';
+import  AttackGrid from '../grid/AttackGrid';
 
 
 
@@ -85,23 +53,7 @@ import  ExecModuleGrid from '../grid/ExecModuleGrid';
 
 
 
-import  FormatGrid from '../grid/FormatGrid';
-
-
-
-import  FormulaGrid from '../grid/FormulaGrid';
-
-
-
 import  GameGrid from '../grid/GameGrid';
-
-
-
-import  GoalGrid from '../grid/GoalGrid';
-
-
-
-import  GoalDependencyGrid from '../grid/GoalDependencyGrid';
 
 
 
@@ -109,11 +61,7 @@ import  IntegrationAccountGrid from '../grid/IntegrationAccountGrid';
 
 
 
-import  InvoiceGrid from '../grid/InvoiceGrid';
-
-
-
-import  KeyMetricGrid from '../grid/KeyMetricGrid';
+import  LevelGrid from '../grid/LevelGrid';
 
 
 
@@ -129,70 +77,6 @@ import  LogoutGrid from '../grid/LogoutGrid';
 
 
 
-import  MediaObjectGrid from '../grid/MediaObjectGrid';
-
-
-
-import  MergeRangeGrid from '../grid/MergeRangeGrid';
-
-
-
-import  NamedRangeGrid from '../grid/NamedRangeGrid';
-
-
-
-import  NoteGrid from '../grid/NoteGrid';
-
-
-
-import  OasComponentsGrid from '../grid/OasComponentsGrid';
-
-
-
-import  OasEnumGrid from '../grid/OasEnumGrid';
-
-
-
-import  OasInfoGrid from '../grid/OasInfoGrid';
-
-
-
-import  OasObjectSchemaGrid from '../grid/OasObjectSchemaGrid';
-
-
-
-import  OasOpenAPISpecGrid from '../grid/OasOpenAPISpecGrid';
-
-
-
-import  OasOperationGrid from '../grid/OasOperationGrid';
-
-
-
-import  OasParameterGrid from '../grid/OasParameterGrid';
-
-
-
-import  OasPathGrid from '../grid/OasPathGrid';
-
-
-
-import  OasRequiredGrid from '../grid/OasRequiredGrid';
-
-
-
-import  OasResponseGrid from '../grid/OasResponseGrid';
-
-
-
-import  OasSecuritySchemeGrid from '../grid/OasSecuritySchemeGrid';
-
-
-
-import  OasServerGrid from '../grid/OasServerGrid';
-
-
-
 import  OpportunityGrid from '../grid/OpportunityGrid';
 
 
@@ -201,23 +85,7 @@ import  OrganizationGrid from '../grid/OrganizationGrid';
 
 
 
-import  PivotTableGrid from '../grid/PivotTableGrid';
-
-
-
 import  PrincipalGrid from '../grid/PrincipalGrid';
-
-
-
-import  ProductGrid from '../grid/ProductGrid';
-
-
-
-import  PtgGrid from '../grid/PtgGrid';
-
-
-
-import  PtgRefGrid from '../grid/PtgRefGrid';
 
 
 
@@ -233,10 +101,6 @@ import  SalesActivityGrid from '../grid/SalesActivityGrid';
 
 
 
-import  SalesOrderGrid from '../grid/SalesOrderGrid';
-
-
-
 import  SalesPipelineGrid from '../grid/SalesPipelineGrid';
 
 
@@ -245,43 +109,11 @@ import  SecureKeyGrid from '../grid/SecureKeyGrid';
 
 
 
-import  SheetGrid from '../grid/SheetGrid';
-
-
-
-import  SheetColumnGrid from '../grid/SheetColumnGrid';
-
-
-
-import  SheetRowGrid from '../grid/SheetRowGrid';
-
-
-
-import  SolutionGrid from '../grid/SolutionGrid';
-
-
-
-import  StrategicPriorityGrid from '../grid/StrategicPriorityGrid';
-
-
-
 import  TaskGrid from '../grid/TaskGrid';
 
 
 
-import  ThorUXComponentGrid from '../grid/ThorUXComponentGrid';
-
-
-
-import  ThorUXMetaGrid from '../grid/ThorUXMetaGrid';
-
-
-
 import  WeaponGrid from '../grid/WeaponGrid';
-
-
-
-import  WorkbookGrid from '../grid/WorkbookGrid';
 
 
 
@@ -364,171 +196,19 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("BackupConfig", 
-                            <BackupConfigGrid />
+                        addTab("Attack", 
+                            <AttackGrid />
                         );
                     }}
-                    key={ 'BackupConfig' }
+                    key={ 'Attack' }
                 >
                     <Card.Header className="card-header">
-                    <h3>Backup Config</h3>
+                    <h3>Attack</h3>
                     </Card.Header>
                     <Card.Body  className="card-body">
                                 
                         <Badge bg="secondary">
-                            BackupConfig
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("BlankRange", 
-                            <BlankRangeGrid />
-                        );
-                    }}
-                    key={ 'BlankRange' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Blank Range</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            BlankRange
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Border", 
-                            <BorderGrid />
-                        );
-                    }}
-                    key={ 'Border' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Border</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Border
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Build", 
-                            <BuildGrid />
-                        );
-                    }}
-                    key={ 'Build' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Build</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Build
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("BuildOutput", 
-                            <BuildOutputGrid />
-                        );
-                    }}
-                    key={ 'BuildOutput' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Build Output</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            BuildOutput
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Campaign", 
-                            <CampaignGrid />
-                        );
-                    }}
-                    key={ 'Campaign' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Campaign</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Campaign
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Cell", 
-                            <CellGrid />
-                        );
-                    }}
-                    key={ 'Cell' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Cell</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Cell
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Chart", 
-                            <ChartGrid />
-                        );
-                    }}
-                    key={ 'Chart' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Chart</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Chart
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("ChartSeries", 
-                            <ChartSeriesGrid />
-                        );
-                    }}
-                    key={ 'ChartSeries' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Chart Series</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            ChartSeries
+                            Attack
                         </Badge>
                     </Card.Body>
                 </Card>
@@ -668,44 +348,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("Format", 
-                            <FormatGrid />
-                        );
-                    }}
-                    key={ 'Format' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Format</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Format
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Formula", 
-                            <FormulaGrid />
-                        );
-                    }}
-                    key={ 'Formula' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Formula</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Formula
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("Game", 
                             <GameGrid />
                         );
@@ -719,44 +361,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
                                 
                         <Badge bg="secondary">
                             Game
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Goal", 
-                            <GoalGrid />
-                        );
-                    }}
-                    key={ 'Goal' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Goal</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Goal
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("GoalDependency", 
-                            <GoalDependencyGrid />
-                        );
-                    }}
-                    key={ 'GoalDependency' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Goal Dependency</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            GoalDependency
                         </Badge>
                     </Card.Body>
                 </Card>
@@ -782,38 +386,19 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("Invoice", 
-                            <InvoiceGrid />
+                        addTab("Level", 
+                            <LevelGrid />
                         );
                     }}
-                    key={ 'Invoice' }
+                    key={ 'Level' }
                 >
                     <Card.Header className="card-header">
-                    <h3>Invoice</h3>
+                    <h3>Level</h3>
                     </Card.Header>
                     <Card.Body  className="card-body">
                                 
                         <Badge bg="secondary">
-                            Invoice
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("KeyMetric", 
-                            <KeyMetricGrid />
-                        );
-                    }}
-                    key={ 'KeyMetric' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Key Metric</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            KeyMetric
+                            Level
                         </Badge>
                     </Card.Body>
                 </Card>
@@ -877,310 +462,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("MediaObject", 
-                            <MediaObjectGrid />
-                        );
-                    }}
-                    key={ 'MediaObject' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Media Object</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            MediaObject
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("MergeRange", 
-                            <MergeRangeGrid />
-                        );
-                    }}
-                    key={ 'MergeRange' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Merge Range</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            MergeRange
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("NamedRange", 
-                            <NamedRangeGrid />
-                        );
-                    }}
-                    key={ 'NamedRange' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Named Range</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            NamedRange
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Note", 
-                            <NoteGrid />
-                        );
-                    }}
-                    key={ 'Note' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Note</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Note
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasComponents", 
-                            <OasComponentsGrid />
-                        );
-                    }}
-                    key={ 'OasComponents' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Components</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasComponents
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasEnum", 
-                            <OasEnumGrid />
-                        );
-                    }}
-                    key={ 'OasEnum' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Enum</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasEnum
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasInfo", 
-                            <OasInfoGrid />
-                        );
-                    }}
-                    key={ 'OasInfo' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Info</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasInfo
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasObjectSchema", 
-                            <OasObjectSchemaGrid />
-                        );
-                    }}
-                    key={ 'OasObjectSchema' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Object Schema</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasObjectSchema
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasOpenAPISpec", 
-                            <OasOpenAPISpecGrid />
-                        );
-                    }}
-                    key={ 'OasOpenAPISpec' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Open API Spec</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasOpenAPISpec
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasOperation", 
-                            <OasOperationGrid />
-                        );
-                    }}
-                    key={ 'OasOperation' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Operation</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasOperation
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasParameter", 
-                            <OasParameterGrid />
-                        );
-                    }}
-                    key={ 'OasParameter' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Parameter</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasParameter
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasPath", 
-                            <OasPathGrid />
-                        );
-                    }}
-                    key={ 'OasPath' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Path</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasPath
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasRequired", 
-                            <OasRequiredGrid />
-                        );
-                    }}
-                    key={ 'OasRequired' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Required</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasRequired
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasResponse", 
-                            <OasResponseGrid />
-                        );
-                    }}
-                    key={ 'OasResponse' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Response</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasResponse
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasSecurityScheme", 
-                            <OasSecuritySchemeGrid />
-                        );
-                    }}
-                    key={ 'OasSecurityScheme' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Security Scheme</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasSecurityScheme
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("OasServer", 
-                            <OasServerGrid />
-                        );
-                    }}
-                    key={ 'OasServer' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Oas Server</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            OasServer
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("Opportunity", 
                             <OpportunityGrid />
                         );
@@ -1219,25 +500,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("PivotTable", 
-                            <PivotTableGrid />
-                        );
-                    }}
-                    key={ 'PivotTable' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Pivot Table</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            PivotTable
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("Principal", 
                             <PrincipalGrid />
                         );
@@ -1251,63 +513,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
                                 
                         <Badge bg="secondary">
                             Principal
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Product", 
-                            <ProductGrid />
-                        );
-                    }}
-                    key={ 'Product' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Product</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Product
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Ptg", 
-                            <PtgGrid />
-                        );
-                    }}
-                    key={ 'Ptg' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Ptg</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Ptg
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("PtgRef", 
-                            <PtgRefGrid />
-                        );
-                    }}
-                    key={ 'PtgRef' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Ptg Ref</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            PtgRef
                         </Badge>
                     </Card.Body>
                 </Card>
@@ -1371,25 +576,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("SalesOrder", 
-                            <SalesOrderGrid />
-                        );
-                    }}
-                    key={ 'SalesOrder' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Sales Order</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            SalesOrder
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("SalesPipeline", 
                             <SalesPipelineGrid />
                         );
@@ -1428,101 +614,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("Sheet", 
-                            <SheetGrid />
-                        );
-                    }}
-                    key={ 'Sheet' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Sheet</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Sheet
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("SheetColumn", 
-                            <SheetColumnGrid />
-                        );
-                    }}
-                    key={ 'SheetColumn' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Sheet Column</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            SheetColumn
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("SheetRow", 
-                            <SheetRowGrid />
-                        );
-                    }}
-                    key={ 'SheetRow' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Sheet Row</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            SheetRow
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Solution", 
-                            <SolutionGrid />
-                        );
-                    }}
-                    key={ 'Solution' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Solution</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Solution
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("StrategicPriority", 
-                            <StrategicPriorityGrid />
-                        );
-                    }}
-                    key={ 'StrategicPriority' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Strategic Priority</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            StrategicPriority
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("Task", 
                             <TaskGrid />
                         );
@@ -1542,44 +633,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
 
                 <Card className="displayCard"
                     onClick={() => {
-                        addTab("ThorUXComponent", 
-                            <ThorUXComponentGrid />
-                        );
-                    }}
-                    key={ 'ThorUXComponent' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Thor UX Component</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            ThorUXComponent
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("ThorUXMeta", 
-                            <ThorUXMetaGrid />
-                        );
-                    }}
-                    key={ 'ThorUXMeta' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Thor UX Meta</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            ThorUXMeta
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
                         addTab("Weapon", 
                             <WeaponGrid />
                         );
@@ -1593,25 +646,6 @@ const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
                                 
                         <Badge bg="secondary">
                             Weapon
-                        </Badge>
-                    </Card.Body>
-                </Card>
-
-                <Card className="displayCard"
-                    onClick={() => {
-                        addTab("Workbook", 
-                            <WorkbookGrid />
-                        );
-                    }}
-                    key={ 'Workbook' }
-                >
-                    <Card.Header className="card-header">
-                    <h3>Workbook</h3>
-                    </Card.Header>
-                    <Card.Body  className="card-body">
-                                
-                        <Badge bg="secondary">
-                            Workbook
                         </Badge>
                     </Card.Body>
                 </Card>

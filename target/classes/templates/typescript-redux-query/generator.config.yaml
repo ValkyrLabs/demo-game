@@ -1,0 +1,72 @@
+files:
+  tsconfig.json.mustache:
+    templateType: SupportingFiles
+    folder: /
+    destinationFilename: tsconfig.json
+
+  modelCards.index.mustache:
+    templateType: SupportingFiles
+    folder: redux/components/modelcards/
+    destinationFilename: index.tsx
+
+  modelDataWorkbook.index.mustache:
+    templateType: SupportingFiles
+    folder: redux/components/dataworkbook/
+    destinationFilename: index.tsx
+
+  customBaseQuery.mustache:
+    templateType: SupportingFiles
+    folder: redux/
+    destinationFilename: customBaseQuery.tsx
+
+  store.mustache:
+    templateType: SupportingFiles
+    folder: redux/
+    destinationFilename: store.tsx
+
+  # allows use of "DataObject" interface in the openapi spec
+  dataObject.ts.mustache:
+    templateType: SupportingFiles
+    folder: model/
+    destinationFilename: DataObject.ts
+  
+  modelService.mustache:
+    templateType: Model
+    folder: redux/services/
+    destinationFilename: Service.tsx
+
+  apiREST.mustache:
+    templateType: API
+    folder: redux/middlewares/
+    destinationFilename: Middleware.tsx
+
+  modelAction.mustache:
+    templateType: API
+    folder: redux/actions/
+    destinationFilename: Action.tsx
+  
+  modelReducer.mustache:
+    templateType: Model
+    folder: redux/reducers/
+    destinationFilename: Reducer.tsx
+
+## UX Form Controls
+  modelForm.mustache:
+    templateType: Model
+    folder: redux/components/form/
+    destinationFilename: Form.tsx
+
+  modelTable.mustache:
+    templateType: Model
+    folder: redux/components/table/
+    destinationFilename: Table.tsx
+
+  modelChart.mustache:
+    templateType: Model
+    folder: redux/components/chart/
+    destinationFilename: Chart.tsx
+
+  modelGrid.mustache:
+    templateType: Model
+    folder: redux/components/grid/
+    destinationFilename: Grid.tsx

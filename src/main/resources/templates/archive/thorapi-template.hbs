@@ -1,0 +1,1316 @@
+openapi: 3.0.1
+
+# ThorAPI Enhanced Sections
+info:
+externalDocs:
+servers:
+tags:
+paths:
+
+{{#each schemas as |schema key|}}
+
+  /{{key}}:
+    get:
+      tags:
+        - {{key}}
+      summary: Retrieve a list of {{key}}s
+      description: Retrieves a list of {{key}}s.
+      x-spring-cacheable: true
+      operationId: get{{key}}List
+      responses:
+        '200':
+          description: Successfully retrieved the list of {{key}}s.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/{{key}}'
+        '404':
+          description: No {{key}}s were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - {{key}}
+      summary: Create a new {{key}}
+      description: Creates a new {{key}}.
+      operationId: post{{key}}
+      requestBody:
+        description: {{key}} details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{key}}'
+      responses:
+        '201':
+          description: {{key}} created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '400':
+          description: Invalid input.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+
+  /{{key}}/{id}:
+    get:
+      tags:
+        - {{key}}
+      summary: Retrieve a {{key}}
+      description: Retrieves a {{key}} for a specific uid.
+      x-spring-cacheable: true
+      operationId: get{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      responses:
+        '200':
+          description: Successfully retrieved {{key}}s.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - {{key}}
+      summary: Update an existing {{key}}
+      description: Updates an existing {{key}}.
+      operationId: update{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      requestBody:
+        description: Updated {{key}} details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{key}}'
+      responses:
+        '200':
+          description: {{key}} updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '400':
+          description: Invalid input.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - {{key}}
+      summary: Delete a {{key}}.
+      description: Deletes a specific {{key}}.
+      operationId: delete{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      responses:
+        '204':
+          description: {{key}} deleted successfully.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+
+{{/each}}
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object to retrieve.
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    
+    ## SecureField KMS - the ultimate encryption solution
+    SecureKey:
+      type: object
+      description: TODO Keys CLASS DESCRIPTION   
+      properties:
+
+        algorithm:
+          description: the algorithm used for encryption/decryption
+          type: string
+
+        version:
+          description: the version of this key
+          type: string
+        
+        keyValue:
+          type: string
+          minLength: 10
+          maxLength: 100
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 8)"
+
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - ARCHIVED
+            - REVOKED
+            - INVALID
+          x-enum-descriptions:
+            - Key is actively used
+            - Key is not being used but still valid
+            - Key is revoked and MUST NOT be used
+            - Key is invalid and will not work
+          x-enum-varnames:
+            - keyActive
+            - keArchived
+            - keyRevoked
+            - keyInvalid
+      required:
+        - algorithm
+        - version
+        - keyValue
+        - status
+
+    Build:
+      type: object
+      description: TODO Build CLASS DESCRIPTION   
+      properties:
+        name:
+          type: string
+        applicationId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - PENDING
+            - RUNNING
+            - SUCCESS
+            - FAILURE
+        projectPath:
+          type: string
+        testEnumCodegen:
+          type: integer
+          format: int32
+          enum:
+            - 0
+            - 10
+            - 1000
+          x-enum-descriptions:
+            - 'zero balance'
+            - 'money for lunch'
+            - 'get on that plane'
+          x-enum-varnames:
+            - broke
+            - poor
+            - rich
+        mavenHome:
+          type: string
+          
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildOutput'
+
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Depend'
+      required:
+        - name
+        - status
+        - projectPath
+        - mavenHome
+
+    BuildOutput:
+      type: object
+      description: TODO BuildOutput CLASS DESCRIPTION   
+      properties:
+        applicationId:
+          type: string
+          format: uuid      
+        buildId:
+          type: string
+          format: uuid
+        lastSuccessfulRun:
+          type: string
+          format: date-time
+        success:
+          type: boolean
+        output:
+          type: string
+        solutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Solution'
+      required:
+        - buildId
+        - timestamp
+        - success
+        - output
+
+    # because this is a "leaf" object in the heirarchy 
+    # no need for it to duplicate the "BaseEntity" fields    
+    Solution:
+      type: object
+      description: TODO Solution CLASS DESCRIPTION   
+      properties:
+        buildOutputId:
+          type: string
+          format: uuid
+        description:
+          type: string
+        appliedFix:
+          type: boolean
+      required:
+        - buildOutputId
+        - description
+        - appliedFix
+
+    # because this is a "leaf" object in the heirarchy 
+    # no need for it to duplicate the "BaseEntity" fields
+    Depend:
+      type: object
+      description: TODO Depend CLASS DESCRIPTION   
+      properties:
+        groupId:
+          type: string
+        artifactId:
+          type: string
+        version:
+          type: string
+        scope:
+          type: string
+        status:
+          type: string
+          enum:
+            - UP_TO_DATE
+            - OUTDATED
+            - MISSING
+        buildId:
+          type: string
+          format: uuid
+      required:
+        - groupId
+        - artifactId
+        - version
+
+## VALKYRAI SYSTEM
+
+    LlmDetails:
+      type: object
+      description: TODO LlmDetails CLASS DESCRIPTION   
+      properties:
+        name:
+          type: string
+          description: The name of the LLM
+        version:
+          type: string
+          description: The vendor-specific version of the LLM
+          example: v3.0.3-B8
+        notes:
+          type: string
+          description: Notes on the LLM implementation
+        role:
+          type: string
+          enum: [user, assistant]
+          description: the user role to set for the target LLM
+
+        credential:
+          type: string
+          description: the user name to access the LLM
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        credentialPassword:
+          maxLength: 35
+          minLength: 8
+          type: string
+          description: the password to access the LLM
+          format: password
+          example: c@nnotBeH@ckd!
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        url:
+          type: string
+          format: url
+          description: the URL to connect to the LLM api
+        requestParameters:
+          type: string
+          description: request parameters to send to the service
+        meta:
+          type: string
+          description: metadata in any text format to be used in client code
+      xml:
+        name: LLMDetails
+
+    Workflow:
+      type: object
+      description: TODO Workflow CLASS DESCRIPTION   
+      properties:
+        description:
+          type: string
+        role:
+          type: string
+          enum: [user, assistant]
+          description: the role with permissions (temporary user is created)
+        schedule:
+          type: string
+          description: cron string (optional) to determine when this runs
+        meta:
+          type: string
+          description: metadata in any text format to be used in client code
+      xml:
+        name: Workflow
+
+    Task:
+      type: object
+      description: TODO Task CLASS DESCRIPTION   
+      properties:
+        description:
+          type: string
+        role:
+          type: string
+          enum: [user, assistant]
+          description: override the workflow role for specific task (login to a system) the role with permissions (temporary user is created)
+      xml:
+        name: Task
+
+    ExecModule:
+      type: object
+      description: TODO ExecModule CLASS DESCRIPTION   
+      properties:
+        systemId:
+          type: string
+          format: uuid
+          description: UUID of the system object
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+          description: json content for configuring the module
+        status:
+          type: string
+          enum: [good, warning, error, disabled]
+      xml:
+        name: ExecModule
+
+    EventLog:
+      type: object
+      description: TODO EventLog CLASS DESCRIPTION   
+      properties:
+        description:
+          type: string
+          description: detailed event description
+        status:
+          type: string
+          enum: [ok, error, disabled]
+          description: status for event
+      xml:
+        name: EventLog
+
+    BpmlDocument:
+      type: object
+      description: TODO BpmlDocument CLASS DESCRIPTION   
+      properties:
+        description:
+          type: string
+          description: detailed event description
+        contents:
+          type: string
+          maxLength: 3000
+          description: detailed event description
+        status:
+          type: string
+          enum: [ok, error, disabled]
+          description: status for event
+      xml:
+        name: BpmlWorkflow
+
+    Application:
+      type: object
+      description: TODO Application CLASS DESCRIPTION   
+      properties:
+        description:
+          type: string
+          description: description of the application
+        status:
+          type: string
+          enum: [ok, error, disabled]
+          description: status for event
+      xml:
+        name: Application
+
+    OpenApiSpec:
+      required:
+        - name
+        - schemaData
+      type: object
+      description: TODO OpenApiSpec CLASS DESCRIPTION   
+      properties:
+        category:
+          type: string
+          description: category of generated output
+          enum:
+            - Full Stack
+            - Front End
+            - API
+            - Data Library
+            - Infrastructure
+            - Documentation
+        name:
+          type: string
+          description: Name of the service API displayed in the UI
+          example: My New Stack
+        artifactId:
+          maxLength: 256
+          type: string
+          description: 'Name of the output build file(s) ie: mvn ArtifactID'
+          example: peragonai
+        applicationId:
+          type: integer
+          description: Id of the Application that this Stack belongs to, if any
+          format: int64
+        adminServerHost:
+          maxLength: 256
+          type: string
+          description: host (FQDN) name of to connect to the admin server -- do not
+            include 'http(s):' or slashes
+          example: www.mycompany.com
+          x-thorapi-dataField: fieldGroup=admin-config, advanced=true
+        adminServerPort:
+          maxLength: 256
+          type: string
+          description: port of to connect to the admin server
+          example: "8009"
+          x-thorapi-dataField: fieldGroup=admin-config, advanced=true
+        hostName:
+          maxLength: 256
+          type: string
+          description: host of this service (FQDN) -- do not include 'http(s):' or
+            slashes
+          example: localhost
+          x-thorapi-dataField: fieldGroup=service-config, advanced=true
+        hostPort:
+          maxLength: 5
+          type: string
+          description: port of this service
+          example: "8099"
+          x-thorapi-dataField: fieldGroup=service-config, advanced=true
+        orgName:
+          maxLength: 256
+          type: string
+          description: the name of the organization owner of the service used in classpath
+          example: Valkyr Labs Inc.
+          x-thorapi-dataField: fieldGroup=github-settings, advanced=true
+        gitUser:
+          maxLength: 256
+          type: string
+          description: The name of the git USER or ORG to push generated stack code
+          example: Valkyr Labs Inc
+          x-thorapi-dataField: fieldGroup=github-settings, advanced=true
+        gitRepo:
+          maxLength: 256
+          type: string
+          description: The repository where the output Project will be pushed after
+            generation
+          example: MyValkyrAIApp
+          x-thorapi-dataField: fieldGroup=github-settings, advanced=true
+        skipSwaggerGen:
+          type: boolean
+          description: Whether to skip Swagger API build during Generation
+          default: false
+          x-thorapi-dataField: fieldGroup=generator-config, advanced=true
+        skipJavaGen:
+          type: boolean
+          description: Whether to skip Java Services and DAO build during Generation
+          default: false
+          x-thorapi-dataField: fieldGroup=generator-config, advanced=true
+        skipDbGen:
+          type: boolean
+          description: Whether to skip Database Modification during Generation
+          default: false
+          x-thorapi-dataField: fieldGroup=generator-config, advanced=true
+        skipReactGen:
+          type: boolean
+          description: Whether to skip React Front End during Generation
+          default: false
+          x-thorapi-dataField: fieldGroup=generator-config, advanced=true
+        dbGenDropTable:
+          type: boolean
+          description: Will rename and any conflicting pre-existing tables during
+            generation
+          default: true
+          x-thorapi-dataField: fieldGroup=generator-config, advanced=true
+        thorApiSecureKey:
+          maxLength: 256
+          type: string
+          description: Secure key used to encrypt the data in the new platform
+          example: =W34sdcwdsfwC34W34sdcwdsfwC34W34sdcwdsfw=
+          x-thorapi-secureField: true
+        dbUrl:
+          maxLength: 256
+          type: string
+          description: database url for the system
+          example: jdbc:mysql//db.myco.com
+          x-thorapi-dataField: fieldGroup=database-config
+        dbName:
+          maxLength: 256
+          type: string
+          description: 'db name (schema name) for the system NOTE: must exist prior
+            to initialization'
+          example: ValkyrAIApp1
+          x-thorapi-dataField: fieldGroup=database-config
+        dbUser:
+          maxLength: 256
+          type: string
+          description: database user for the system
+          example: igniteuser
+          x-thorapi-dataField: fieldGroup=database-config
+          x-thorapi-secureField: true
+        dbPassword:
+          maxLength: 256
+          type: string
+          description: database password for the system
+          format: password
+          example: hard2Gu3ss
+          x-thorapi-dataField: fieldGroup=database-config
+          x-thorapi-secureField: true
+        schemaName:
+          maxLength: 256
+          type: string
+          description: 'Name of the DB Schema to connect to  NOTE: must exist prior
+            to initialization'
+          example: starter
+          x-thorapi-dataField: advanced=true, fieldGroup=database-config
+        language:
+          type: string
+          description: Backend Stack Service Language
+          enum:
+            - peragonai_java_spring
+            - peragonai_kotlin_spring
+        templateRepo:
+          type: string
+          description: Stack template repo
+          enum:
+            - java_spring_mybatis_react_redux
+            - kotlin_spring_mybatis_react_redux
+            - kotlin_spring_jpa_react_redux
+            - gatsby_front_page
+        schemaData:
+          maxLength: 1000000
+          minLength: 20
+          type: string
+          description: YAML Swagger/OpenAPI Schema
+          example: Sparkyt
+        schemaFileName:
+          maxLength: 256
+          type: string
+          description: File name containing Schema definition
+          example: ignite_commerce.yml
+        status:
+          type: string
+          description: Current Stack status
+          enum:
+            - available
+            - syntax_error
+            - compilation_error
+            - runtime_error
+            - database_error
+            - locked
+      description: ValkyrAI Design Spec
+      xml:
+        name: OpenApiSpec
+
+## Sage Chat API
+
+    ChatMessage:
+      type: object
+      description: TODO ChatMessage CLASS DESCRIPTION   
+      properties:
+        sessionId:
+          type: string
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+
+    ChatResponse:
+      type: object
+      description: TODO ChatResponse CLASS DESCRIPTION   
+      properties:
+        content:
+          type: string
+
+## Basic Functionality Section
+
+    Reaction:
+      required:
+        - target
+        - value
+      type: object
+      description: TODO Reaction CLASS DESCRIPTION        
+      properties:
+        target:
+          type: string
+          format: uuid
+          description: UUID of the system object
+          example: ABC234
+        value:
+          type: string
+          description: the reaction to the item
+          enum:
+            - like
+            - dislike
+            - neutral
+            - angry
+            - sad
+            - question
+          example: "neutral"  
+
+    User:
+      required:
+        - email
+        - password
+        - userName
+      type: object
+      description: The Valkyr Labs User. Represents a user in the system with preferences and privileges.
+      properties:
+        firstName:
+          type: string
+          description: first name of user (encrypted)
+          example: Peace
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        middleName:
+          type: string
+          description: middle name of user
+          example: Love
+          x-thorapi-dataField: fieldGroup=personal-details
+          x-thorapi-secureField: true          
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        lastName:
+          type: string
+          description: last name of user (encrypted)
+          example: Harmony
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        userName:
+          maxLength: 50
+          minLength: 4
+          type: string
+          description: Your account Username
+          example: Sparky
+          x-thorapi-dataField: fieldGroup=personal-details, unique=true
+        password:
+          maxLength: 35
+          minLength: 8
+          type: string
+          description: Your account Password
+          format: password
+          example: HardToGuess1980
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.HASHED, strength = 5)"
+        fingerprint:
+          type: string
+          description: Encrypted identity (Facial Recognition, Fingerprint Scanner,
+            etc.)
+          readOnly: true
+          example: DK$DFSJaraDD
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        federalIdentification:
+          minLength: 11
+          maxLength: 11
+          pattern: ^\d{3}-\d{2}-\d{4}$
+          default: 333-22-4444
+          type: string
+          description: SSN or a 10 digit federal government ID (encrypted)
+          example: "111-22-3333"
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+        residenceCountry:
+          minLength: 3
+          maxLength: 3
+          type: string
+          description: Country of residence 3-character code
+          example: USA
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        stateIdentification:
+          minLength: 10
+          maxLength: 10
+          pattern: ^\d{10}$
+          type: string
+          description: Driver's License or a 10 digit state government ID
+          example: 3333333333
+          default: 2222222222
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        residenceState:
+          minLength: 2
+          maxLength: 2
+          type: string
+          description: State of residence 2-character code (USA)
+          example: CA
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        email:
+          pattern: ^.+@[^.].*.[a-z]{2,}$
+          type: string
+          description: The main email address for the user (encrypted)
+          format: email
+          example: wiley.coyote@acme-corp.com
+          
+        social:
+          type: string
+          description: The username for your primary social account (if any)
+          format: url
+          example: https://twitter.com/ValkyrAI
+          x-field-extra-annotation:
+            "@SecureField(encryptionType = SecureField.EncryptionType.SYMMETRIC, strength = 5)"
+
+        bio:
+          type: string
+          description: More in-depth information about you and your account
+          format: url
+          example: https://twitter.com/ValkyrAI
+        avatar_url:
+          type: string
+          description: URL for user avatar image
+          format: url
+          example: https://img.com/mypic.png
+        
+        # for now one per user
+        organizationId:
+          type: string
+          format: uuid
+        organization:
+          $ref: '#/components/schemas/Organization'
+        
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+
+        acceptedCookies:
+          type: boolean
+          description: Whether the user accepted the use of cookies
+          default: false
+          x-thorapi-dataField: advanced=true, fieldGroup=signup
+
+        acceptedTos:
+          type: boolean
+          description: Whether the user accepted the terms of service
+          default: false
+          x-thorapi-dataField: advanced=true, fieldGroup=signup
+
+        # Spring Security section
+        enabled:
+          type: boolean
+          description: Spring Security User field whether the user is enabled
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        credentialNonExpired:
+          type: boolean
+          description: Spring Security User field whether the user's login credentials
+            have expired
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountEnabled:
+          type: boolean
+          description: Spring Security User field whether the user account is enabled
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountNonLocked:
+          type: boolean
+          description: Spring Security User field whether the user account is locked
+          default: true
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+        accountNonExpired:
+          type: boolean
+          description: Spring Security User field whether the user account has expired
+          default: false
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+
+        roles:
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+          description: the granted roles (or null if the granted authority cannot be expressed as a String with sufficient precision).
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+
+        authorityList:
+          x-thorapi-dataField: advanced=true, fieldGroup=accountStatus
+          description: the granted authorities (or null if the granted authority cannot be expressed as a String with sufficient precision).
+          type: array
+          items:
+            $ref: '#/components/schemas/Authority'
+          
+      xml:
+        name: User
+
+    Organization:
+      required:
+        - name
+      type: object
+      description: TODO Organization CLASS DESCRIPTION
+      properties:
+        name:
+          type: string
+          example: ACME Corp Inc.
+        homePage:
+          type: string
+          format: url
+          example: https://www.acme-corp.com
+        phone:
+          type: string
+          example: 415-867-5309
+        addressId:
+          type: string
+          format: uuid
+        address:
+          $ref: '#/components/schemas/Address'  
+      xml:
+        name: Organization
+
+    Address:
+      required:
+        - city
+        - name
+        - state
+        - street1
+        - postal_code
+      type: object
+      description: TODO Address CLASS DESCRIPTION
+      properties:
+        hasWifi:
+          type: boolean
+        userId:
+          type: string
+          format: uuid
+        addressType:
+          type: string
+          description: The type of address
+          enum:
+            - home
+            - mail
+            - work
+            - school
+            - other
+          example: "home"          
+        name:
+          type: string
+          description: full name of addressee
+          example: Henry Johnson
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        street1:
+          type: string
+          description: street address line 1
+          example: 123 Daydream Blvd.
+        street2:
+          type: string
+          description: street address line 2
+          example: Apt. 7
+        city:
+          type: string
+          description: full name of city
+          example: San Francisco
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        state:
+          minLength: 2
+          maxLength: 2
+          type: string
+          description: State of residence 2-character code (USA)
+          example: CA
+          x-thorapi-dataField: advanced=true
+          x-thorapi-secureField: true
+        country:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: 3 character country code (upper case)          
+        postal_code:
+          maxLength: 10
+          minLength: 10
+          type: string
+          pattern: ^\d{5}-\d{4}$
+          description: 5+4 digit zip code
+          example: "94210-0000"
+      xml:
+        name: Address
+  
+## CMS
+
+    ContentData:
+      type: object
+      description: TODO ContentData CLASS DESCRIPTION
+      required:
+        - name
+      properties:
+        authorName:
+          type: string
+          example: Jimjam McYoyo
+        title:
+          type: string
+          example: Amazing Things Happened
+        subtitle:
+          type: string
+          example: Many detailed things about what all the things that hapened.
+        contentUrl:
+          type: string
+          example: The url to the location of the full content
+          maxLength: 500
+          minLength: 8
+
+        contentData:
+          type: string
+          example: The full content
+          maxLength: 50000
+          minLength: 50
+        contentType:
+          type: string
+          example: CodeGen
+          enum:
+            - plaintext
+            - markdown
+            - json
+            - yaml
+            - audio
+            - video
+            - url
+            - binary
+                 
+        thumbnailImage:
+          type: string
+          description: The large image (optional) for your content
+          format: url
+          example: https://peragonlabs.com/assets/peragon_games_INC_LOGO-BKV9JIdt.png
+        largeImage:
+          type: string
+          description: The large image (optional) for your content
+          format: url
+          example: https://peragonlabs.com/assets/peragon_games_INC_LOGO-BKV9JIdt.png
+        category:
+          type: string
+          example: CodeGen
+          enum:
+            - CodeGen
+            - DOCS
+            - BLOG
+            - Product
+            - SECURITY
+            - Event            
+
+        status:
+          type: string
+          example: editing
+          enum:
+            - holding
+            - editing
+            - published
+        releaseDate:
+          type:  string
+          format: "date-time"
+          description: the release date (used to automate publishing)
+        
+        userId:
+          description: the author or attibuted entity
+          type: string
+          format: uuid
+        user:
+          description: the author object
+          $ref: '#/components/schemas/User'
+
+      xml:
+        name: ContentData
+
+## Ratings (formerly CSAT)
+
+    Rating:
+      type: object
+      description: TODO Rating CLASS DESCRIPTION
+      required:
+        - contentId
+      properties:
+        targetType:
+          type: string
+          description: type of the target object
+          enum:
+            - homepage
+            - blog
+            - product
+            - none
+          description: target object for the rating and comments
+        contentId:
+          type: string
+          format: uuid
+          description: The unique identifier for the content item
+        comments:
+          type: string
+          example: Your real feelings
+          maxLength: 100000
+        url:
+          type: string
+          example: The URL of the rating record is about
+          maxLength: 500
+        rating:
+          type:  "integer"
+          format: "int64"
+          minimum: 0
+          maximum: 10
+      xml:
+        name: Rating
+
+
+    ## THORUX Section    
+    ThorUXMeta:
+      type: object
+      description: TODO ThorUXMeta CLASS DESCRIPTION
+      description: Metadata for ThorUX components.
+      properties:
+        thoruxComponents:
+          type: string
+          description: Temporary string holder for config data.
+          example: "theme: odin, locale: en"
+
+    ThorUXComponent:
+      type: object
+      description: TODO ThorUXComponent CLASS DESCRIPTION
+      properties:
+        componentType:
+          type: string
+          description: The type of the UX component.
+          example: "button"
+        status:
+          type: string
+          description: The status of the component in the UX.
+          enum:
+            - ready
+            - pending
+            - disabled 
+            - hidden
+          example: "ready"
+        settings:
+          type: string
+          description: The option for the component in the UX.
+          enum:
+            - opt1
+            - opt2
+            - opt3 
+            - opt4
+          example: "opt1"
+
+    ## Spring Security section
+    Login:
+      type: object
+      description: TODO Login CLASS DESCRIPTION
+      properties:
+        username:
+          type: string
+          maxLength: 64
+        password:
+          type: string
+        description:
+          type: string
+
+    Logout:
+      type: object
+      description: TODO Logout CLASS DESCRIPTION
+      properties:
+        description:
+          type: string
+          
+    PersistentLogin:
+      type: object
+      description: TODO PersistentLogin CLASS DESCRIPTION
+      properties:
+        username:
+          type: string
+          maxLength: 64
+        series:
+          type: string
+          maxLength: 64
+        token:
+          type: string
+          maxLength: 64
+        lastUsed:
+          type: string
+          format: date-time
+      required:
+        - username
+        - series
+        - token
+        - last_used
+
+    Role:
+      type: object
+      description: TODO Role CLASS DESCRIPTION
+      properties:
+        userId:
+          type: string
+          format: uuid
+        roleName:
+          type: string
+          description: the role
+          enum:
+            - ANONYMOUS
+            - CUSTOMER
+            - STAFF 
+            - ADMIN
+          default: "ANONYMOUS"
+          
+    Authority:
+      type: object
+      description: TODO Authority CLASS DESCRIPTION
+      properties:
+        userId:
+          type: string
+          format: uuid
+        username:
+          type: string
+          maxLength: 50
+        authority:
+          type: string
+          maxLength: 50
+      required:
+        - username
+        - authority
+
+    AclSid:
+      type: object
+      description: TODO AclSid CLASS DESCRIPTION
+      properties:
+        sid:
+          type: string
+          maxLength: 245
+          nullable: true
+        principal:
+          type: string
+          format: uuid
+          nullable: true
+
+    AclClass:
+      type: object
+      description: TODO AclClass CLASS DESCRIPTION
+      properties:
+        class:
+          type: string
+          maxLength: 245
+          nullable: true
+
+    AclObjectIdentity:
+      type: object
+      description: TODO AclObjectIdentity CLASS DESCRIPTION
+      properties:
+        objectIdClass:
+          type: string
+          format: uuid
+          nullable: true
+        objectIdIdentity:
+          type: string
+          format: uuid
+          nullable: true
+        parentObject:
+          type: string
+          format: uuid
+          nullable: true
+        ownerSid:
+          type: string
+          format: uuid
+          nullable: true
+        entriesInheriting:
+          type: integer
+          format: int32
+          nullable: true
+
+    AclEntry:
+      type: object
+      description: TODO AclEntry CLASS DESCRIPTION
+      properties:
+        aclObjectOdentity:
+          type: integer
+          format: int64
+          nullable: true
+        aceOrder:
+          type: integer
+          format: int32
+          nullable: true
+        sid:
+          type: string
+          format: uuid
+          nullable: true
+        mask:
+          type: integer
+          format: int32
+          nullable: true
+        granting:
+          type: integer
+          format: int32
+          nullable: true
+        auditSuccess:
+          type: integer
+          format: int32
+          nullable: true
+        auditFailure:
+          type: integer
+          format: int32
+          nullable: true
+
+  securitySchemes:
+
+    thorapi_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://{username}.peragonlabs.com:{port}/oauth
+          scopes:
+            write:items: modify owned items
+            read:items: read owned items

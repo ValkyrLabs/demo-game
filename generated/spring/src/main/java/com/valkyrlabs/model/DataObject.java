@@ -1,0 +1,26 @@
+package com.valkyrlabs.model;
+
+import java.util.UUID;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+/**
+    a workaround for injecting our Data Classes into the generated code
+*/
+@Entity
+public interface DataObject extends com.valkyrlabs.thorapi.data.DataClass{
+
+    @Id
+    UUID getId();
+
+    void setId(UUID u);
+
+    default UUID getWorkflowStateId(){
+        return UUID.randomUUID();
+    }
+
+    default void setWorkflowStateId(UUID u){
+        ;
+    }
+}

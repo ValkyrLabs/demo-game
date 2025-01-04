@@ -1,7 +1,7 @@
 // tslint:disable
 /**
- * Percival the Dragon Slayer CORE API
- * The API for accessing Percival the Dragon Slayer services
+ * ValkyrAI CORE API
+ * The API for accessing ValkyrAI services
  *
  * The version of the OpenAPI document: 0.9.25
  * Contact: info@valkyrlabs.com
@@ -29,6 +29,12 @@ import {
  * @interface Weapon
  */
 export type Weapon  = {
+    /**
+     * 
+     * @type {string}
+     * @memberof Weapon
+     */
+    attackId?: string;
     /**
      * the name of the weapon
      * @type {string}
@@ -117,6 +123,7 @@ export type Weapon  = {
 
 export function WeaponFromJSON(json: any): Weapon {
     return {
+        'attackId': !exists(json, 'attackId') ? undefined : json['attackId'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'game': !exists(json, 'game') ? undefined : GameWeaponIDXFromJSON(json['game']),
         'harmLevel': !exists(json, 'harmLevel') ? undefined : json['harmLevel'],
@@ -139,6 +146,7 @@ export function WeaponToJSON(value?: Weapon): any {
         return undefined;
     }
     return {
+        'attackId': value.attackId,
         'name': value.name,
         'game': GameWeaponIDXToJSON(value.game),
         'harmLevel': value.harmLevel,

@@ -1,0 +1,53 @@
+
+import React, { useState } from 'react';
+
+import { Card, Col, Badge, Container, Nav, NavDropdown, Row, Tab, Tabs } from "react-bootstrap";
+import CoolButton from "../../../../components/CoolButton";
+import TimeSeriesChart from "../../../../components/Charts/TimeSeriesChart";
+import SplitPaneView from "../../../../components/SplitPane/SplitPaneView";
+import FloatingToolbar from "../../../../components/FloatingToolbar";
+
+{{#apiInfo}}{{#apis}}{{#operations}}
+
+import  {{baseName}}Grid from '../grid/{{baseName}}Grid';
+
+{{/operations}}{{/apis}}{{/apiInfo}}
+
+
+interface ModelCardsProps {
+    addTab: (key: string, component: JSX.Element) => void;
+}
+
+const ModelCards: React.FC<ModelCardsProps> = ({ addTab }) => {
+
+    const [activeTab, setActiveTab] = useState('');
+  
+    return (
+        <Container fluid className="p-3 card-list">
+    {{#apiInfo}}{{#apis}}{{#operations}}
+                <Card className="displayCard"
+                    onClick={() => {
+                        addTab("{{{baseName}}}", 
+                            <{{{baseName}}}Grid />
+                        );
+                    }}
+                    key={ '{{{baseName}}}' }
+                >
+                    <Card.Header className="card-header">
+                    <h3>{{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}}</h3>
+                    </Card.Header>
+                    <Card.Body  className="card-body">
+                                
+                        <Badge bg="secondary">
+                            {{{baseName}}}
+                        </Badge>
+                    </Card.Body>
+                </Card>
+{{/operations}}{{/apis}}{{/apiInfo}}
+                        
+
+        </Container>
+    );
+};
+
+export default ModelCards;

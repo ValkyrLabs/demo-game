@@ -1,0 +1,142 @@
+{{#each schemas as |schema key|}}
+
+  /{{key}}:
+    get:
+      tags:
+        - {{key}}
+      summary: Retrieve a list of {{key}}s
+      description: Retrieves a list of {{key}}s.
+      x-spring-cacheable: true
+      operationId: get{{key}}List
+      responses:
+        '200':
+          description: Successfully retrieved the list of {{key}}s.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/{{key}}'
+        '404':
+          description: No {{key}}s were found.
+        '500':
+          description: Internal server error.
+
+    post:
+      tags:
+        - {{key}}
+      summary: Create a new {{key}}
+      description: Creates a new {{key}}.
+      operationId: post{{key}}
+      requestBody:
+        description: {{key}} details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{key}}'
+      responses:
+        '201':
+          description: {{key}} created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '400':
+          description: Invalid input.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+
+  /{{key}}/{id}:
+    get:
+      tags:
+        - {{key}}
+      summary: Retrieve a single {{key}}
+      description: Retrieves a single {{key}} for a specific uid.
+      x-spring-cacheable: true
+      operationId: get{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      responses:
+        '200':
+          description: Successfully retrieved the {{key}}.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+    put:
+      tags:
+        - {{key}}
+      summary: Update an existing {{key}}
+      description: Updates an existing {{key}}.
+      operationId: update{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      requestBody:
+        description: Updated {{key}} details.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{key}}'
+      responses:
+        '200':
+          description: {{key}} updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{key}}'
+        '400':
+          description: Invalid input.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+    delete:
+      tags:
+        - {{key}}
+      summary: Delete a {{key}}.
+      description: Deletes a specific {{key}}.
+      operationId: delete{{key}}
+      parameters:
+        - name: id
+          schema:
+            type: string
+            format: uuid
+          in: path
+          required: true
+          description: Unique identifier for the {{key}}.
+
+      responses:
+        '204':
+          description: {{key}} deleted successfully.
+        '404':
+          description: {{key}} not found.
+        '500':
+          description: Internal server error.
+
+
+{{/each}}

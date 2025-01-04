@@ -4,7 +4,7 @@ import { Col, Image, Row, } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import logo from "../assets/images/VALKYR_LABS_INC_LOGO.png";
+import logo from "../assets/images/peragon-inc.png";
 
 function ComingSoon() {
   const canvasRef = useRef(null);

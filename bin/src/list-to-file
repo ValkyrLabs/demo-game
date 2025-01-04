@@ -1,0 +1,29 @@
+#!/bin/bash
+list_filtered_directory() {
+    find "$1" \( -type d -o \
+        -name "*.yaml" -o \
+        -name "*.proprties" -o \
+        -name "*.txt" -o \
+        -name "*.md" -o \
+        -name "*.mdx" -o \
+        -name "*.hbs" -o \
+        -name "*.mustache" -o \
+        -name "*.xml" -o \
+        -name ".*" \) \
+        ! -path "*/.git/*" \
+        ! -path "*target*" \
+        ! -path "*node_modules*" \
+        ! -path "*storybook-static*" \
+        ! -path "*.docusaurus*" \
+        ! -path "*.build*" \
+        ! -path "*.cache*" \
+        ! -path "*/.DS_Store" \
+        ! -path "*/.class" \
+        ! -path "*/.git" \
+        ! -name "*.o" \
+        ! -name "*.py" \
+        | sed -e 's/[^-][^\/]*\//|   /g' -e 's/|   \([^|]\)/|--- \1/'
+}
+
+# Run for the current directory
+list_filtered_directory .

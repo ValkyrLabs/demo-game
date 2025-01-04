@@ -1,0 +1,2047 @@
+openapi: 3.0.1
+info:
+  title: ValkyrAI CORE API
+  description: The API for accessing ValkyrAI services
+  termsOfService: https://valkyrlabs.com/tos/
+  contact: {email: info@valkyrlabs.com}
+  license: {name: AGPL 3.0, url: 'https://www.gnu.org/licenses/agpl-3.0.html'}
+  version: 0.9.25
+externalDocs: {description: Learn more about ValkyrAI, url: 'https://valkyrlabs.com/vai/docs'}
+servers:
+- {url: 'http://localhost:8081/v1', description: local server (uses live data)}
+- {url: 'https://loki.valkyrlabs.com/v1', description: production server}
+tags:
+- {name: admins, description: Secured Admin-only calls}
+- {name: users, description: Operations available to regular users}
+paths:
+  /Workflow:
+    get:
+      tags: [Workflow]
+      summary: Retrieve a list of Workflows
+      description: Retrieves a list of Workflows.
+      x-spring-cacheable: true
+      operationId: getWorkflowList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Workflows.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Workflow'}
+        '404': {description: No Workflows were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Workflow]
+      summary: Create a new Workflow
+      description: Creates a new Workflow.
+      operationId: postWorkflow
+      requestBody:
+        description: Workflow details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Workflow'}
+      responses:
+        '201':
+          description: Workflow created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Workflow'}
+        '400': {description: Invalid input.}
+        '404': {description: Workflow not found.}
+        '500': {description: Internal server error.}
+  /Workflow/{id}:
+    get:
+      tags: [Workflow]
+      summary: Retrieve a Workflow
+      description: Retrieves a Workflow for a specific uid.
+      x-spring-cacheable: true
+      operationId: getWorkflow
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Workflow.
+      responses:
+        '200':
+          description: Successfully retrieved Workflows.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Workflow'}
+        '404': {description: Workflow not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Workflow]
+      summary: Update an existing Workflow
+      description: Updates an existing Workflow.
+      operationId: updateWorkflow
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Workflow.
+      requestBody:
+        description: Updated Workflow details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Workflow'}
+      responses:
+        '200':
+          description: Workflow updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Workflow'}
+        '400': {description: Invalid input.}
+        '404': {description: Workflow not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Workflow]
+      summary: Delete a Workflow.
+      description: Deletes a specific Workflow.
+      operationId: deleteWorkflow
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        descriptidon: Unique identifier for the Workflow.
+      responses:
+        '204': {description: Workflow deleted successfully.}
+        '404': {description: Workflow not found.}
+        '500': {description: Internal server error.}
+  /Task:
+    get:
+      tags: [Task]
+      summary: Retrieve a list of Tasks
+      description: Retrieves a list of Tasks.
+      x-spring-cacheable: true
+      operationId: getTaskList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Task'}
+        '404': {description: No Tasks were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Task]
+      summary: Create a new Task
+      description: Creates a new Task.
+      operationId: postTask
+      requestBody:
+        description: Task details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Task'}
+      responses:
+        '201':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Task'}
+        '400': {description: Invalid input.}
+        '404': {description: Task not found.}
+        '500': {description: Internal server error.}
+  /Task/{id}:
+    get:
+      tags: [Task]
+      summary: Retrieve a Task
+      description: Retrieves a Task for a specific uid.
+      x-spring-cacheable: true
+      operationId: getTask
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Task.
+      responses:
+        '200':
+          description: Successfully retrieved Tasks.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Task'}
+        '404': {description: Task not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Task]
+      summary: Update an existing Task
+      description: Updates an existing Task.
+      operationId: updateTask
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Task.
+      requestBody:
+        description: Updated Task details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Task'}
+      responses:
+        '200':
+          description: Task updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Task'}
+        '400': {description: Invalid input.}
+        '404': {description: Task not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Task]
+      summary: Delete a Task.
+      description: Deletes a specific Task.
+      operationId: deleteTask
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Task.
+      responses:
+        '204': {description: Task deleted successfully.}
+        '404': {description: Task not found.}
+        '500': {description: Internal server error.}
+  /ExecModule:
+    get:
+      tags: [ExecModule]
+      summary: Retrieve a list of ExecModules
+      description: Retrieves a list of ExecModules.
+      x-spring-cacheable: true
+      operationId: getExecModuleList
+      responses:
+        '200':
+          description: Successfully retrieved the list of ExecModules.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ExecModule'}
+        '404': {description: No ExecModules were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [ExecModule]
+      summary: Create a new ExecModule
+      description: Creates a new ExecModule.
+      operationId: postExecModule
+      requestBody:
+        description: ExecModule details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ExecModule'}
+      responses:
+        '201':
+          description: ExecModule created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ExecModule'}
+        '400': {description: Invalid input.}
+        '404': {description: ExecModule not found.}
+        '500': {description: Internal server error.}
+  /ExecModule/{id}:
+    get:
+      tags: [ExecModule]
+      summary: Retrieve a ExecModule
+      description: Retrieves a ExecModule for a specific uid.
+      x-spring-cacheable: true
+      operationId: getExecModule
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ExecModule.
+      responses:
+        '200':
+          description: Successfully retrieved ExecModules.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ExecModule'}
+        '404': {description: ExecModule not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [ExecModule]
+      summary: Update an existing ExecModule
+      description: Updates an existing ExecModule.
+      operationId: updateExecModule
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ExecModule.
+      requestBody:
+        description: Updated ExecModule details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ExecModule'}
+      responses:
+        '200':
+          description: ExecModule updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ExecModule'}
+        '400': {description: Invalid input.}
+        '404': {description: ExecModule not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [ExecModule]
+      summary: Delete a ExecModule.
+      description: Deletes a specific ExecModule.
+      operationId: deleteExecModule
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ExecModule.
+      responses:
+        '204': {description: ExecModule deleted successfully.}
+        '404': {description: ExecModule not found.}
+        '500': {description: Internal server error.}
+  /EventLog:
+    get:
+      tags: [EventLog]
+      summary: Retrieve a list of EventLogs
+      description: Retrieves a list of EventLogs.
+      x-spring-cacheable: true
+      operationId: getEventLogList
+      responses:
+        '200':
+          description: Successfully retrieved the list of EventLogs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/EventLog'}
+        '404': {description: No EventLogs were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [EventLog]
+      summary: Create a new EventLog
+      description: Creates a new EventLog.
+      operationId: postEventLog
+      requestBody:
+        description: EventLog details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EventLog'}
+      responses:
+        '201':
+          description: EventLog created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/EventLog'}
+        '400': {description: Invalid input.}
+        '404': {description: EventLog not found.}
+        '500': {description: Internal server error.}
+  /EventLog/{id}:
+    get:
+      tags: [EventLog]
+      summary: Retrieve a EventLog
+      description: Retrieves a EventLog for a specific uid.
+      x-spring-cacheable: true
+      operationId: getEventLog
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the EventLog.
+      responses:
+        '200':
+          description: Successfully retrieved EventLogs.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/EventLog'}
+        '404': {description: EventLog not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [EventLog]
+      summary: Update an existing EventLog
+      description: Updates an existing EventLog.
+      operationId: updateEventLog
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the EventLog.
+      requestBody:
+        description: Updated EventLog details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EventLog'}
+      responses:
+        '200':
+          description: EventLog updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/EventLog'}
+        '400': {description: Invalid input.}
+        '404': {description: EventLog not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [EventLog]
+      summary: Delete a EventLog.
+      description: Deletes a specific EventLog.
+      operationId: deleteEventLog
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the EventLog.
+      responses:
+        '204': {description: EventLog deleted successfully.}
+        '404': {description: EventLog not found.}
+        '500': {description: Internal server error.}
+  /OpenAPISpec:
+    get:
+      tags: [OpenAPISpec]
+      summary: Retrieve a list of OpenAPISpecs
+      description: Retrieves a list of OpenAPISpecs.
+      x-spring-cacheable: true
+      operationId: getOpenAPISpecList
+      responses:
+        '200':
+          description: Successfully retrieved the list of OpenAPISpecs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/OpenAPISpec'}
+        '404': {description: No OpenAPISpecs were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [OpenAPISpec]
+      summary: Create a new OpenAPISpec
+      description: Creates a new OpenAPISpec.
+      operationId: postOpenAPISpec
+      requestBody:
+        description: OpenAPISpec details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/OpenAPISpec'}
+      responses:
+        '201':
+          description: OpenAPISpec created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/OpenAPISpec'}
+        '400': {description: Invalid input.}
+        '404': {description: OpenAPISpec not found.}
+        '500': {description: Internal server error.}
+  /OpenAPISpec/{id}:
+    get:
+      tags: [OpenAPISpec]
+      summary: Retrieve a OpenAPISpec
+      description: Retrieves a OpenAPISpec for a specific uid.
+      x-spring-cacheable: true
+      operationId: getOpenAPISpec
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the OpenAPISpec.
+      responses:
+        '200':
+          description: Successfully retrieved OpenAPISpecs.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/OpenAPISpec'}
+        '404': {description: OpenAPISpec not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [OpenAPISpec]
+      summary: Update an existing OpenAPISpec
+      description: Updates an existing OpenAPISpec.
+      operationId: updateOpenAPISpec
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the OpenAPISpec.
+      requestBody:
+        description: Updated OpenAPISpec details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/OpenAPISpec'}
+      responses:
+        '200':
+          description: OpenAPISpec updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/OpenAPISpec'}
+        '400': {description: Invalid input.}
+        '404': {description: OpenAPISpec not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [OpenAPISpec]
+      summary: Delete a OpenAPISpec.
+      description: Deletes a specific OpenAPISpec.
+      operationId: deleteOpenAPISpec
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the OpenAPISpec.
+      responses:
+        '204': {description: OpenAPISpec deleted successfully.}
+        '404': {description: OpenAPISpec not found.}
+        '500': {description: Internal server error.}
+  /Application:
+    get:
+      tags: [Application]
+      summary: Retrieve a list of Applications
+      description: Retrieves a list of Applications.
+      x-spring-cacheable: true
+      operationId: getApplicationList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Application'}
+        '404': {description: No Applications were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Application]
+      summary: Create a new Application
+      description: Creates a new Application.
+      operationId: postApplication
+      requestBody:
+        description: Application details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Application'}
+      responses:
+        '201':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Application'}
+        '400': {description: Invalid input.}
+        '404': {description: Application not found.}
+        '500': {description: Internal server error.}
+  /Application/{id}:
+    get:
+      tags: [Application]
+      summary: Retrieve a Application
+      description: Retrieves a Application for a specific uid.
+      x-spring-cacheable: true
+      operationId: getApplication
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Application.
+      responses:
+        '200':
+          description: Successfully retrieved Applications.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Application'}
+        '404': {description: Application not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Application]
+      summary: Update an existing Application
+      description: Updates an existing Application.
+      operationId: updateApplication
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Application.
+      requestBody:
+        description: Updated Application details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Application'}
+      responses:
+        '200':
+          description: Application updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Application'}
+        '400': {description: Invalid input.}
+        '404': {description: Application not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Application]
+      summary: Delete a Application.
+      description: Deletes a specific Application.
+      operationId: deleteApplication
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Application.
+      responses:
+        '204': {description: Application deleted successfully.}
+        '404': {description: Application not found.}
+        '500': {description: Internal server error.}
+  /ContentData:
+    get:
+      tags: [ContentData]
+      summary: Retrieve a list of ContentDatas
+      description: Retrieves a list of ContentDatas.
+      x-spring-cacheable: true
+      operationId: getContentDataList
+      responses:
+        '200':
+          description: Successfully retrieved the list of ContentDatas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ContentData'}
+        '404': {description: No ContentDatas were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [ContentData]
+      summary: Create a new ContentData
+      description: Creates a new ContentData.
+      operationId: postContentData
+      requestBody:
+        description: ContentData details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ContentData'}
+      responses:
+        '201':
+          description: ContentData created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ContentData'}
+        '400': {description: Invalid input.}
+        '404': {description: ContentData not found.}
+        '500': {description: Internal server error.}
+  /ContentData/{id}:
+    get:
+      tags: [ContentData]
+      summary: Retrieve a ContentData
+      description: Retrieves a ContentData for a specific uid.
+      x-spring-cacheable: true
+      operationId: getContentData
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ContentData.
+      responses:
+        '200':
+          description: Successfully retrieved ContentDatas.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ContentData'}
+        '404': {description: ContentData not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [ContentData]
+      summary: Update an existing ContentData
+      description: Updates an existing ContentData.
+      operationId: updateContentData
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ContentData.
+      requestBody:
+        description: Updated ContentData details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ContentData'}
+      responses:
+        '200':
+          description: ContentData updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ContentData'}
+        '400': {description: Invalid input.}
+        '404': {description: ContentData not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [ContentData]
+      summary: Delete a ContentData.
+      description: Deletes a specific ContentData.
+      operationId: deleteContentData
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ContentData.
+      responses:
+        '204': {description: ContentData deleted successfully.}
+        '404': {description: ContentData not found.}
+        '500': {description: Internal server error.}
+  /Rating:
+    get:
+      tags: [Rating]
+      summary: Retrieve a list of Ratings
+      description: Retrieves a list of Ratings.
+      x-spring-cacheable: true
+      operationId: getRatingList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Ratings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Rating'}
+        '404': {description: No Ratings were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Rating]
+      summary: Create a new Rating
+      description: Creates a new Rating.
+      operationId: postRating
+      requestBody:
+        description: Rating details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Rating'}
+      responses:
+        '201':
+          description: Rating created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Rating'}
+        '400': {description: Invalid input.}
+        '404': {description: Rating not found.}
+        '500': {description: Internal server error.}
+  /Rating/{id}:
+    get:
+      tags: [Rating]
+      summary: Retrieve a Rating
+      description: Retrieves a Rating for a specific uid.
+      x-spring-cacheable: true
+      operationId: getRating
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Rating.
+      responses:
+        '200':
+          description: Successfully retrieved Ratings.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Rating'}
+        '404': {description: Rating not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Rating]
+      summary: Update an existing Rating
+      description: Updates an existing Rating.
+      operationId: updateRating
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Rating.
+      requestBody:
+        description: Updated Rating details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Rating'}
+      responses:
+        '200':
+          description: Rating updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Rating'}
+        '400': {description: Invalid input.}
+        '404': {description: Rating not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Rating]
+      summary: Delete a Rating.
+      description: Deletes a specific Rating.
+      operationId: deleteRating
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Rating.
+      responses:
+        '204': {description: Rating deleted successfully.}
+        '404': {description: Rating not found.}
+        '500': {description: Internal server error.}
+  /ChatMessage:
+    get:
+      tags: [ChatMessage]
+      summary: Retrieve a list of ChatMessages
+      description: Retrieves a list of ChatMessages.
+      x-spring-cacheable: true
+      operationId: getChatMessageList
+      responses:
+        '200':
+          description: Successfully retrieved the list of ChatMessages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ChatMessage'}
+        '404': {description: No ChatMessages were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [ChatMessage]
+      summary: Create a new ChatMessage
+      description: Creates a new ChatMessage.
+      operationId: postChatMessage
+      requestBody:
+        description: ChatMessage details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ChatMessage'}
+      responses:
+        '201':
+          description: ChatMessage created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChatMessage'}
+        '400': {description: Invalid input.}
+        '404': {description: ChatMessage not found.}
+        '500': {description: Internal server error.}
+  /ChatMessage/{id}:
+    get:
+      tags: [ChatMessage]
+      summary: Retrieve a ChatMessage
+      description: Retrieves a ChatMessage for a specific uid.
+      x-spring-cacheable: true
+      operationId: getChatMessage
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ChatMessage.
+      responses:
+        '200':
+          description: Successfully retrieved ChatMessages.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChatMessage'}
+        '404': {description: ChatMessage not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [ChatMessage]
+      summary: Update an existing ChatMessage
+      description: Updates an existing ChatMessage.
+      operationId: updateChatMessage
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ChatMessage.
+      requestBody:
+        description: Updated ChatMessage details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ChatMessage'}
+      responses:
+        '200':
+          description: ChatMessage updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChatMessage'}
+        '400': {description: Invalid input.}
+        '404': {description: ChatMessage not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [ChatMessage]
+      summary: Delete a ChatMessage.
+      description: Deletes a specific ChatMessage.
+      operationId: deleteChatMessage
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ChatMessage.
+      responses:
+        '204': {description: ChatMessage deleted successfully.}
+        '404': {description: ChatMessage not found.}
+        '500': {description: Internal server error.}
+  /User:
+    get:
+      tags: [User]
+      summary: Retrieve a list of Users
+      description: Retrieves a list of Users.
+      x-spring-cacheable: true
+      operationId: getUserList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/User'}
+        '404': {description: No Users were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [User]
+      summary: Create a new User
+      description: Creates a new User.
+      operationId: postUser
+      requestBody:
+        description: User details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/User'}
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '400': {description: Invalid input.}
+        '404': {description: User not found.}
+        '500': {description: Internal server error.}
+  /User/{id}:
+    get:
+      tags: [User]
+      summary: Retrieve a User
+      description: Retrieves a User for a specific uid.
+      x-spring-cacheable: true
+      operationId: getUser
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the User.
+      responses:
+        '200':
+          description: Successfully retrieved Users.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '404': {description: User not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [User]
+      summary: Update an existing User
+      description: Updates an existing User.
+      operationId: updateUser
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the User.
+      requestBody:
+        description: Updated User details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/User'}
+      responses:
+        '200':
+          description: User updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '400': {description: Invalid input.}
+        '404': {description: User not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [User]
+      summary: Delete a User.
+      description: Deletes a specific User.
+      operationId: deleteUser
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the User.
+      responses:
+        '204': {description: User deleted successfully.}
+        '404': {description: User not found.}
+        '500': {description: Internal server error.}
+  /Organization:
+    get:
+      tags: [Organization]
+      summary: Retrieve a list of Organizations
+      description: Retrieves a list of Organizations.
+      x-spring-cacheable: true
+      operationId: getOrganizationList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Organizations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Organization'}
+        '404': {description: No Organizations were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Organization]
+      summary: Create a new Organization
+      description: Creates a new Organization.
+      operationId: postOrganization
+      requestBody:
+        description: Organization details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Organization'}
+      responses:
+        '201':
+          description: Organization created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Organization'}
+        '400': {description: Invalid input.}
+        '404': {description: Organization not found.}
+        '500': {description: Internal server error.}
+  /Organization/{id}:
+    get:
+      tags: [Organization]
+      summary: Retrieve a Organization
+      description: Retrieves a Organization for a specific uid.
+      x-spring-cacheable: true
+      operationId: getOrganization
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Organization.
+      responses:
+        '200':
+          description: Successfully retrieved Organizations.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Organization'}
+        '404': {description: Organization not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Organization]
+      summary: Update an existing Organization
+      description: Updates an existing Organization.
+      operationId: updateOrganization
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Organization.
+      requestBody:
+        description: Updated Organization details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Organization'}
+      responses:
+        '200':
+          description: Organization updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Organization'}
+        '400': {description: Invalid input.}
+        '404': {description: Organization not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Organization]
+      summary: Delete a Organization.
+      description: Deletes a specific Organization.
+      operationId: deleteOrganization
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Organization.
+      responses:
+        '204': {description: Organization deleted successfully.}
+        '404': {description: Organization not found.}
+        '500': {description: Internal server error.}
+  /Address:
+    get:
+      tags: [Address]
+      summary: Retrieve a list of Addresss
+      description: Retrieves a list of Addresss.
+      x-spring-cacheable: true
+      operationId: getAddressList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Addresss.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Address'}
+        '404': {description: No Addresss were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Address]
+      summary: Create a new Address
+      description: Creates a new Address.
+      operationId: postAddress
+      requestBody:
+        description: Address details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Address'}
+      responses:
+        '201':
+          description: Address created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Address'}
+        '400': {description: Invalid input.}
+        '404': {description: Address not found.}
+        '500': {description: Internal server error.}
+  /Address/{id}:
+    get:
+      tags: [Address]
+      summary: Retrieve a Address
+      description: Retrieves a Address for a specific uid.
+      x-spring-cacheable: true
+      operationId: getAddress
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Address.
+      responses:
+        '200':
+          description: Successfully retrieved Addresss.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Address'}
+        '404': {description: Address not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Address]
+      summary: Update an existing Address
+      description: Updates an existing Address.
+      operationId: updateAddress
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Address.
+      requestBody:
+        description: Updated Address details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Address'}
+      responses:
+        '200':
+          description: Address updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Address'}
+        '400': {description: Invalid input.}
+        '404': {description: Address not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Address]
+      summary: Delete a Address.
+      description: Deletes a specific Address.
+      operationId: deleteAddress
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Address.
+      responses:
+        '204': {description: Address deleted successfully.}
+        '404': {description: Address not found.}
+        '500': {description: Internal server error.}
+  /Role:
+    get:
+      tags: [Role]
+      summary: Retrieve a list of Roles
+      description: Retrieves a list of Roles.
+      x-spring-cacheable: true
+      operationId: getRoleList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Roles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Role'}
+        '404': {description: No Roles were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Role]
+      summary: Create a new Role
+      description: Creates a new Role.
+      operationId: postRole
+      requestBody:
+        description: Role details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Role'}
+      responses:
+        '201':
+          description: Role created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Role'}
+        '400': {description: Invalid input.}
+        '404': {description: Role not found.}
+        '500': {description: Internal server error.}
+  /Role/{id}:
+    get:
+      tags: [Role]
+      summary: Retrieve a Role
+      description: Retrieves a Role for a specific uid.
+      x-spring-cacheable: true
+      operationId: getRole
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Role.
+      responses:
+        '200':
+          description: Successfully retrieved Roles.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Role'}
+        '404': {description: Role not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Role]
+      summary: Update an existing Role
+      description: Updates an existing Role.
+      operationId: updateRole
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Role.
+      requestBody:
+        description: Updated Role details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Role'}
+      responses:
+        '200':
+          description: Role updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Role'}
+        '400': {description: Invalid input.}
+        '404': {description: Role not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Role]
+      summary: Delete a Role.
+      description: Deletes a specific Role.
+      operationId: deleteRole
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Role.
+      responses:
+        '204': {description: Role deleted successfully.}
+        '404': {description: Role not found.}
+        '500': {description: Internal server error.}
+  /AclEntry:
+    get:
+      tags: [AclEntry]
+      summary: Retrieve a list of AclEntrys
+      description: Retrieves a list of AclEntrys.
+      x-spring-cacheable: true
+      operationId: getAclEntryList
+      responses:
+        '200':
+          description: Successfully retrieved the list of AclEntrys.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/AclEntry'}
+        '404': {description: No AclEntrys were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [AclEntry]
+      summary: Create a new AclEntry
+      description: Creates a new AclEntry.
+      operationId: postAclEntry
+      requestBody:
+        description: AclEntry details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/AclEntry'}
+      responses:
+        '201':
+          description: AclEntry created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AclEntry'}
+        '400': {description: Invalid input.}
+        '404': {description: AclEntry not found.}
+        '500': {description: Internal server error.}
+  /AclEntry/{id}:
+    get:
+      tags: [AclEntry]
+      summary: Retrieve a AclEntry
+      description: Retrieves a AclEntry for a specific uid.
+      x-spring-cacheable: true
+      operationId: getAclEntry
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the AclEntry.
+      responses:
+        '200':
+          description: Successfully retrieved AclEntrys.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AclEntry'}
+        '404': {description: AclEntry not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [AclEntry]
+      summary: Update an existing AclEntry
+      description: Updates an existing AclEntry.
+      operationId: updateAclEntry
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the AclEntry.
+      requestBody:
+        description: Updated AclEntry details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/AclEntry'}
+      responses:
+        '200':
+          description: AclEntry updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AclEntry'}
+        '400': {description: Invalid input.}
+        '404': {description: AclEntry not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [AclEntry]
+      summary: Delete a AclEntry.
+      description: Deletes a specific AclEntry.
+      operationId: deleteAclEntry
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the AclEntry.
+      responses:
+        '204': {description: AclEntry deleted successfully.}
+        '404': {description: AclEntry not found.}
+        '500': {description: Internal server error.}
+  /ThorUXMeta:
+    get:
+      tags: [ThorUXMeta]
+      summary: Retrieve a list of ThorUXMetas
+      description: Retrieves a list of ThorUXMetas.
+      x-spring-cacheable: true
+      operationId: getThorUXMetaList
+      responses:
+        '200':
+          description: Successfully retrieved the list of ThorUXMetas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ThorUXMeta'}
+        '404': {description: No ThorUXMetas were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [ThorUXMeta]
+      summary: Create a new ThorUXMeta
+      description: Creates a new ThorUXMeta.
+      operationId: postThorUXMeta
+      requestBody:
+        description: ThorUXMeta details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ThorUXMeta'}
+      responses:
+        '201':
+          description: ThorUXMeta created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXMeta'}
+        '400': {description: Invalid input.}
+        '404': {description: ThorUXMeta not found.}
+        '500': {description: Internal server error.}
+  /ThorUXMeta/{id}:
+    get:
+      tags: [ThorUXMeta]
+      summary: Retrieve a ThorUXMeta
+      description: Retrieves a ThorUXMeta for a specific uid.
+      x-spring-cacheable: true
+      operationId: getThorUXMeta
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXMeta.
+      responses:
+        '200':
+          description: Successfully retrieved ThorUXMetas.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXMeta'}
+        '404': {description: ThorUXMeta not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [ThorUXMeta]
+      summary: Update an existing ThorUXMeta
+      description: Updates an existing ThorUXMeta.
+      operationId: updateThorUXMeta
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXMeta.
+      requestBody:
+        description: Updated ThorUXMeta details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ThorUXMeta'}
+      responses:
+        '200':
+          description: ThorUXMeta updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXMeta'}
+        '400': {description: Invalid input.}
+        '404': {description: ThorUXMeta not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [ThorUXMeta]
+      summary: Delete a ThorUXMeta.
+      description: Deletes a specific ThorUXMeta.
+      operationId: deleteThorUXMeta
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXMeta.
+      responses:
+        '204': {description: ThorUXMeta deleted successfully.}
+        '404': {description: ThorUXMeta not found.}
+        '500': {description: Internal server error.}
+  /ThorUXComponent:
+    get:
+      tags: [ThorUXComponent]
+      summary: Retrieve a list of ThorUXComponents
+      description: Retrieves a list of ThorUXComponents.
+      x-spring-cacheable: true
+      operationId: getThorUXComponentList
+      responses:
+        '200':
+          description: Successfully retrieved the list of ThorUXComponents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ThorUXComponent'}
+        '404': {description: No ThorUXComponents were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [ThorUXComponent]
+      summary: Create a new ThorUXComponent
+      description: Creates a new ThorUXComponent.
+      operationId: postThorUXComponent
+      requestBody:
+        description: ThorUXComponent details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ThorUXComponent'}
+      responses:
+        '201':
+          description: ThorUXComponent created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXComponent'}
+        '400': {description: Invalid input.}
+        '404': {description: ThorUXComponent not found.}
+        '500': {description: Internal server error.}
+  /ThorUXComponent/{id}:
+    get:
+      tags: [ThorUXComponent]
+      summary: Retrieve a ThorUXComponent
+      description: Retrieves a ThorUXComponent for a specific uid.
+      x-spring-cacheable: true
+      operationId: getThorUXComponent
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXComponent.
+      responses:
+        '200':
+          description: Successfully retrieved ThorUXComponents.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXComponent'}
+        '404': {description: ThorUXComponent not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [ThorUXComponent]
+      summary: Update an existing ThorUXComponent
+      description: Updates an existing ThorUXComponent.
+      operationId: updateThorUXComponent
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXComponent.
+      requestBody:
+        description: Updated ThorUXComponent details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ThorUXComponent'}
+      responses:
+        '200':
+          description: ThorUXComponent updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ThorUXComponent'}
+        '400': {description: Invalid input.}
+        '404': {description: ThorUXComponent not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [ThorUXComponent]
+      summary: Delete a ThorUXComponent.
+      description: Deletes a specific ThorUXComponent.
+      operationId: deleteThorUXComponent
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the ThorUXComponent.
+      responses:
+        '204': {description: ThorUXComponent deleted successfully.}
+        '404': {description: ThorUXComponent not found.}
+        '500': {description: Internal server error.}
+  /Login:
+    get:
+      tags: [Login]
+      summary: Retrieve a list of Logins
+      description: Retrieves a list of Logins.
+      x-spring-cacheable: true
+      operationId: getLoginList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Logins.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Login'}
+        '404': {description: No Logins were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Login]
+      summary: Create a new Login
+      description: Creates a new Login.
+      operationId: postLogin
+      requestBody:
+        description: Login details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Login'}
+      responses:
+        '201':
+          description: Login created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Login'}
+        '400': {description: Invalid input.}
+        '404': {description: Login not found.}
+        '500': {description: Internal server error.}
+  /Login/{id}:
+    get:
+      tags: [Login]
+      summary: Retrieve a Login
+      description: Retrieves a Login for a specific uid.
+      x-spring-cacheable: true
+      operationId: getLogin
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Login.
+      responses:
+        '200':
+          description: Successfully retrieved Logins.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Login'}
+        '404': {description: Login not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Login]
+      summary: Update an existing Login
+      description: Updates an existing Login.
+      operationId: updateLogin
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Login.
+      requestBody:
+        description: Updated Login details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Login'}
+      responses:
+        '200':
+          description: Login updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Login'}
+        '400': {description: Invalid input.}
+        '404': {description: Login not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Login]
+      summary: Delete a Login.
+      description: Deletes a specific Login.
+      operationId: deleteLogin
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Login.
+      responses:
+        '204': {description: Login deleted successfully.}
+        '404': {description: Login not found.}
+        '500': {description: Internal server error.}
+  /Logout:
+    get:
+      tags: [Logout]
+      summary: Retrieve a list of Logouts
+      description: Retrieves a list of Logouts.
+      x-spring-cacheable: true
+      operationId: getLogoutList
+      responses:
+        '200':
+          description: Successfully retrieved the list of Logouts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Logout'}
+        '404': {description: No Logouts were found.}
+        '500': {description: Internal server error.}
+    post:
+      tags: [Logout]
+      summary: Create a new Logout
+      description: Creates a new Logout.
+      operationId: postLogout
+      requestBody:
+        description: Logout details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Logout'}
+      responses:
+        '201':
+          description: Logout created successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Logout'}
+        '400': {description: Invalid input.}
+        '404': {description: Logout not found.}
+        '500': {description: Internal server error.}
+  /Logout/{id}:
+    get:
+      tags: [Logout]
+      summary: Retrieve a Logout
+      description: Retrieves a Logout for a specific uid.
+      x-spring-cacheable: true
+      operationId: getLogout
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Logout.
+      responses:
+        '200':
+          description: Successfully retrieved Logouts.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Logout'}
+        '404': {description: Logout not found.}
+        '500': {description: Internal server error.}
+    put:
+      tags: [Logout]
+      summary: Update an existing Logout
+      description: Updates an existing Logout.
+      operationId: updateLogout
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Logout.
+      requestBody:
+        description: Updated Logout details.
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Logout'}
+      responses:
+        '200':
+          description: Logout updated successfully.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Logout'}
+        '400': {description: Invalid input.}
+        '404': {description: Logout not found.}
+        '500': {description: Internal server error.}
+    delete:
+      tags: [Logout]
+      summary: Delete a Logout.
+      description: Deletes a specific Logout.
+      operationId: deleteLogout
+      parameters:
+      - name: id
+        schema: {type: string, format: uuid}
+        in: path
+        required: true
+        description: Unique identifier for the Logout.
+      responses:
+        '204': {description: Logout deleted successfully.}
+        '404': {description: Logout not found.}
+        '500': {description: Internal server error.}
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object to retrieve.
+      schema: {type: string, format: uuid}
+  schemas:
+    Workflow:
+      type: object
+      properties: {description: '@DataField(hidden = false, advanced = true)', role: '@DataField(hidden
+          = false, advanced = true)', schedule: '@DataField(hidden = false, advanced
+          = true)', meta: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+      xml: {name: Workflow}
+    Task:
+      type: object
+      properties: {description: '@DataField(hidden = false, advanced = true)', role: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: Task}
+    ExecModule:
+      type: object
+      properties: {systemId: '@DataField(hidden = false, advanced = true)', role: '@DataField(hidden
+          = false, advanced = true)', content: '@DataField(hidden = false, advanced
+          = true)', status: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+      xml: {name: ExecModule}
+    EventLog:
+      type: object
+      properties: {description: '@DataField(hidden = false, advanced = true)', status: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: EventLog}
+    OpenAPISpec:
+      type: object
+      properties: {description: '@DataField(hidden = false, advanced = true)', originalOwner: '@DataField(hidden
+          = false, advanced = true)', originalPath: '@DataField(hidden = false, advanced
+          = true)', content: '@DataField(hidden = false, advanced = true)', meta: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: OpenAPISpec}
+    ChatMessage:
+      type: object
+      properties: {sessionId: '@DataField(hidden = false, advanced = true)', role: '@DataField(hidden
+          = false, advanced = true)', content: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    ChatResponse:
+      type: object
+      properties: {content: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+    Reaction:
+      required: [target, value]
+      properties: {target: '@DataField(hidden = false, advanced = true)', value: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    User:
+      required: [email, password]
+      type: object
+      properties: {firstName: '@DataField(hidden = false, advanced = true)', middleName: '@DataField(hidden
+          = false, advanced = true)', lastName: '@DataField(hidden = false, advanced
+          = true)', userName: '@DataField(hidden = false, advanced = true)', password: '@DataField(hidden
+          = false, advanced = true)', fingerprint: '@DataField(hidden = false, advanced
+          = true)', federalIdentification: '@DataField(hidden = false, advanced =
+          true)', residenceCountry: '@DataField(hidden = false, advanced = true)',
+        stateIdentification: '@DataField(hidden = false, advanced = true)', residenceState: '@DataField(hidden
+          = false, advanced = true)', email: '@DataField(hidden = false, advanced
+          = true)', social: '@DataField(hidden = false, advanced = true)', bio: '@DataField(hidden
+          = false, advanced = true)', avatar_url: '@DataField(hidden = false, advanced
+          = true)', organizationId: '@DataField(hidden = false, advanced = true)',
+        organization: '@DataField(hidden = false, advanced = true)', addresses: '@DataField(hidden
+          = false, advanced = true)', enabled: '@DataField(hidden = false, advanced
+          = true)', credentialNonExpired: '@DataField(hidden = false, advanced = true)',
+        accountEnabled: '@DataField(hidden = false, advanced = true)', accountNonLocked: '@DataField(hidden
+          = false, advanced = true)', accountNonExpired: '@DataField(hidden = false,
+          advanced = true)', roles: '@DataField(hidden = false, advanced = true)',
+        authorityList: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+      xml: {name: User}
+    Organization:
+      required: [name]
+      type: object
+      properties: {name: '@DataField(hidden = false, advanced = true)', homePage: '@DataField(hidden
+          = false, advanced = true)', phone: '@DataField(hidden = false, advanced
+          = true)', addressId: '@DataField(hidden = false, advanced = true)', address: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: Organization}
+    Address:
+      required: [city, name, state, street1, postal_code]
+      type: object
+      properties: {hasWifi: '@DataField(hidden = false, advanced = true)', userId: '@DataField(hidden
+          = false, advanced = true)', addressType: '@DataField(hidden = false, advanced
+          = true)', name: '@DataField(hidden = false, advanced = true)', street1: '@DataField(hidden
+          = false, advanced = true)', street2: '@DataField(hidden = false, advanced
+          = true)', city: '@DataField(hidden = false, advanced = true)', state: '@DataField(hidden
+          = false, advanced = true)', country: '@DataField(hidden = false, advanced
+          = true)', postal_code: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+      xml: {name: Address}
+    ContentData:
+      type: object
+      required: [name]
+      properties: {name: '@DataField(hidden = false, advanced = true)', contentData: '@DataField(hidden
+          = false, advanced = true)', releaseDate: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: ContentData}
+    Rating:
+      type: object
+      required: [contentId]
+      properties: {targetType: '@DataField(hidden = false, advanced = true)', contentId: '@DataField(hidden
+          = false, advanced = true)', comments: '@DataField(hidden = false, advanced
+          = true)', url: '@DataField(hidden = false, advanced = true)', rating: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      xml: {name: Rating}
+    ThorUXMeta:
+      type: object
+      description: Metadata for ThorUX components.
+      properties: {thoruxComponents: '@DataField(hidden = false, advanced = true)',
+        id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    ThorUXComponent:
+      type: object
+      properties: {componentType: '@DataField(hidden = false, advanced = true)', status: '@DataField(hidden
+          = false, advanced = true)', settings: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    Login:
+      type: object
+      properties: {username: '@DataField(hidden = false, advanced = true)', password: '@DataField(hidden
+          = false, advanced = true)', description: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    Logout:
+      type: object
+      properties: {description: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+    PersistentLogin:
+      type: object
+      properties: {username: '@DataField(hidden = false, advanced = true)', series: '@DataField(hidden
+          = false, advanced = true)', token: '@DataField(hidden = false, advanced
+          = true)', last_used: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+      required: [username, series, token, last_used]
+    Role:
+      type: object
+      properties: {userId: '@DataField(hidden = false, advanced = true)', roleName: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    Authority:
+      type: object
+      properties: {userId: '@DataField(hidden = false, advanced = true)', username: '@DataField(hidden
+          = false, advanced = true)', authority: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+      required: [username, authority]
+    AclSid:
+      type: object
+      properties: {sid: '@DataField(hidden = false, advanced = true)', principal: '@DataField(hidden
+          = false, advanced = true)', id: '@DataField(hidden = false, advanced = true)',
+        ownerId: '@DataField(hidden = false, advanced = true)', lastModifiedById: '@DataField(hidden
+          = false, advanced = true)', createdDate: '@DataField(hidden = false, advanced
+          = true)', modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    AclClass:
+      type: object
+      properties: {class: '@DataField(hidden = false, advanced = true)', id: '@DataField(hidden
+          = false, advanced = true)', ownerId: '@DataField(hidden = false, advanced
+          = true)', lastModifiedById: '@DataField(hidden = false, advanced = true)',
+        createdDate: '@DataField(hidden = false, advanced = true)', modifiedDate: '@DataField(hidden
+          = false, advanced = true)'}
+    AclObjectIdentity:
+      type: object
+      properties: {object_id_class: '@DataField(hidden = false, advanced = true)',
+        object_id_identity: '@DataField(hidden = false, advanced = true)', parent_object: '@DataField(hidden
+          = false, advanced = true)', owner_sid: '@DataField(hidden = false, advanced
+          = true)', entries_inheriting: '@DataField(hidden = false, advanced = true)',
+        id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+    AclEntry:
+      type: object
+      properties: {acl_object_identity: '@DataField(hidden = false, advanced = true)',
+        ace_order: '@DataField(hidden = false, advanced = true)', sid: '@DataField(hidden
+          = false, advanced = true)', mask: '@DataField(hidden = false, advanced =
+          true)', granting: '@DataField(hidden = false, advanced = true)', audit_success: '@DataField(hidden
+          = false, advanced = true)', audit_failure: '@DataField(hidden = false, advanced
+          = true)', id: '@DataField(hidden = false, advanced = true)', ownerId: '@DataField(hidden
+          = false, advanced = true)', lastModifiedById: '@DataField(hidden = false,
+          advanced = true)', createdDate: '@DataField(hidden = false, advanced = true)',
+        modifiedDate: '@DataField(hidden = false, advanced = true)'}
+  securitySchemes:
+    thorapi_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://{username}.valkyrlabs.com:{port}/oauth
+          scopes: {'write:items': modify owned items, 'read:items': read owned items}

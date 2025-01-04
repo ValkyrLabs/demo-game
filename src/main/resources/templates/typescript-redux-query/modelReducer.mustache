@@ -1,0 +1,39 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+import { {{classname}} } from '../../model/{{classname}}';
+
+const {{classname}}Slice = createSlice({
+  name: "{{classname}}s",
+  initialState: [],
+
+  reducers: {
+    {{classname}}Added(state, action) {
+      state.push(action.payload);
+    },
+
+    {{classname}}ValueToggled(state, action) {
+      console.log("{{classname}} TOGGLE")
+      console.warn(JSON.stringify(action))
+      const {{classname}}:{{classname}} = state.find(({{classname}}) => {{classname}}.id === action.payload.{{classname}}Id);
+      if ({{classname}}) {
+        if (action.payload.target === "SOMETHING") {
+          
+        }
+      }
+    },
+    
+    {{classname}}propertySet(state, action) {
+      const {{classname}} = state.find(({{classname}}) => {{classname}}.id === action.payload.{{classname}}Id);
+      if ({{classname}}) {
+      //  {{classname}}[action.property] = action.payload[action.property];
+      }
+    },
+  },
+});
+
+export const {
+  {{classname}}Added,
+  {{classname}}ValueToggled,
+  {{classname}}propertySet
+} = {{classname}}Slice.actions;
+export default {{classname}}Slice.reducer;

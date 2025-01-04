@@ -3,9 +3,9 @@
 import { useCallback, useState } from "react";
 
 export default function useJumpPhysics({
-  gravity = 10,
-  jumpSpeed = 8,
-  initialY = -2
+  gravity = 100,
+  jumpSpeed = 80,
+  initialY = 2
 }) {
   const [isJumping, setIsJumping] = useState(false);
   const [verticalVelocity, setVerticalVelocity] = useState(0);

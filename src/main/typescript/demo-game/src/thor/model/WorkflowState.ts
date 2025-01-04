@@ -1,7 +1,7 @@
 // tslint:disable
 /**
- * Percival the Dragon Slayer CORE API
- * The API for accessing Percival the Dragon Slayer services
+ * ValkyrAI CORE API
+ * The API for accessing ValkyrAI services
  *
  * The version of the OpenAPI document: 0.9.25
  * Contact: info@valkyrlabs.com
@@ -24,7 +24,7 @@ import {
 // thorapi
 
 /**
- * Percival the Dragon Slayer Workflow State object holds the state container for a workflow
+ * ValkyrAI Workflow State object holds the state container for a workflow
  * @export
  * @interface WorkflowState
  */

@@ -1,7 +1,7 @@
 // tslint:disable
 /**
- * Percival the Dragon Slayer CORE API
- * The API for accessing Percival the Dragon Slayer services
+ * ValkyrAI CORE API
+ * The API for accessing ValkyrAI services
  *
  * The version of the OpenAPI document: 0.9.25
  * Contact: info@valkyrlabs.com
@@ -11,8 +11,10 @@
  * Do not edit the class manually.
  */
 
-import { exists } from '../src/runtime';
+import { exists, mapValues } from '../src/runtime';
 import {
+
+
     Address,
     AddressFromJSON,
     AddressToJSON,
@@ -31,7 +33,7 @@ import {
 // thorapi
 
 /**
- * The Peragon Principal. Represents a user, service, or agent in the system with preferences and privileges.
+ * The Valkyr Principal. Represents a user, service, or agent in the system with preferences and privileges.
  * @export
  * @interface Principal
  */

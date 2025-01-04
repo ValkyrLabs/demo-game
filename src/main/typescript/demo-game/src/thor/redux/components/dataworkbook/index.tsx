@@ -23,49 +23,9 @@ import  ApplicationForm  from '../form/ApplicationForm';
 import  ApplicationTable from '../table/ApplicationTable';
 
 
-import  BackupConfigChart  from '../chart/BackupConfigChart';
-import  BackupConfigForm  from '../form/BackupConfigForm';
-import  BackupConfigTable from '../table/BackupConfigTable';
-
-
-import  BlankRangeChart  from '../chart/BlankRangeChart';
-import  BlankRangeForm  from '../form/BlankRangeForm';
-import  BlankRangeTable from '../table/BlankRangeTable';
-
-
-import  BorderChart  from '../chart/BorderChart';
-import  BorderForm  from '../form/BorderForm';
-import  BorderTable from '../table/BorderTable';
-
-
-import  BuildChart  from '../chart/BuildChart';
-import  BuildForm  from '../form/BuildForm';
-import  BuildTable from '../table/BuildTable';
-
-
-import  BuildOutputChart  from '../chart/BuildOutputChart';
-import  BuildOutputForm  from '../form/BuildOutputForm';
-import  BuildOutputTable from '../table/BuildOutputTable';
-
-
-import  CampaignChart  from '../chart/CampaignChart';
-import  CampaignForm  from '../form/CampaignForm';
-import  CampaignTable from '../table/CampaignTable';
-
-
-import  CellChart  from '../chart/CellChart';
-import  CellForm  from '../form/CellForm';
-import  CellTable from '../table/CellTable';
-
-
-import  ChartChart  from '../chart/ChartChart';
-import  ChartForm  from '../form/ChartForm';
-import  ChartTable from '../table/ChartTable';
-
-
-import  ChartSeriesChart  from '../chart/ChartSeriesChart';
-import  ChartSeriesForm  from '../form/ChartSeriesForm';
-import  ChartSeriesTable from '../table/ChartSeriesTable';
+import  AttackChart  from '../chart/AttackChart';
+import  AttackForm  from '../form/AttackForm';
+import  AttackTable from '../table/AttackTable';
 
 
 import  ChatMessageChart  from '../chart/ChatMessageChart';
@@ -103,29 +63,9 @@ import  ExecModuleForm  from '../form/ExecModuleForm';
 import  ExecModuleTable from '../table/ExecModuleTable';
 
 
-import  FormatChart  from '../chart/FormatChart';
-import  FormatForm  from '../form/FormatForm';
-import  FormatTable from '../table/FormatTable';
-
-
-import  FormulaChart  from '../chart/FormulaChart';
-import  FormulaForm  from '../form/FormulaForm';
-import  FormulaTable from '../table/FormulaTable';
-
-
 import  GameChart  from '../chart/GameChart';
 import  GameForm  from '../form/GameForm';
 import  GameTable from '../table/GameTable';
-
-
-import  GoalChart  from '../chart/GoalChart';
-import  GoalForm  from '../form/GoalForm';
-import  GoalTable from '../table/GoalTable';
-
-
-import  GoalDependencyChart  from '../chart/GoalDependencyChart';
-import  GoalDependencyForm  from '../form/GoalDependencyForm';
-import  GoalDependencyTable from '../table/GoalDependencyTable';
 
 
 import  IntegrationAccountChart  from '../chart/IntegrationAccountChart';
@@ -133,14 +73,9 @@ import  IntegrationAccountForm  from '../form/IntegrationAccountForm';
 import  IntegrationAccountTable from '../table/IntegrationAccountTable';
 
 
-import  InvoiceChart  from '../chart/InvoiceChart';
-import  InvoiceForm  from '../form/InvoiceForm';
-import  InvoiceTable from '../table/InvoiceTable';
-
-
-import  KeyMetricChart  from '../chart/KeyMetricChart';
-import  KeyMetricForm  from '../form/KeyMetricForm';
-import  KeyMetricTable from '../table/KeyMetricTable';
+import  LevelChart  from '../chart/LevelChart';
+import  LevelForm  from '../form/LevelForm';
+import  LevelTable from '../table/LevelTable';
 
 
 import  LlmDetailsChart  from '../chart/LlmDetailsChart';
@@ -158,86 +93,6 @@ import  LogoutForm  from '../form/LogoutForm';
 import  LogoutTable from '../table/LogoutTable';
 
 
-import  MediaObjectChart  from '../chart/MediaObjectChart';
-import  MediaObjectForm  from '../form/MediaObjectForm';
-import  MediaObjectTable from '../table/MediaObjectTable';
-
-
-import  MergeRangeChart  from '../chart/MergeRangeChart';
-import  MergeRangeForm  from '../form/MergeRangeForm';
-import  MergeRangeTable from '../table/MergeRangeTable';
-
-
-import  NamedRangeChart  from '../chart/NamedRangeChart';
-import  NamedRangeForm  from '../form/NamedRangeForm';
-import  NamedRangeTable from '../table/NamedRangeTable';
-
-
-import  NoteChart  from '../chart/NoteChart';
-import  NoteForm  from '../form/NoteForm';
-import  NoteTable from '../table/NoteTable';
-
-
-import  OasComponentsChart  from '../chart/OasComponentsChart';
-import  OasComponentsForm  from '../form/OasComponentsForm';
-import  OasComponentsTable from '../table/OasComponentsTable';
-
-
-import  OasEnumChart  from '../chart/OasEnumChart';
-import  OasEnumForm  from '../form/OasEnumForm';
-import  OasEnumTable from '../table/OasEnumTable';
-
-
-import  OasInfoChart  from '../chart/OasInfoChart';
-import  OasInfoForm  from '../form/OasInfoForm';
-import  OasInfoTable from '../table/OasInfoTable';
-
-
-import  OasObjectSchemaChart  from '../chart/OasObjectSchemaChart';
-import  OasObjectSchemaForm  from '../form/OasObjectSchemaForm';
-import  OasObjectSchemaTable from '../table/OasObjectSchemaTable';
-
-
-import  OasOpenAPISpecChart  from '../chart/OasOpenAPISpecChart';
-import  OasOpenAPISpecForm  from '../form/OasOpenAPISpecForm';
-import  OasOpenAPISpecTable from '../table/OasOpenAPISpecTable';
-
-
-import  OasOperationChart  from '../chart/OasOperationChart';
-import  OasOperationForm  from '../form/OasOperationForm';
-import  OasOperationTable from '../table/OasOperationTable';
-
-
-import  OasParameterChart  from '../chart/OasParameterChart';
-import  OasParameterForm  from '../form/OasParameterForm';
-import  OasParameterTable from '../table/OasParameterTable';
-
-
-import  OasPathChart  from '../chart/OasPathChart';
-import  OasPathForm  from '../form/OasPathForm';
-import  OasPathTable from '../table/OasPathTable';
-
-
-import  OasRequiredChart  from '../chart/OasRequiredChart';
-import  OasRequiredForm  from '../form/OasRequiredForm';
-import  OasRequiredTable from '../table/OasRequiredTable';
-
-
-import  OasResponseChart  from '../chart/OasResponseChart';
-import  OasResponseForm  from '../form/OasResponseForm';
-import  OasResponseTable from '../table/OasResponseTable';
-
-
-import  OasSecuritySchemeChart  from '../chart/OasSecuritySchemeChart';
-import  OasSecuritySchemeForm  from '../form/OasSecuritySchemeForm';
-import  OasSecuritySchemeTable from '../table/OasSecuritySchemeTable';
-
-
-import  OasServerChart  from '../chart/OasServerChart';
-import  OasServerForm  from '../form/OasServerForm';
-import  OasServerTable from '../table/OasServerTable';
-
-
 import  OpportunityChart  from '../chart/OpportunityChart';
 import  OpportunityForm  from '../form/OpportunityForm';
 import  OpportunityTable from '../table/OpportunityTable';
@@ -248,29 +103,9 @@ import  OrganizationForm  from '../form/OrganizationForm';
 import  OrganizationTable from '../table/OrganizationTable';
 
 
-import  PivotTableChart  from '../chart/PivotTableChart';
-import  PivotTableForm  from '../form/PivotTableForm';
-import  PivotTableTable from '../table/PivotTableTable';
-
-
 import  PrincipalChart  from '../chart/PrincipalChart';
 import  PrincipalForm  from '../form/PrincipalForm';
 import  PrincipalTable from '../table/PrincipalTable';
-
-
-import  ProductChart  from '../chart/ProductChart';
-import  ProductForm  from '../form/ProductForm';
-import  ProductTable from '../table/ProductTable';
-
-
-import  PtgChart  from '../chart/PtgChart';
-import  PtgForm  from '../form/PtgForm';
-import  PtgTable from '../table/PtgTable';
-
-
-import  PtgRefChart  from '../chart/PtgRefChart';
-import  PtgRefForm  from '../form/PtgRefForm';
-import  PtgRefTable from '../table/PtgRefTable';
 
 
 import  RatingChart  from '../chart/RatingChart';
@@ -288,11 +123,6 @@ import  SalesActivityForm  from '../form/SalesActivityForm';
 import  SalesActivityTable from '../table/SalesActivityTable';
 
 
-import  SalesOrderChart  from '../chart/SalesOrderChart';
-import  SalesOrderForm  from '../form/SalesOrderForm';
-import  SalesOrderTable from '../table/SalesOrderTable';
-
-
 import  SalesPipelineChart  from '../chart/SalesPipelineChart';
 import  SalesPipelineForm  from '../form/SalesPipelineForm';
 import  SalesPipelineTable from '../table/SalesPipelineTable';
@@ -303,54 +133,14 @@ import  SecureKeyForm  from '../form/SecureKeyForm';
 import  SecureKeyTable from '../table/SecureKeyTable';
 
 
-import  SheetChart  from '../chart/SheetChart';
-import  SheetForm  from '../form/SheetForm';
-import  SheetTable from '../table/SheetTable';
-
-
-import  SheetColumnChart  from '../chart/SheetColumnChart';
-import  SheetColumnForm  from '../form/SheetColumnForm';
-import  SheetColumnTable from '../table/SheetColumnTable';
-
-
-import  SheetRowChart  from '../chart/SheetRowChart';
-import  SheetRowForm  from '../form/SheetRowForm';
-import  SheetRowTable from '../table/SheetRowTable';
-
-
-import  SolutionChart  from '../chart/SolutionChart';
-import  SolutionForm  from '../form/SolutionForm';
-import  SolutionTable from '../table/SolutionTable';
-
-
-import  StrategicPriorityChart  from '../chart/StrategicPriorityChart';
-import  StrategicPriorityForm  from '../form/StrategicPriorityForm';
-import  StrategicPriorityTable from '../table/StrategicPriorityTable';
-
-
 import  TaskChart  from '../chart/TaskChart';
 import  TaskForm  from '../form/TaskForm';
 import  TaskTable from '../table/TaskTable';
 
 
-import  ThorUXComponentChart  from '../chart/ThorUXComponentChart';
-import  ThorUXComponentForm  from '../form/ThorUXComponentForm';
-import  ThorUXComponentTable from '../table/ThorUXComponentTable';
-
-
-import  ThorUXMetaChart  from '../chart/ThorUXMetaChart';
-import  ThorUXMetaForm  from '../form/ThorUXMetaForm';
-import  ThorUXMetaTable from '../table/ThorUXMetaTable';
-
-
 import  WeaponChart  from '../chart/WeaponChart';
 import  WeaponForm  from '../form/WeaponForm';
 import  WeaponTable from '../table/WeaponTable';
-
-
-import  WorkbookChart  from '../chart/WorkbookChart';
-import  WorkbookForm  from '../form/WorkbookForm';
-import  WorkbookTable from '../table/WorkbookTable';
 
 
 import  WorkflowChart  from '../chart/WorkflowChart';
@@ -427,128 +217,16 @@ Application
 
 
                             <NavDropdown.Item
-                                title='BackupConfig'
-                                active={ activeTab == 'BackupConfig' }
+                                title='Attack'
+                                active={ activeTab == 'Attack' }
                                 onClick={() => {
-                                    setActiveTab("BackupConfig");
+                                    setActiveTab("Attack");
                                 }}
-                                key={ 'BackupConfig' }
+                                key={ 'Attack' }
                                     >
                                 {/* DataChart Section */}                  
-<h5>Backup Config</h5>
-BackupConfig
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='BlankRange'
-                                active={ activeTab == 'BlankRange' }
-                                onClick={() => {
-                                    setActiveTab("BlankRange");
-                                }}
-                                key={ 'BlankRange' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Blank Range</h5>
-BlankRange
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Border'
-                                active={ activeTab == 'Border' }
-                                onClick={() => {
-                                    setActiveTab("Border");
-                                }}
-                                key={ 'Border' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Border</h5>
-Border
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Build'
-                                active={ activeTab == 'Build' }
-                                onClick={() => {
-                                    setActiveTab("Build");
-                                }}
-                                key={ 'Build' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Build</h5>
-Build
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='BuildOutput'
-                                active={ activeTab == 'BuildOutput' }
-                                onClick={() => {
-                                    setActiveTab("BuildOutput");
-                                }}
-                                key={ 'BuildOutput' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Build Output</h5>
-BuildOutput
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Campaign'
-                                active={ activeTab == 'Campaign' }
-                                onClick={() => {
-                                    setActiveTab("Campaign");
-                                }}
-                                key={ 'Campaign' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Campaign</h5>
-Campaign
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Cell'
-                                active={ activeTab == 'Cell' }
-                                onClick={() => {
-                                    setActiveTab("Cell");
-                                }}
-                                key={ 'Cell' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Cell</h5>
-Cell
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Chart'
-                                active={ activeTab == 'Chart' }
-                                onClick={() => {
-                                    setActiveTab("Chart");
-                                }}
-                                key={ 'Chart' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Chart</h5>
-Chart
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='ChartSeries'
-                                active={ activeTab == 'ChartSeries' }
-                                onClick={() => {
-                                    setActiveTab("ChartSeries");
-                                }}
-                                key={ 'ChartSeries' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Chart Series</h5>
-ChartSeries
+<h5>Attack</h5>
+Attack
                             </NavDropdown.Item>
 
 
@@ -651,34 +329,6 @@ ExecModule
 
 
                             <NavDropdown.Item
-                                title='Format'
-                                active={ activeTab == 'Format' }
-                                onClick={() => {
-                                    setActiveTab("Format");
-                                }}
-                                key={ 'Format' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Format</h5>
-Format
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Formula'
-                                active={ activeTab == 'Formula' }
-                                onClick={() => {
-                                    setActiveTab("Formula");
-                                }}
-                                key={ 'Formula' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Formula</h5>
-Formula
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='Game'
                                 active={ activeTab == 'Game' }
                                 onClick={() => {
@@ -689,34 +339,6 @@ Formula
                                 {/* DataChart Section */}                  
 <h5>Game</h5>
 Game
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Goal'
-                                active={ activeTab == 'Goal' }
-                                onClick={() => {
-                                    setActiveTab("Goal");
-                                }}
-                                key={ 'Goal' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Goal</h5>
-Goal
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='GoalDependency'
-                                active={ activeTab == 'GoalDependency' }
-                                onClick={() => {
-                                    setActiveTab("GoalDependency");
-                                }}
-                                key={ 'GoalDependency' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Goal Dependency</h5>
-GoalDependency
                             </NavDropdown.Item>
 
 
@@ -735,30 +357,16 @@ IntegrationAccount
 
 
                             <NavDropdown.Item
-                                title='Invoice'
-                                active={ activeTab == 'Invoice' }
+                                title='Level'
+                                active={ activeTab == 'Level' }
                                 onClick={() => {
-                                    setActiveTab("Invoice");
+                                    setActiveTab("Level");
                                 }}
-                                key={ 'Invoice' }
+                                key={ 'Level' }
                                     >
                                 {/* DataChart Section */}                  
-<h5>Invoice</h5>
-Invoice
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='KeyMetric'
-                                active={ activeTab == 'KeyMetric' }
-                                onClick={() => {
-                                    setActiveTab("KeyMetric");
-                                }}
-                                key={ 'KeyMetric' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Key Metric</h5>
-KeyMetric
+<h5>Level</h5>
+Level
                             </NavDropdown.Item>
 
 
@@ -805,230 +413,6 @@ Logout
 
 
                             <NavDropdown.Item
-                                title='MediaObject'
-                                active={ activeTab == 'MediaObject' }
-                                onClick={() => {
-                                    setActiveTab("MediaObject");
-                                }}
-                                key={ 'MediaObject' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Media Object</h5>
-MediaObject
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='MergeRange'
-                                active={ activeTab == 'MergeRange' }
-                                onClick={() => {
-                                    setActiveTab("MergeRange");
-                                }}
-                                key={ 'MergeRange' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Merge Range</h5>
-MergeRange
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='NamedRange'
-                                active={ activeTab == 'NamedRange' }
-                                onClick={() => {
-                                    setActiveTab("NamedRange");
-                                }}
-                                key={ 'NamedRange' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Named Range</h5>
-NamedRange
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Note'
-                                active={ activeTab == 'Note' }
-                                onClick={() => {
-                                    setActiveTab("Note");
-                                }}
-                                key={ 'Note' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Note</h5>
-Note
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasComponents'
-                                active={ activeTab == 'OasComponents' }
-                                onClick={() => {
-                                    setActiveTab("OasComponents");
-                                }}
-                                key={ 'OasComponents' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Components</h5>
-OasComponents
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasEnum'
-                                active={ activeTab == 'OasEnum' }
-                                onClick={() => {
-                                    setActiveTab("OasEnum");
-                                }}
-                                key={ 'OasEnum' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Enum</h5>
-OasEnum
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasInfo'
-                                active={ activeTab == 'OasInfo' }
-                                onClick={() => {
-                                    setActiveTab("OasInfo");
-                                }}
-                                key={ 'OasInfo' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Info</h5>
-OasInfo
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasObjectSchema'
-                                active={ activeTab == 'OasObjectSchema' }
-                                onClick={() => {
-                                    setActiveTab("OasObjectSchema");
-                                }}
-                                key={ 'OasObjectSchema' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Object Schema</h5>
-OasObjectSchema
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasOpenAPISpec'
-                                active={ activeTab == 'OasOpenAPISpec' }
-                                onClick={() => {
-                                    setActiveTab("OasOpenAPISpec");
-                                }}
-                                key={ 'OasOpenAPISpec' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Open API Spec</h5>
-OasOpenAPISpec
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasOperation'
-                                active={ activeTab == 'OasOperation' }
-                                onClick={() => {
-                                    setActiveTab("OasOperation");
-                                }}
-                                key={ 'OasOperation' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Operation</h5>
-OasOperation
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasParameter'
-                                active={ activeTab == 'OasParameter' }
-                                onClick={() => {
-                                    setActiveTab("OasParameter");
-                                }}
-                                key={ 'OasParameter' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Parameter</h5>
-OasParameter
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasPath'
-                                active={ activeTab == 'OasPath' }
-                                onClick={() => {
-                                    setActiveTab("OasPath");
-                                }}
-                                key={ 'OasPath' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Path</h5>
-OasPath
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasRequired'
-                                active={ activeTab == 'OasRequired' }
-                                onClick={() => {
-                                    setActiveTab("OasRequired");
-                                }}
-                                key={ 'OasRequired' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Required</h5>
-OasRequired
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasResponse'
-                                active={ activeTab == 'OasResponse' }
-                                onClick={() => {
-                                    setActiveTab("OasResponse");
-                                }}
-                                key={ 'OasResponse' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Response</h5>
-OasResponse
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasSecurityScheme'
-                                active={ activeTab == 'OasSecurityScheme' }
-                                onClick={() => {
-                                    setActiveTab("OasSecurityScheme");
-                                }}
-                                key={ 'OasSecurityScheme' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Security Scheme</h5>
-OasSecurityScheme
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='OasServer'
-                                active={ activeTab == 'OasServer' }
-                                onClick={() => {
-                                    setActiveTab("OasServer");
-                                }}
-                                key={ 'OasServer' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Oas Server</h5>
-OasServer
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='Opportunity'
                                 active={ activeTab == 'Opportunity' }
                                 onClick={() => {
@@ -1057,20 +441,6 @@ Organization
 
 
                             <NavDropdown.Item
-                                title='PivotTable'
-                                active={ activeTab == 'PivotTable' }
-                                onClick={() => {
-                                    setActiveTab("PivotTable");
-                                }}
-                                key={ 'PivotTable' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Pivot Table</h5>
-PivotTable
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='Principal'
                                 active={ activeTab == 'Principal' }
                                 onClick={() => {
@@ -1081,48 +451,6 @@ PivotTable
                                 {/* DataChart Section */}                  
 <h5>Principal</h5>
 Principal
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Product'
-                                active={ activeTab == 'Product' }
-                                onClick={() => {
-                                    setActiveTab("Product");
-                                }}
-                                key={ 'Product' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Product</h5>
-Product
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Ptg'
-                                active={ activeTab == 'Ptg' }
-                                onClick={() => {
-                                    setActiveTab("Ptg");
-                                }}
-                                key={ 'Ptg' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Ptg</h5>
-Ptg
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='PtgRef'
-                                active={ activeTab == 'PtgRef' }
-                                onClick={() => {
-                                    setActiveTab("PtgRef");
-                                }}
-                                key={ 'PtgRef' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Ptg Ref</h5>
-PtgRef
                             </NavDropdown.Item>
 
 
@@ -1169,20 +497,6 @@ SalesActivity
 
 
                             <NavDropdown.Item
-                                title='SalesOrder'
-                                active={ activeTab == 'SalesOrder' }
-                                onClick={() => {
-                                    setActiveTab("SalesOrder");
-                                }}
-                                key={ 'SalesOrder' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Sales Order</h5>
-SalesOrder
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='SalesPipeline'
                                 active={ activeTab == 'SalesPipeline' }
                                 onClick={() => {
@@ -1211,76 +525,6 @@ SecureKey
 
 
                             <NavDropdown.Item
-                                title='Sheet'
-                                active={ activeTab == 'Sheet' }
-                                onClick={() => {
-                                    setActiveTab("Sheet");
-                                }}
-                                key={ 'Sheet' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Sheet</h5>
-Sheet
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='SheetColumn'
-                                active={ activeTab == 'SheetColumn' }
-                                onClick={() => {
-                                    setActiveTab("SheetColumn");
-                                }}
-                                key={ 'SheetColumn' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Sheet Column</h5>
-SheetColumn
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='SheetRow'
-                                active={ activeTab == 'SheetRow' }
-                                onClick={() => {
-                                    setActiveTab("SheetRow");
-                                }}
-                                key={ 'SheetRow' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Sheet Row</h5>
-SheetRow
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Solution'
-                                active={ activeTab == 'Solution' }
-                                onClick={() => {
-                                    setActiveTab("Solution");
-                                }}
-                                key={ 'Solution' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Solution</h5>
-Solution
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='StrategicPriority'
-                                active={ activeTab == 'StrategicPriority' }
-                                onClick={() => {
-                                    setActiveTab("StrategicPriority");
-                                }}
-                                key={ 'StrategicPriority' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Strategic Priority</h5>
-StrategicPriority
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='Task'
                                 active={ activeTab == 'Task' }
                                 onClick={() => {
@@ -1295,34 +539,6 @@ Task
 
 
                             <NavDropdown.Item
-                                title='ThorUXComponent'
-                                active={ activeTab == 'ThorUXComponent' }
-                                onClick={() => {
-                                    setActiveTab("ThorUXComponent");
-                                }}
-                                key={ 'ThorUXComponent' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Thor UX Component</h5>
-ThorUXComponent
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='ThorUXMeta'
-                                active={ activeTab == 'ThorUXMeta' }
-                                onClick={() => {
-                                    setActiveTab("ThorUXMeta");
-                                }}
-                                key={ 'ThorUXMeta' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Thor UX Meta</h5>
-ThorUXMeta
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
                                 title='Weapon'
                                 active={ activeTab == 'Weapon' }
                                 onClick={() => {
@@ -1333,20 +549,6 @@ ThorUXMeta
                                 {/* DataChart Section */}                  
 <h5>Weapon</h5>
 Weapon
-                            </NavDropdown.Item>
-
-
-                            <NavDropdown.Item
-                                title='Workbook'
-                                active={ activeTab == 'Workbook' }
-                                onClick={() => {
-                                    setActiveTab("Workbook");
-                                }}
-                                key={ 'Workbook' }
-                                    >
-                                {/* DataChart Section */}                  
-<h5>Workbook</h5>
-Workbook
                             </NavDropdown.Item>
 
 
@@ -1460,225 +662,25 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="BackupConfig" 
-             active={ activeTab == 'BackupConfig' }
+             eventKey="Attack" 
+             active={ activeTab == 'Attack' }
             >
-                <h1>BackupConfig</h1>
-                <Tabs key={'BackupConfig'}>
-                    <Tab title='BackupConfig Chart'
-                            eventKey="BackupConfigC"
+                <h1>Attack</h1>
+                <Tabs key={'Attack'}>
+                    <Tab title='Attack Chart'
+                            eventKey="AttackC"
                     >
-                        <BackupConfigChart /> 
+                        <AttackChart /> 
                     </Tab>     
-                    <Tab title='BackupConfig Table'
-                            eventKey="BackupConfigT"
+                    <Tab title='Attack Table'
+                            eventKey="AttackT"
                     >
-                        <BackupConfigTable />
+                        <AttackTable />
                     </Tab>
-                    <Tab title='Edit BackupConfig'
-                            eventKey="BackupConfigF"
+                    <Tab title='Edit Attack'
+                            eventKey="AttackF"
                     >
-                        <BackupConfigForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="BlankRange" 
-             active={ activeTab == 'BlankRange' }
-            >
-                <h1>BlankRange</h1>
-                <Tabs key={'BlankRange'}>
-                    <Tab title='BlankRange Chart'
-                            eventKey="BlankRangeC"
-                    >
-                        <BlankRangeChart /> 
-                    </Tab>     
-                    <Tab title='BlankRange Table'
-                            eventKey="BlankRangeT"
-                    >
-                        <BlankRangeTable />
-                    </Tab>
-                    <Tab title='Edit BlankRange'
-                            eventKey="BlankRangeF"
-                    >
-                        <BlankRangeForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Border" 
-             active={ activeTab == 'Border' }
-            >
-                <h1>Border</h1>
-                <Tabs key={'Border'}>
-                    <Tab title='Border Chart'
-                            eventKey="BorderC"
-                    >
-                        <BorderChart /> 
-                    </Tab>     
-                    <Tab title='Border Table'
-                            eventKey="BorderT"
-                    >
-                        <BorderTable />
-                    </Tab>
-                    <Tab title='Edit Border'
-                            eventKey="BorderF"
-                    >
-                        <BorderForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Build" 
-             active={ activeTab == 'Build' }
-            >
-                <h1>Build</h1>
-                <Tabs key={'Build'}>
-                    <Tab title='Build Chart'
-                            eventKey="BuildC"
-                    >
-                        <BuildChart /> 
-                    </Tab>     
-                    <Tab title='Build Table'
-                            eventKey="BuildT"
-                    >
-                        <BuildTable />
-                    </Tab>
-                    <Tab title='Edit Build'
-                            eventKey="BuildF"
-                    >
-                        <BuildForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="BuildOutput" 
-             active={ activeTab == 'BuildOutput' }
-            >
-                <h1>BuildOutput</h1>
-                <Tabs key={'BuildOutput'}>
-                    <Tab title='BuildOutput Chart'
-                            eventKey="BuildOutputC"
-                    >
-                        <BuildOutputChart /> 
-                    </Tab>     
-                    <Tab title='BuildOutput Table'
-                            eventKey="BuildOutputT"
-                    >
-                        <BuildOutputTable />
-                    </Tab>
-                    <Tab title='Edit BuildOutput'
-                            eventKey="BuildOutputF"
-                    >
-                        <BuildOutputForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Campaign" 
-             active={ activeTab == 'Campaign' }
-            >
-                <h1>Campaign</h1>
-                <Tabs key={'Campaign'}>
-                    <Tab title='Campaign Chart'
-                            eventKey="CampaignC"
-                    >
-                        <CampaignChart /> 
-                    </Tab>     
-                    <Tab title='Campaign Table'
-                            eventKey="CampaignT"
-                    >
-                        <CampaignTable />
-                    </Tab>
-                    <Tab title='Edit Campaign'
-                            eventKey="CampaignF"
-                    >
-                        <CampaignForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Cell" 
-             active={ activeTab == 'Cell' }
-            >
-                <h1>Cell</h1>
-                <Tabs key={'Cell'}>
-                    <Tab title='Cell Chart'
-                            eventKey="CellC"
-                    >
-                        <CellChart /> 
-                    </Tab>     
-                    <Tab title='Cell Table'
-                            eventKey="CellT"
-                    >
-                        <CellTable />
-                    </Tab>
-                    <Tab title='Edit Cell'
-                            eventKey="CellF"
-                    >
-                        <CellForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Chart" 
-             active={ activeTab == 'Chart' }
-            >
-                <h1>Chart</h1>
-                <Tabs key={'Chart'}>
-                    <Tab title='Chart Chart'
-                            eventKey="ChartC"
-                    >
-                        <ChartChart /> 
-                    </Tab>     
-                    <Tab title='Chart Table'
-                            eventKey="ChartT"
-                    >
-                        <ChartTable />
-                    </Tab>
-                    <Tab title='Edit Chart'
-                            eventKey="ChartF"
-                    >
-                        <ChartForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="ChartSeries" 
-             active={ activeTab == 'ChartSeries' }
-            >
-                <h1>ChartSeries</h1>
-                <Tabs key={'ChartSeries'}>
-                    <Tab title='ChartSeries Chart'
-                            eventKey="ChartSeriesC"
-                    >
-                        <ChartSeriesChart /> 
-                    </Tab>     
-                    <Tab title='ChartSeries Table'
-                            eventKey="ChartSeriesT"
-                    >
-                        <ChartSeriesTable />
-                    </Tab>
-                    <Tab title='Edit ChartSeries'
-                            eventKey="ChartSeriesF"
-                    >
-                        <ChartSeriesForm />
+                        <AttackForm />
                     </Tab>
                 </Tabs>
             </Tab>
@@ -1860,56 +862,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="Format" 
-             active={ activeTab == 'Format' }
-            >
-                <h1>Format</h1>
-                <Tabs key={'Format'}>
-                    <Tab title='Format Chart'
-                            eventKey="FormatC"
-                    >
-                        <FormatChart /> 
-                    </Tab>     
-                    <Tab title='Format Table'
-                            eventKey="FormatT"
-                    >
-                        <FormatTable />
-                    </Tab>
-                    <Tab title='Edit Format'
-                            eventKey="FormatF"
-                    >
-                        <FormatForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Formula" 
-             active={ activeTab == 'Formula' }
-            >
-                <h1>Formula</h1>
-                <Tabs key={'Formula'}>
-                    <Tab title='Formula Chart'
-                            eventKey="FormulaC"
-                    >
-                        <FormulaChart /> 
-                    </Tab>     
-                    <Tab title='Formula Table'
-                            eventKey="FormulaT"
-                    >
-                        <FormulaTable />
-                    </Tab>
-                    <Tab title='Edit Formula'
-                            eventKey="FormulaF"
-                    >
-                        <FormulaForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="Game" 
              active={ activeTab == 'Game' }
             >
@@ -1929,56 +881,6 @@ WorkflowState
                             eventKey="GameF"
                     >
                         <GameForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Goal" 
-             active={ activeTab == 'Goal' }
-            >
-                <h1>Goal</h1>
-                <Tabs key={'Goal'}>
-                    <Tab title='Goal Chart'
-                            eventKey="GoalC"
-                    >
-                        <GoalChart /> 
-                    </Tab>     
-                    <Tab title='Goal Table'
-                            eventKey="GoalT"
-                    >
-                        <GoalTable />
-                    </Tab>
-                    <Tab title='Edit Goal'
-                            eventKey="GoalF"
-                    >
-                        <GoalForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="GoalDependency" 
-             active={ activeTab == 'GoalDependency' }
-            >
-                <h1>GoalDependency</h1>
-                <Tabs key={'GoalDependency'}>
-                    <Tab title='GoalDependency Chart'
-                            eventKey="GoalDependencyC"
-                    >
-                        <GoalDependencyChart /> 
-                    </Tab>     
-                    <Tab title='GoalDependency Table'
-                            eventKey="GoalDependencyT"
-                    >
-                        <GoalDependencyTable />
-                    </Tab>
-                    <Tab title='Edit GoalDependency'
-                            eventKey="GoalDependencyF"
-                    >
-                        <GoalDependencyForm />
                     </Tab>
                 </Tabs>
             </Tab>
@@ -2010,50 +912,25 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="Invoice" 
-             active={ activeTab == 'Invoice' }
+             eventKey="Level" 
+             active={ activeTab == 'Level' }
             >
-                <h1>Invoice</h1>
-                <Tabs key={'Invoice'}>
-                    <Tab title='Invoice Chart'
-                            eventKey="InvoiceC"
+                <h1>Level</h1>
+                <Tabs key={'Level'}>
+                    <Tab title='Level Chart'
+                            eventKey="LevelC"
                     >
-                        <InvoiceChart /> 
+                        <LevelChart /> 
                     </Tab>     
-                    <Tab title='Invoice Table'
-                            eventKey="InvoiceT"
+                    <Tab title='Level Table'
+                            eventKey="LevelT"
                     >
-                        <InvoiceTable />
+                        <LevelTable />
                     </Tab>
-                    <Tab title='Edit Invoice'
-                            eventKey="InvoiceF"
+                    <Tab title='Edit Level'
+                            eventKey="LevelF"
                     >
-                        <InvoiceForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="KeyMetric" 
-             active={ activeTab == 'KeyMetric' }
-            >
-                <h1>KeyMetric</h1>
-                <Tabs key={'KeyMetric'}>
-                    <Tab title='KeyMetric Chart'
-                            eventKey="KeyMetricC"
-                    >
-                        <KeyMetricChart /> 
-                    </Tab>     
-                    <Tab title='KeyMetric Table'
-                            eventKey="KeyMetricT"
-                    >
-                        <KeyMetricTable />
-                    </Tab>
-                    <Tab title='Edit KeyMetric'
-                            eventKey="KeyMetricF"
-                    >
-                        <KeyMetricForm />
+                        <LevelForm />
                     </Tab>
                 </Tabs>
             </Tab>
@@ -2135,406 +1012,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="MediaObject" 
-             active={ activeTab == 'MediaObject' }
-            >
-                <h1>MediaObject</h1>
-                <Tabs key={'MediaObject'}>
-                    <Tab title='MediaObject Chart'
-                            eventKey="MediaObjectC"
-                    >
-                        <MediaObjectChart /> 
-                    </Tab>     
-                    <Tab title='MediaObject Table'
-                            eventKey="MediaObjectT"
-                    >
-                        <MediaObjectTable />
-                    </Tab>
-                    <Tab title='Edit MediaObject'
-                            eventKey="MediaObjectF"
-                    >
-                        <MediaObjectForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="MergeRange" 
-             active={ activeTab == 'MergeRange' }
-            >
-                <h1>MergeRange</h1>
-                <Tabs key={'MergeRange'}>
-                    <Tab title='MergeRange Chart'
-                            eventKey="MergeRangeC"
-                    >
-                        <MergeRangeChart /> 
-                    </Tab>     
-                    <Tab title='MergeRange Table'
-                            eventKey="MergeRangeT"
-                    >
-                        <MergeRangeTable />
-                    </Tab>
-                    <Tab title='Edit MergeRange'
-                            eventKey="MergeRangeF"
-                    >
-                        <MergeRangeForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="NamedRange" 
-             active={ activeTab == 'NamedRange' }
-            >
-                <h1>NamedRange</h1>
-                <Tabs key={'NamedRange'}>
-                    <Tab title='NamedRange Chart'
-                            eventKey="NamedRangeC"
-                    >
-                        <NamedRangeChart /> 
-                    </Tab>     
-                    <Tab title='NamedRange Table'
-                            eventKey="NamedRangeT"
-                    >
-                        <NamedRangeTable />
-                    </Tab>
-                    <Tab title='Edit NamedRange'
-                            eventKey="NamedRangeF"
-                    >
-                        <NamedRangeForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Note" 
-             active={ activeTab == 'Note' }
-            >
-                <h1>Note</h1>
-                <Tabs key={'Note'}>
-                    <Tab title='Note Chart'
-                            eventKey="NoteC"
-                    >
-                        <NoteChart /> 
-                    </Tab>     
-                    <Tab title='Note Table'
-                            eventKey="NoteT"
-                    >
-                        <NoteTable />
-                    </Tab>
-                    <Tab title='Edit Note'
-                            eventKey="NoteF"
-                    >
-                        <NoteForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasComponents" 
-             active={ activeTab == 'OasComponents' }
-            >
-                <h1>OasComponents</h1>
-                <Tabs key={'OasComponents'}>
-                    <Tab title='OasComponents Chart'
-                            eventKey="OasComponentsC"
-                    >
-                        <OasComponentsChart /> 
-                    </Tab>     
-                    <Tab title='OasComponents Table'
-                            eventKey="OasComponentsT"
-                    >
-                        <OasComponentsTable />
-                    </Tab>
-                    <Tab title='Edit OasComponents'
-                            eventKey="OasComponentsF"
-                    >
-                        <OasComponentsForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasEnum" 
-             active={ activeTab == 'OasEnum' }
-            >
-                <h1>OasEnum</h1>
-                <Tabs key={'OasEnum'}>
-                    <Tab title='OasEnum Chart'
-                            eventKey="OasEnumC"
-                    >
-                        <OasEnumChart /> 
-                    </Tab>     
-                    <Tab title='OasEnum Table'
-                            eventKey="OasEnumT"
-                    >
-                        <OasEnumTable />
-                    </Tab>
-                    <Tab title='Edit OasEnum'
-                            eventKey="OasEnumF"
-                    >
-                        <OasEnumForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasInfo" 
-             active={ activeTab == 'OasInfo' }
-            >
-                <h1>OasInfo</h1>
-                <Tabs key={'OasInfo'}>
-                    <Tab title='OasInfo Chart'
-                            eventKey="OasInfoC"
-                    >
-                        <OasInfoChart /> 
-                    </Tab>     
-                    <Tab title='OasInfo Table'
-                            eventKey="OasInfoT"
-                    >
-                        <OasInfoTable />
-                    </Tab>
-                    <Tab title='Edit OasInfo'
-                            eventKey="OasInfoF"
-                    >
-                        <OasInfoForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasObjectSchema" 
-             active={ activeTab == 'OasObjectSchema' }
-            >
-                <h1>OasObjectSchema</h1>
-                <Tabs key={'OasObjectSchema'}>
-                    <Tab title='OasObjectSchema Chart'
-                            eventKey="OasObjectSchemaC"
-                    >
-                        <OasObjectSchemaChart /> 
-                    </Tab>     
-                    <Tab title='OasObjectSchema Table'
-                            eventKey="OasObjectSchemaT"
-                    >
-                        <OasObjectSchemaTable />
-                    </Tab>
-                    <Tab title='Edit OasObjectSchema'
-                            eventKey="OasObjectSchemaF"
-                    >
-                        <OasObjectSchemaForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasOpenAPISpec" 
-             active={ activeTab == 'OasOpenAPISpec' }
-            >
-                <h1>OasOpenAPISpec</h1>
-                <Tabs key={'OasOpenAPISpec'}>
-                    <Tab title='OasOpenAPISpec Chart'
-                            eventKey="OasOpenAPISpecC"
-                    >
-                        <OasOpenAPISpecChart /> 
-                    </Tab>     
-                    <Tab title='OasOpenAPISpec Table'
-                            eventKey="OasOpenAPISpecT"
-                    >
-                        <OasOpenAPISpecTable />
-                    </Tab>
-                    <Tab title='Edit OasOpenAPISpec'
-                            eventKey="OasOpenAPISpecF"
-                    >
-                        <OasOpenAPISpecForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasOperation" 
-             active={ activeTab == 'OasOperation' }
-            >
-                <h1>OasOperation</h1>
-                <Tabs key={'OasOperation'}>
-                    <Tab title='OasOperation Chart'
-                            eventKey="OasOperationC"
-                    >
-                        <OasOperationChart /> 
-                    </Tab>     
-                    <Tab title='OasOperation Table'
-                            eventKey="OasOperationT"
-                    >
-                        <OasOperationTable />
-                    </Tab>
-                    <Tab title='Edit OasOperation'
-                            eventKey="OasOperationF"
-                    >
-                        <OasOperationForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasParameter" 
-             active={ activeTab == 'OasParameter' }
-            >
-                <h1>OasParameter</h1>
-                <Tabs key={'OasParameter'}>
-                    <Tab title='OasParameter Chart'
-                            eventKey="OasParameterC"
-                    >
-                        <OasParameterChart /> 
-                    </Tab>     
-                    <Tab title='OasParameter Table'
-                            eventKey="OasParameterT"
-                    >
-                        <OasParameterTable />
-                    </Tab>
-                    <Tab title='Edit OasParameter'
-                            eventKey="OasParameterF"
-                    >
-                        <OasParameterForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasPath" 
-             active={ activeTab == 'OasPath' }
-            >
-                <h1>OasPath</h1>
-                <Tabs key={'OasPath'}>
-                    <Tab title='OasPath Chart'
-                            eventKey="OasPathC"
-                    >
-                        <OasPathChart /> 
-                    </Tab>     
-                    <Tab title='OasPath Table'
-                            eventKey="OasPathT"
-                    >
-                        <OasPathTable />
-                    </Tab>
-                    <Tab title='Edit OasPath'
-                            eventKey="OasPathF"
-                    >
-                        <OasPathForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasRequired" 
-             active={ activeTab == 'OasRequired' }
-            >
-                <h1>OasRequired</h1>
-                <Tabs key={'OasRequired'}>
-                    <Tab title='OasRequired Chart'
-                            eventKey="OasRequiredC"
-                    >
-                        <OasRequiredChart /> 
-                    </Tab>     
-                    <Tab title='OasRequired Table'
-                            eventKey="OasRequiredT"
-                    >
-                        <OasRequiredTable />
-                    </Tab>
-                    <Tab title='Edit OasRequired'
-                            eventKey="OasRequiredF"
-                    >
-                        <OasRequiredForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasResponse" 
-             active={ activeTab == 'OasResponse' }
-            >
-                <h1>OasResponse</h1>
-                <Tabs key={'OasResponse'}>
-                    <Tab title='OasResponse Chart'
-                            eventKey="OasResponseC"
-                    >
-                        <OasResponseChart /> 
-                    </Tab>     
-                    <Tab title='OasResponse Table'
-                            eventKey="OasResponseT"
-                    >
-                        <OasResponseTable />
-                    </Tab>
-                    <Tab title='Edit OasResponse'
-                            eventKey="OasResponseF"
-                    >
-                        <OasResponseForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasSecurityScheme" 
-             active={ activeTab == 'OasSecurityScheme' }
-            >
-                <h1>OasSecurityScheme</h1>
-                <Tabs key={'OasSecurityScheme'}>
-                    <Tab title='OasSecurityScheme Chart'
-                            eventKey="OasSecuritySchemeC"
-                    >
-                        <OasSecuritySchemeChart /> 
-                    </Tab>     
-                    <Tab title='OasSecurityScheme Table'
-                            eventKey="OasSecuritySchemeT"
-                    >
-                        <OasSecuritySchemeTable />
-                    </Tab>
-                    <Tab title='Edit OasSecurityScheme'
-                            eventKey="OasSecuritySchemeF"
-                    >
-                        <OasSecuritySchemeForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="OasServer" 
-             active={ activeTab == 'OasServer' }
-            >
-                <h1>OasServer</h1>
-                <Tabs key={'OasServer'}>
-                    <Tab title='OasServer Chart'
-                            eventKey="OasServerC"
-                    >
-                        <OasServerChart /> 
-                    </Tab>     
-                    <Tab title='OasServer Table'
-                            eventKey="OasServerT"
-                    >
-                        <OasServerTable />
-                    </Tab>
-                    <Tab title='Edit OasServer'
-                            eventKey="OasServerF"
-                    >
-                        <OasServerForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="Opportunity" 
              active={ activeTab == 'Opportunity' }
             >
@@ -2585,31 +1062,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="PivotTable" 
-             active={ activeTab == 'PivotTable' }
-            >
-                <h1>PivotTable</h1>
-                <Tabs key={'PivotTable'}>
-                    <Tab title='PivotTable Chart'
-                            eventKey="PivotTableC"
-                    >
-                        <PivotTableChart /> 
-                    </Tab>     
-                    <Tab title='PivotTable Table'
-                            eventKey="PivotTableT"
-                    >
-                        <PivotTableTable />
-                    </Tab>
-                    <Tab title='Edit PivotTable'
-                            eventKey="PivotTableF"
-                    >
-                        <PivotTableForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="Principal" 
              active={ activeTab == 'Principal' }
             >
@@ -2629,81 +1081,6 @@ WorkflowState
                             eventKey="PrincipalF"
                     >
                         <PrincipalForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Product" 
-             active={ activeTab == 'Product' }
-            >
-                <h1>Product</h1>
-                <Tabs key={'Product'}>
-                    <Tab title='Product Chart'
-                            eventKey="ProductC"
-                    >
-                        <ProductChart /> 
-                    </Tab>     
-                    <Tab title='Product Table'
-                            eventKey="ProductT"
-                    >
-                        <ProductTable />
-                    </Tab>
-                    <Tab title='Edit Product'
-                            eventKey="ProductF"
-                    >
-                        <ProductForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Ptg" 
-             active={ activeTab == 'Ptg' }
-            >
-                <h1>Ptg</h1>
-                <Tabs key={'Ptg'}>
-                    <Tab title='Ptg Chart'
-                            eventKey="PtgC"
-                    >
-                        <PtgChart /> 
-                    </Tab>     
-                    <Tab title='Ptg Table'
-                            eventKey="PtgT"
-                    >
-                        <PtgTable />
-                    </Tab>
-                    <Tab title='Edit Ptg'
-                            eventKey="PtgF"
-                    >
-                        <PtgForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="PtgRef" 
-             active={ activeTab == 'PtgRef' }
-            >
-                <h1>PtgRef</h1>
-                <Tabs key={'PtgRef'}>
-                    <Tab title='PtgRef Chart'
-                            eventKey="PtgRefC"
-                    >
-                        <PtgRefChart /> 
-                    </Tab>     
-                    <Tab title='PtgRef Table'
-                            eventKey="PtgRefT"
-                    >
-                        <PtgRefTable />
-                    </Tab>
-                    <Tab title='Edit PtgRef'
-                            eventKey="PtgRefF"
-                    >
-                        <PtgRefForm />
                     </Tab>
                 </Tabs>
             </Tab>
@@ -2785,31 +1162,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="SalesOrder" 
-             active={ activeTab == 'SalesOrder' }
-            >
-                <h1>SalesOrder</h1>
-                <Tabs key={'SalesOrder'}>
-                    <Tab title='SalesOrder Chart'
-                            eventKey="SalesOrderC"
-                    >
-                        <SalesOrderChart /> 
-                    </Tab>     
-                    <Tab title='SalesOrder Table'
-                            eventKey="SalesOrderT"
-                    >
-                        <SalesOrderTable />
-                    </Tab>
-                    <Tab title='Edit SalesOrder'
-                            eventKey="SalesOrderF"
-                    >
-                        <SalesOrderForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="SalesPipeline" 
              active={ activeTab == 'SalesPipeline' }
             >
@@ -2860,131 +1212,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="Sheet" 
-             active={ activeTab == 'Sheet' }
-            >
-                <h1>Sheet</h1>
-                <Tabs key={'Sheet'}>
-                    <Tab title='Sheet Chart'
-                            eventKey="SheetC"
-                    >
-                        <SheetChart /> 
-                    </Tab>     
-                    <Tab title='Sheet Table'
-                            eventKey="SheetT"
-                    >
-                        <SheetTable />
-                    </Tab>
-                    <Tab title='Edit Sheet'
-                            eventKey="SheetF"
-                    >
-                        <SheetForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="SheetColumn" 
-             active={ activeTab == 'SheetColumn' }
-            >
-                <h1>SheetColumn</h1>
-                <Tabs key={'SheetColumn'}>
-                    <Tab title='SheetColumn Chart'
-                            eventKey="SheetColumnC"
-                    >
-                        <SheetColumnChart /> 
-                    </Tab>     
-                    <Tab title='SheetColumn Table'
-                            eventKey="SheetColumnT"
-                    >
-                        <SheetColumnTable />
-                    </Tab>
-                    <Tab title='Edit SheetColumn'
-                            eventKey="SheetColumnF"
-                    >
-                        <SheetColumnForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="SheetRow" 
-             active={ activeTab == 'SheetRow' }
-            >
-                <h1>SheetRow</h1>
-                <Tabs key={'SheetRow'}>
-                    <Tab title='SheetRow Chart'
-                            eventKey="SheetRowC"
-                    >
-                        <SheetRowChart /> 
-                    </Tab>     
-                    <Tab title='SheetRow Table'
-                            eventKey="SheetRowT"
-                    >
-                        <SheetRowTable />
-                    </Tab>
-                    <Tab title='Edit SheetRow'
-                            eventKey="SheetRowF"
-                    >
-                        <SheetRowForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Solution" 
-             active={ activeTab == 'Solution' }
-            >
-                <h1>Solution</h1>
-                <Tabs key={'Solution'}>
-                    <Tab title='Solution Chart'
-                            eventKey="SolutionC"
-                    >
-                        <SolutionChart /> 
-                    </Tab>     
-                    <Tab title='Solution Table'
-                            eventKey="SolutionT"
-                    >
-                        <SolutionTable />
-                    </Tab>
-                    <Tab title='Edit Solution'
-                            eventKey="SolutionF"
-                    >
-                        <SolutionForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="StrategicPriority" 
-             active={ activeTab == 'StrategicPriority' }
-            >
-                <h1>StrategicPriority</h1>
-                <Tabs key={'StrategicPriority'}>
-                    <Tab title='StrategicPriority Chart'
-                            eventKey="StrategicPriorityC"
-                    >
-                        <StrategicPriorityChart /> 
-                    </Tab>     
-                    <Tab title='StrategicPriority Table'
-                            eventKey="StrategicPriorityT"
-                    >
-                        <StrategicPriorityTable />
-                    </Tab>
-                    <Tab title='Edit StrategicPriority'
-                            eventKey="StrategicPriorityF"
-                    >
-                        <StrategicPriorityForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="Task" 
              active={ activeTab == 'Task' }
             >
@@ -3010,56 +1237,6 @@ WorkflowState
 
             <Tab
              title={null}
-             eventKey="ThorUXComponent" 
-             active={ activeTab == 'ThorUXComponent' }
-            >
-                <h1>ThorUXComponent</h1>
-                <Tabs key={'ThorUXComponent'}>
-                    <Tab title='ThorUXComponent Chart'
-                            eventKey="ThorUXComponentC"
-                    >
-                        <ThorUXComponentChart /> 
-                    </Tab>     
-                    <Tab title='ThorUXComponent Table'
-                            eventKey="ThorUXComponentT"
-                    >
-                        <ThorUXComponentTable />
-                    </Tab>
-                    <Tab title='Edit ThorUXComponent'
-                            eventKey="ThorUXComponentF"
-                    >
-                        <ThorUXComponentForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="ThorUXMeta" 
-             active={ activeTab == 'ThorUXMeta' }
-            >
-                <h1>ThorUXMeta</h1>
-                <Tabs key={'ThorUXMeta'}>
-                    <Tab title='ThorUXMeta Chart'
-                            eventKey="ThorUXMetaC"
-                    >
-                        <ThorUXMetaChart /> 
-                    </Tab>     
-                    <Tab title='ThorUXMeta Table'
-                            eventKey="ThorUXMetaT"
-                    >
-                        <ThorUXMetaTable />
-                    </Tab>
-                    <Tab title='Edit ThorUXMeta'
-                            eventKey="ThorUXMetaF"
-                    >
-                        <ThorUXMetaForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
              eventKey="Weapon" 
              active={ activeTab == 'Weapon' }
             >
@@ -3079,31 +1256,6 @@ WorkflowState
                             eventKey="WeaponF"
                     >
                         <WeaponForm />
-                    </Tab>
-                </Tabs>
-            </Tab>
-
-            <Tab
-             title={null}
-             eventKey="Workbook" 
-             active={ activeTab == 'Workbook' }
-            >
-                <h1>Workbook</h1>
-                <Tabs key={'Workbook'}>
-                    <Tab title='Workbook Chart'
-                            eventKey="WorkbookC"
-                    >
-                        <WorkbookChart /> 
-                    </Tab>     
-                    <Tab title='Workbook Table'
-                            eventKey="WorkbookT"
-                    >
-                        <WorkbookTable />
-                    </Tab>
-                    <Tab title='Edit Workbook'
-                            eventKey="WorkbookF"
-                    >
-                        <WorkbookForm />
                     </Tab>
                 </Tabs>
             </Tab>

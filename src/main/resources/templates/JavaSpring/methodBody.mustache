@@ -1,0 +1,122 @@
+{{^reactive}}
+    // ThorAPI Method Template
+
+    {{#examples}}
+        {{#-first}}
+            {{#async}}
+                return CompletableFuture.supplyAsync(()-> {
+            {{/async}}getRequest().ifPresent(request -> {
+            {{#async}}    {{/async}}            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+        {{/-first}}
+        {{#async}}        {{/async}}{{^async}}    {{/async}}            if (mediaType.isCompatibleWith(MediaType.valueOf("{{{contentType}}}"))) {
+        {{#async}}        {{/async}}{{^async}}    {{/async}}                String exampleString = {{>exampleString}};
+        {{#async}}        {{/async}}{{^async}}    {{/async}}                ApiUtil.setExampleResponse(request, "{{{contentType}}}", exampleString);
+        {{#async}}        {{/async}}{{^async}}    {{/async}}                break;
+        {{#async}}        {{/async}}{{^async}}    {{/async}}            }
+        {{#-last}}
+            {{#async}}        {{/async}}{{^async}}    {{/async}}        }
+            {{#async}}    {{/async}}        });
+            {{#async}}    {{/async}}
+            {{#useResponseEntity}}
+                /// ThorAPI method impl
+                {{#hasParams}}
+                    {{#hasBodyParam}}
+                        {{#hasPathParams}}
+                            // ThorAPI UPDATE
+                            // logger.trace("UPDATING RECORD:" + {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}});
+                            if({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findById(id).isEmpty()){
+                                return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+                            }
+                            {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}.setId(id); // guard against a patch with no ID (upserts new objects)
+                            {{baseName}} ox = {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.saveOrUpdate({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}});
+                            return new ResponseEntity<{{baseName}}>({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findById(ox.getId()).get(), HttpStatus.OK);
+                        {{/hasPathParams}}
+                        {{^hasPathParams}}
+                            // ThorAPI CREATE
+                            logger.trace("CREATING RECORD: {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}");
+                            {{baseName}} ox = {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.saveOrUpdate({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}});
+                            return new ResponseEntity<{{baseName}}>({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findById(ox.getId()).get(), HttpStatus.CREATED);
+                        {{/hasPathParams}}
+                    {{/hasBodyParam}}
+                    {{^hasBodyParam}}
+                        {{#hasPathParams}}
+                            // ThorAPI GET
+                            logger.info("GETTING: {}:{} " , "{{classname}}",  id);
+                            Optional<{{baseName}}> ox = {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findById(id);
+                            if(ox.isEmpty()){
+                                return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+                            }
+                            return new ResponseEntity<{{baseName}}>(ox.get(), HttpStatus.OK);
+                        {{/hasPathParams}}
+                    {{/hasBodyParam}}
+                {{/hasParams}}
+                {{^hasParams}}
+                if({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findAll() == null){
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+                return new ResponseEntity<>((List<{{baseName}}>){{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findAll(), HttpStatus.OK);
+                {{/hasParams}}
+                /// END ThorAPI method impl
+            {{/useResponseEntity}}
+            {{^useResponseEntity}}
+                throw new IllegalArgumentException("Not implemented");
+            {{/useResponseEntity}}
+            {{#async}}
+                }, Runnable::run);
+            {{/async}}
+        {{/-last}}
+    {{/examples}}
+    {{^examples}}
+        {{#hasPathParams}}
+        
+        // ThorAPI DELETE
+        if({{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.findById(id).isEmpty()){
+            {{#useResponseEntity}}return {{#async}}CompletableFuture.completedFuture({{/async}}new ResponseEntity<>({{#returnSuccessCode}}HttpStatus.NOT_FOUND{{/returnSuccessCode}}){{#async}}){{/async}};{{/useResponseEntity}}
+        }
+        logger.info("DELETING: {}:{} " , "{{classname}}",  id);
+
+            {{#lambda.camelcase}}{{baseName}}{{/lambda.camelcase}}Service.deleteById(id);
+            {{#useResponseEntity}}return {{#async}}CompletableFuture.completedFuture({{/async}}new ResponseEntity<>({{#returnSuccessCode}}HttpStatus.NO_CONTENT{{/returnSuccessCode}}){{#async}}){{/async}};{{/useResponseEntity}}
+        {{/hasPathParams}}
+
+        {{^hasPathParams}}
+            {{#useResponseEntity}}return {{#async}}CompletableFuture.completedFuture({{/async}}new ResponseEntity<>({{#returnSuccessCode}}HttpStatus.OK{{/returnSuccessCode}}){{#async}}){{/async}};{{/useResponseEntity}}
+        {{/hasPathParams}}
+
+
+        {{^useResponseEntity}}throw new IllegalArgumentException("Not implemented");
+        {{/useResponseEntity}}
+    {{/examples}}
+
+
+
+
+
+{{/reactive}}
+{{#reactive}}
+    {{^vendorExtensions.x-sse}}
+        Mono<Void> result = Mono.empty();
+        {{#examples}}
+            {{#-first}}
+                    exchange.getResponse().setStatusCode({{#returnSuccessCode}}HttpStatus.valueOf({{{statusCode}}}){{/returnSuccessCode}}{{^returnSuccessCode}}HttpStatus.NOT_IMPLEMENTED{{/returnSuccessCode}});
+                    for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
+            {{/-first}}
+                if (mediaType.isCompatibleWith(MediaType.valueOf("{{{contentType}}}"))) {
+                String exampleString = {{>exampleString}};
+                result = ApiUtil.getExampleResponse(exchange, MediaType.valueOf("{{{generatedContentType}}}"), exampleString);
+                break;
+                }
+            {{#-last}}
+                    }
+            {{/-last}}
+        {{/examples}}
+        {{^examples}}
+                exchange.getResponse().setStatusCode({{#returnSuccessCode}}HttpStatus.OK{{/returnSuccessCode}}{{^returnSuccessCode}}HttpStatus.NOT_IMPLEMENTED{{/returnSuccessCode}});
+        {{/examples}}
+            return result{{#allParams}}{{#isBodyParam}}{{^isArray}}{{#paramName}}.then({{.}}){{/paramName}}{{/isArray}}{{#isArray}}{{#paramName}}.thenMany({{.}}){{/paramName}}{{/isArray}}{{/isBodyParam}}{{/allParams}}{{#isArray}}{{#useResponseEntity}}.then(Mono.empty()){{/useResponseEntity}}{{^useResponseEntity}}.thenMany(Flux.empty()){{/useResponseEntity}}{{/isArray}}{{^isArray}}.then(Mono.empty()){{/isArray}};
+    {{/vendorExtensions.x-sse}}
+    {{#vendorExtensions.x-sse}}
+            exchange.getResponse().setStatusCode({{#returnSuccessCode}}HttpStatus.valueOf({{{statusCode}}}){{/returnSuccessCode}}{{^returnSuccessCode}}HttpStatus.NOT_IMPLEMENTED{{/returnSuccessCode}});
+            return Flux.empty();
+    {{/vendorExtensions.x-sse}}
+{{/reactive}}

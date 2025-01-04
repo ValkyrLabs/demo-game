@@ -5,7 +5,7 @@ import AcceptCookies from "../components/AcceptCookies";
 import { CloseButton, Col, Image, Row } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import { FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa";
-import logo from "../assets/images/VALKYR_LABS_INC_LOGO.png";
+import logo from "../assets/images/peragon-inc.png";
 
 function MiniFooter() {
   const [hideCookieDialog, setHideCookieDialog] = useState(true);
@@ -52,11 +52,11 @@ function MiniFooter() {
                 <FaFacebookF />
               </a>
 
-              <a href="https://www.instagram.com/valkyrlabs">
+              <a href="https://www.instagram.com/peragonlabs">
                 <FaInstagram />
               </a>
 
-              <a href="mailto:info@valkyrlabs.com">
+              <a href="mailto:info@peragonlabs.com">
                 <FaEnvelope />
               </a>
               <br /><br />

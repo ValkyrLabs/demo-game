@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Function to display error messages
+function error_exit {
+    echo "Error: $1" >&2
+    exit 1
+}
+
+echo "THORCRYPT TEST SUCCESS"

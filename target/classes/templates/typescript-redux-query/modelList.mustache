@@ -1,0 +1,74 @@
+import { Card, Carousel } from "react-bootstrap";
+import { {{classname}} } from "../../../model";
+
+import { useGet{{classname}}sQuery } from "../../services/{{classname}}Service";
+import "./index.css";
+
+const {{classname}}List = () => {
+  // Using a query hook automatically fetches data and returns query values
+  const { data, error, isLoading } = useGet{{classname}}sQuery();
+
+  // Individual hooks are also accessible under the generated endpoints:
+  // const { data, error, isLoading } = pokemonApi.endpoints.getPokemonByName.useQuery('bulbasaur')
+
+  // render UI based on data and loading state
+
+  if (error) {
+    return "ERROR:" + JSON.stringify(error);
+  }
+  if (isLoading) {
+    return "Loading...";
+  }
+  if (!data) {
+    return "NO USERS";
+  }
+
+  return (
+    <>
+      <h2>Valkyr Labs  {{classname}} List</h2>
+
+      <div 
+        className="tableContainer"
+      >
+
+        <table className="table">
+          
+            <tr>
+              <th className="tableHeader">Id</th>
+            </tr>
+          
+            {data.map((principal:  {{classname}}) => (
+              <tr key={ principal.id} style={{ minWidth: "100%" }}>
+                <td className="tableCell">{ principal.id }</td>
+              </tr>
+            ))}
+          
+        </table>
+      </div>
+
+      <{{classname}}Form />
+
+      {true && (
+        <Carousel>
+          {data.length == 0 && <h1>{{classname}}</h1>}
+          {data.map((principal:  {{classname}} ) => (
+            <Carousel.Item key={ principal.id}>
+              <Card className="carouselCard" key={ principal.firstName}>
+                <h4>{ principal.userName}</h4>
+                <body>{ principal.bio}</body>
+
+                <h5>
+                  { principal.firstName} { principal.lastName}
+                </h5>
+                <h5>{ principal.email}</h5>
+                <h5>{ principal.avatarUrl}</h5>
+              </Card>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      )}
+    </>
+  );
+};
+
+export default {{classname}}List;

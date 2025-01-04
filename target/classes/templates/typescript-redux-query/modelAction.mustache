@@ -1,0 +1,96 @@
+// defines the Redux Actions for {{baseName}}
+
+// {{baseName}}
+
+export const FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST = 'FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST';
+export const FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS = 'FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS';
+export const FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE = 'FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE';
+
+export const ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST = 'ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST';
+export const ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS = 'ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS';
+export const ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE = 'ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE';
+
+export const UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST = 'UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST';
+export const UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS = 'UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS';
+export const UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE = 'UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE';
+
+export const DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST = 'DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST';
+export const DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS = 'DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS';
+export const DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE = 'DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE';
+
+export const LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST = 'LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST';
+export const LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS = 'LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS';
+export const LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE = 'LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE';
+
+export const add{{baseName}}Request = () => ({
+    type: ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST,
+});
+
+export const add{{baseName}}Success = ({{baseName}}s) => ({
+    type: ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS,
+    payload: {{baseName}}s,
+});
+
+export const add{{baseName}}Failure = (error) => ({
+    type: ADD_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE,
+    payload: error,
+});
+
+
+export const fetch{{baseName}}Request = () => ({
+    type: FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST,
+});
+
+export const fetch{{baseName}}Success = ({{baseName}}s) => ({
+    type: FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS,
+    payload: {{baseName}}s,
+});
+
+export const fetch{{baseName}}Failure = (error) => ({
+    type: FETCH_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE,
+    payload: error,
+});
+
+export const list{{baseName}}Request = () => ({
+    type: LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST,
+});
+
+export const list{{baseName}}Success = ({{baseName}}s) => ({
+    type: LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS,
+    payload: {{baseName}}s,
+});
+
+export const list{{baseName}}Failure = (error) => ({
+    type: LIST_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE,
+    payload: error,
+});
+
+export const update{{baseName}}Request = ({{baseName}}) => ({
+    type: UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST,
+    payload: {{baseName}},
+});
+
+export const update{{baseName}}Success = ({{baseName}}) => ({
+    type: UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS,
+    payload: {{baseName}},
+});
+
+export const update{{baseName}}Failure = (error) => ({
+    type: UPDATE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE,
+    payload: error,
+});
+
+export const delete{{baseName}}Request = ({{baseName}}) => ({
+    type: DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_REQUEST,
+    payload: {{baseName}},
+});
+
+export const delete{{baseName}}Success = ({{baseName}}) => ({
+    type: DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_SUCCESS,
+    payload: {{baseName}},
+});
+
+export const delete{{baseName}}Failure = (error) => ({
+    type: DELETE_{{#lambda.uppercase}}{{baseName}}{{/lambda.uppercase}}_FAILURE,
+    payload: error,
+});

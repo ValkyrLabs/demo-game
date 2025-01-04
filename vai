@@ -1,0 +1,403 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+clear
+
+# Colors for enhanced user experience
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+WHITE='\033[1;28m'
+BLUE='\033[1;34m'
+NC='\033[0m' # No Color
+
+# Function to display error messages
+function error_exit {
+    echo -e $(format_err "Error: $1") >&2
+    exit 1
+}
+# Function to format error messages
+function format_err {
+    echo -e "${RED} $1 ${NC}" >&2
+}
+
+# Function to prompt user for input with a default value
+function prompt_with_default {
+    local prompt="$1"
+    local default="$2"
+    local var
+    
+    read -p "$prompt [$default]:" var
+    # var < $(format var)
+    echo -e "${var:-$default}"
+    echo -e $(format "${var:-$default}");
+}
+
+# Function to format regular messages
+function format {
+    echo -e "${GREEN} $1 ${NC}" >&2
+}
+
+echo -e "${BLUE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${BLUE} ..................................................................................................${NC}"
+echo -e "${RED} ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░ ${NC}"
+echo -e "${RED} ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${RED}  ░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${RED}  ░▒▓█▓▒▒▓█▓▒░░▒▓████████▓▒░▒▓█▓▒░      ░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${RED}   ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${RED}   ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${RED}    ░▒▓██▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░ ${NC}"
+echo -e "${BLUE} ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️                                                        ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️  ©2025 Valkyr Labs Inc                                 ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️  https://peragonlabs.com/vai                            ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️  San Francisco, California                             ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️  support@peragonlabs.com                                ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️                                                        ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo -e "${WHITE} ☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️☮️${NC}"
+echo ""
+echo ""
+echo -e "${GREEN}WELCOME TO THE VAI GUIDED RUNNER${NC}"
+# Default values
+BYPASS=false
+USER_NAME=$(whoami)
+WORKSPACE_DIR=$(pwd)
+SSH_KEY_PATH="$SSH_KEY_PATH" #
+REMOTE_USER="$REMOTE_USER" #
+REMOTE_HOST="$REMOTE_HOST" #
+REMOTE_BACKEND_DIR="/home/bitnami/ValkyrAI"
+REMOTE_FRONTEND_DIR="/home/bitnami/stack/apache/htdocs"
+SERVER_PORT=8081
+SPRING_DATASOURCE_URL="$VSPRING_DATASOURCE_URL"
+SPRING_DATASOURCE_USERNAME="$VSPRING_DATASOURCE_USERNAME"
+SPRING_DATASOURCE_PASSWORD="$VSPRING_DATASOURCE_PASSWORD"
+JWT_SECRET="$JWT_SECRET"
+OPENAI_KEY_SECRETKEY="$OPENAI_KEY_SECRETKEY"
+THORAPI_SECRET_KEY="$THORAPI_SECRET_KEY"
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --bypass)
+            BYPASS=true
+            shift
+            ;;
+        *)
+            echo -e "Unknown option $1{NC}"
+            exit 1
+            ;;
+    esac
+done
+
+# Prompt for workspace directory if bypass is not set
+if [ "$BYPASS" = false ]; then
+    WORKSPACE_DIR=$(prompt_with_default "Enter the workspace directory" $WORKSPACE_DIR)
+fi
+
+# Define paths
+peragon_games_DIR="$WORKSPACE_DIR/src/main/demo-game"
+THOR_DIR="$peragon_games_DIR/src/thor"
+
+GENERATED_DIR="$WORKSPACE_DIR/generated"
+GENERATED_SPRING_LIB="$GENERATED_DIR/spring/lib"
+GENERATED_LIB="$GENERATED_DIR/lib"
+GENERATED_SPRING="$GENERATED_DIR/spring"
+GENERATOR_JAR="$WORKSPACE_DIR/lib/generator-1.0-SNAPSHOT-exec.jar"
+API_YAML="$WORKSPACE_DIR/src/main/resources/openapi/api.yaml"
+TEMPLATE_DIR="$WORKSPACE_DIR/src/main/resources/openapi/api"
+
+# CLEAN THE GENERATED FILES
+if [ "$BYPASS" = false ]; then
+    CLEAN_FILES=$(prompt_with_default "Clean generated files from prior run...? (Y/n)" "n")
+else
+    CLEAN_FILES="Y"
+fi
+
+if [[ "$CLEAN_FILES" =~ ^[Yy]$ ]]; then
+    if [ "$BYPASS" = false ]; then
+
+    echo -e "Cleaning generated files..."
+
+    rm -rf "$THOR_DIR" || error_exit "Failed to remove $THOR_DIR"
+
+    if [ -d "$GENERATED_SPRING_LIB" ]; then
+        mv "$GENERATED_SPRING_LIB" "$GENERATED_DIR/" || error_exit "Failed to move $GENERATED_SPRING_LIB"
+    fi
+
+    rm -rf "$GENERATED_SPRING" || error_exit "Failed to remove $GENERATED_SPRING"
+
+    mkdir "$GENERATED_SPRING" || error_exit "Failed to create $GENERATED_SPRING"
+
+    if [ -d "$GENERATED_LIB" ]; then
+        mv "$GENERATED_LIB" "$GENERATED_SPRING/" || error_exit "Failed to move $GENERATED_LIB to $GENERATED_SPRING/"
+    fi
+
+    fi
+else
+    echo -e "${BLUE}Skipping cleaning generated files.${NC}"
+fi
+
+# ENHANCE THE OPENAPI
+
+if [ "$BYPASS" = false ]; then
+    ENHANCE_OPENAPI=$(prompt_with_default "Enhance the input OpenAPI with ThorAPI extensions...? (Y/n)" "Y")
+else
+    ENHANCE_OPENAPI="Y"
+fi
+
+if [[ "$ENHANCE_OPENAPI" =~ ^[Yy]$ ]]; then
+    if [ "$BYPASS" = false ]; then
+
+        echo -e "Enhancing the OpenAPI..."
+
+        if [ -f "$GENERATOR_JAR" ]; then
+            /usr/bin/env java -jar "$GENERATOR_JAR" "$API_YAML" "$TEMPLATE_DIR" || error_exit "Failed to enhance the OpenAPI"
+        else
+            error_exit "Enhancing the OpenAPI FAILED: generator JAR not found at $GENERATOR_JAR"
+        fi
+    fi
+else
+    echo -e "${BLUE}Skipping enhancing OpenAPI.${NC}"
+fi
+
+# Build Generator and Generate Code from Enhanced OpenAPI
+if [ "$BYPASS" = false ]; then
+    REBUILD_GENERATOR=$(prompt_with_default "Build generator and generate code from enhanced OpenAPI...? (Y/n)" "Y")
+else
+    REBUILD_GENERATOR="Y"
+fi
+
+if [[ "$REBUILD_GENERATOR" =~ ^[Yy]$ ]]; then
+    if [ "$BYPASS" = false ]; then
+
+        mvn clean install -DskipTests || error_exit "Maven build failed"
+        # mkdir $peragon_games_DIR/docs/docs/api-docs/
+        # update the generator jar
+        BUILT_JAR="$WORKSPACE_DIR/target/percival-1.0-SNAPSHOT-exec.jar"
+        echo -e "${GREEN} copying $BUILT_JAR to $WORKSPACE_DIR/lib/ ${NC}"
+        cp $BUILT_JAR $WORKSPACE_DIR/lib/
+        
+        # cp $GENERATED_SPRING/src/main/docs/* $peragon_games_DIR/docs/docs/
+        echo -e "${GREEN} copying $GENERATED_SPRING/src/main/docs/api/* to $peragon_games_DIR/v1/docs/api-docs/ ${NC}"
+        cp $GENERATED_SPRING/src/main/docs/api/* $peragon_games_DIR/v1/docs/api-docs/
+        echo -e "${GREEN} copying $GENERATED_SPRING/src/main/docs/model/* to $peragon_games_DIR/v1/docs/model-docs/ ${NC}"
+        cp $GENERATED_SPRING/src/main/docs/model/* $peragon_games_DIR/v1/docs/model-docs/
+    fi
+else
+    echo -e "${BLUE}Skipping generator rebuild.${NC}"
+fi
+
+# Optional trace setting for maven (uncomment if needed)
+# -Djdk.instrument.traceUsage 
+
+# Optionally run backend instance for development
+if [ "$BYPASS" = false ]; then
+    RUN_BACKEND=$(prompt_with_default "Do you want to run the backend instance for development? (Y/n)" "Y")
+else
+    RUN_BACKEND="Y"
+fi
+
+if [[ "$RUN_BACKEND" =~ ^[Yy]$ ]]; then
+    if [ "$BYPASS" = false ]; then
+        OPENAI_KEY_SECRETKEY=$(prompt_with_default "Enter OPENAI_KEY_SECRETKEY " $OPENAI_KEY_SECRETKEY)
+        THORAPI_SECRET_KEY=$(prompt_with_default "Enter THORAPI_SECRET_KEY " $THORAPI_SECRET_KEY)
+        SPRING_DATASOURCE_URL=$(prompt_with_default "Enter SPRING_DATASOURCE_URL " $SPRING_DATASOURCE_URL)
+        SPRING_DATASOURCE_USERNAME=$(prompt_with_default "Enter SPRING_DATASOURCE_USERNAME " $SPRING_DATASOURCE_USERNAME)
+        SPRING_DATASOURCE_PASSWORD=$(prompt_with_default "Enter SPRING_DATASOURCE_PASSWORD " $SPRING_DATASOURCE_PASSWORD)
+        SERVER_PORT=$(prompt_with_default "Enter SERVER_PORT " $SERVER_PORT)
+        JWT_SECRET=$(prompt_with_default "Enter JWT_SECRET " $JWT_SECRET)
+    else
+        # Use default or predefined values
+        OPENAI_KEY_SECRETKEY="your-openai-key-secretkey"
+        THORAPI_SECRET_KEY="your-thorapi-secret-key"
+        # Other variables are already set with default values
+    fi
+
+    export OPENAI_KEY_SECRETKEY
+    export THORAPI_SECRET_KEY
+
+    echo -e "${WHITE}Building generated Spring project...${NC}"
+    mvn clean install -f "$GENERATED_SPRING/pom.xml" -DskipTests || error_exit "Maven build failed for generated/spring"
+
+    echo -e "${WHITE}Running backend instance...${NC}"
+    cd $GENERATED_SPRING
+    java -jar "./target/valkyrai-api-1.0-SNAPSHOT.jar" \
+        --spring.datasource.url="$SPRING_DATASOURCE_URL" \
+        --spring.jpa.hibernate.ddl-auto=update \
+        --spring.datasource.username="$SPRING_DATASOURCE_USERNAME" \
+        --spring.datasource.password="$SPRING_DATASOURCE_PASSWORD" \
+        --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
+        --server.port="$SERVER_PORT" \
+        --jwt.secret="$JWT_SECRET" \
+    || error_exit "Failed to run backend instance"
+
+else
+    echo -e "${BLUE}Skipping backend instance run.${NC}"
+fi
+
+# builds need this
+export OPENAI_KEY_SECRETKEY
+export THORAPI_SECRET_KEY
+
+# Optionally run frontend instance for development
+if [ "$BYPASS" = false ]; then
+    RUN_FRONTEND=$(prompt_with_default "Do you want to build and run the frontend instance for development? (Y/n)" "Y")
+else
+    RUN_FRONTEND="Y"
+fi
+
+if [[ "$RUN_FRONTEND" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Running frontend instance...${NC}"
+    cd "$peragon_games_DIR" || error_exit "Failed to change directory to $peragon_games_DIR "
+    yarn install || error_exit "Frontend install failed"
+    yarn build || error_exit "Frontend build failed"
+    yarn dev || error_exit "Failed to start frontend development server"
+else
+    echo -e "${BLUE}Skipping frontend instance run.${NC}"
+fi
+
+### DEPLOY SECTION
+
+if [ "$BYPASS" = false ]; then
+    DEPLOY_NOW=$(prompt_with_default "Do you want to deploy generated artifacts now? (Y/n)" "Y")
+else
+    DEPLOY_NOW="Y"
+fi
+
+if [[ "$DEPLOY_NOW" =~ ^[Yy]$ ]]; then
+    # Backend deploy to server
+    echo -e "${WHITE}Building generated Spring project...${NC}"
+    mvn clean install -f "$GENERATED_SPRING/pom.xml" || error_exit "Maven build failed for generated/spring"
+
+    echo -e "Deploying backend to server..."
+
+    if [ "$BYPASS" = false ]; then
+        SSH_KEY_PATH=$(prompt_with_default "Enter SSH_KEY_PATH " $SSH_KEY_PATH)
+        REMOTE_USER=$(prompt_with_default "Enter REMOTE_USER " $REMOTE_USER)
+        REMOTE_HOST=$(prompt_with_default "Enter REMOTE_HOST " $REMOTE_HOST)
+        REMOTE_BACKEND_DIR=$(prompt_with_default "Enter REMOTE_BACKEND_DIR " $REMOTE_BACKEND_DIR)
+    fi
+
+    scp -rp -i $SSH_KEY_PATH $GENERATED_SPRING/target/peragonai-api-*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_BACKEND_DIR/ || error_exit "Failed to copy backend jar to server"
+
+    # Frontend deploy to server
+    echo -e "${WHITE}Deploying frontend to server...${NC}"
+
+    if [ "$BYPASS" = false ]; then
+        REMOTE_FRONTEND_DIR=$(prompt_with_default "Enter remote frontend directory " $REMOTE_FRONTEND_DIR)
+    fi
+    cd $peragon_games_DIR
+    yarn build-prod
+    scp -rp -i $SSH_KEY_PATH $peragon_games_DIR/dist/* $REMOTE_USER@$REMOTE_HOST:$REMOTE_FRONTEND_DIR/ || error_exit "Failed to copy frontend files to server"
+
+    # docs deploy
+    cd $peragon_games_DIR/docs
+    yarn install
+    yarn clear
+    yarn build
+    scp -rp -i $SSH_KEY_PATH $peragon_games_DIR/docs/build/* $REMOTE_USER@$REMOTE_HOST:$REMOTE_FRONTEND_DIR/docs/ || error_exit "Failed to copy frontend files to server"
+
+else
+    echo -e "${BLUE}Deployment skipped.${NC}"
+fi
+
+# Optionally ssh into the server to restart services
+if [ "$BYPASS" = false ]; then
+    SSH_INTO_SERVER=$(prompt_with_default "Do you want to SSH into $REMOTE_HOST to restart services? (Y/n)" "Y")
+else
+    SSH_INTO_SERVER="Y"
+fi
+
+if [[ "$SSH_INTO_SERVER" =~ ^[Yy]$ ]]; then
+    echo -e "Connecting to server..."
+    ssh -i $SSH_KEY_PATH $REMOTE_USER@$REMOTE_HOST || error_exit "Failed to SSH into server"
+else
+    echo -e "${BLUE}Skipping SSH into server.${NC}"
+fi
+
+# Generate Keys
+if [ "$BYPASS" = false ]; then
+    GENERATE_JWT_SECRET_KEY=$(prompt_with_default "Do you want to generate a JWT Secret Key? (Y/n)" "Y")
+else
+    GENERATE_JWT_SECRET_KEY="Y"
+fi
+
+if [[ "$GENERATE_JWT_SECRET_KEY" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Generating JWT Secret Key...${NC}"
+    cd $peragon_games_DIR
+    yarn generate-jwt-key
+else
+    echo -e "${BLUE}Skipping generating a JWT Secret Key...${NC}"
+fi
+
+
+if [ "$BYPASS" = false ]; then
+    GENERATE_THORAPI_KEY=$(prompt_with_default "Do you want to generate a THORAPI Secret Key? (Y/n)" "Y")
+else
+    GENERATE_THORAPI_KEY="Y"
+fi
+
+if [[ "$GENERATE_THORAPI_KEY" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Generating THORAPI Secret Key...${NC}"
+    cd $WORKSPACE_DIR
+    java -jar $GENERATOR_JAR generatekey
+else
+    echo -e "${BLUE}Skipping generating a THORAPI Secret Key...${NC}"
+fi
+
+
+if [ "$BYPASS" = false ]; then
+    CREATE_VIDAR_FILE=$(prompt_with_default "Do you want to create an encrypted VIDAR file? (Y/n)" "Y")
+else
+    CREATE_VIDAR_FILE="Y"
+fi
+
+if [[ "$CREATE_VIDAR_FILE" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Packaging VIDAR encrypted file...${NC}"
+    ./bin/vidar
+else
+    echo -e "${BLUE}Skipping generating a VIDAR encrypted file...${NC}"
+fi
+
+if [ "$BYPASS" = false ]; then
+    LAUNCH_VLKDOCKER=$(prompt_with_default "Do you want to launch a local ValkyrAI Docker instance? (Y/n)" "Y")
+else
+    LAUNCH_VLKDOCKER="n"
+fi
+
+if [[ "$LAUNCH_VLKDOCKER" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Launching ValkyrAI Docker instance...${NC}"
+    cd $WORKSPACE_DIR/docker/peragonai
+    
+    docker build -t springio/gs-spring-boot-docker .
+
+    docker run -p 8080:8080 springio/gs-spring-boot-docker
+
+    echo -e "${GREEN}ValkyrAI Docker instance launched successfully: access the UI at http://localhost:8081 .${NC}"
+else
+    echo -e "${BLUE}Skipping Launching ValkyrAI Docker instance...${NC}"
+fi
+
+
+
+if [ "$BYPASS" = false ]; then
+    LAUNCH_MINDSDB=$(prompt_with_default "Do you want to launch a local MINDSDB instance? (Y/n)" "Y")
+else
+    LAUNCH_MINDSDB="n"
+fi
+
+if [[ "$LAUNCH_MINDSDB" =~ ^[Yy]$ ]]; then
+    echo -e "${WHITE}Launching MINDSDB instance...${NC}"
+    cd $WORKSPACE_DIR/docker/mindsdb
+    docker compose build
+    docker compose up --force-recreate -d
+    echo -e "${GREEN}MINDSDB instance launched successfully: access the UI at http://127.0.0.1:47334/editor .${NC}"
+else
+    echo -e "${BLUE}Skipping Launching MINDSDB instance...${NC}"
+fi
+
+
+echo -e "Script execution completed successfully."

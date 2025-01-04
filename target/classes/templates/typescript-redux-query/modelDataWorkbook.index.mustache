@@ -1,0 +1,86 @@
+
+import React, { useState } from 'react';
+
+import { Col, Container, Nav, NavDropdown, Row, Tab, Tabs } from "react-bootstrap";
+import CoolButton from "../../../../components/CoolButton";
+import TimeSeriesChart from "../../../../components/Charts/TimeSeriesChart";
+import SplitPaneView from "../../../../components/SplitPane/SplitPaneView";
+import FloatingToolbar from "../../../../components/FloatingToolbar";
+
+{{#apiInfo}}{{#apis}}{{#operations}}
+import  {{baseName}}Chart  from '../chart/{{baseName}}Chart';
+import  {{baseName}}Form  from '../form/{{baseName}}Form';
+import  {{baseName}}Table from '../table/{{baseName}}Table';
+
+{{/operations}}{{/apis}}{{/apiInfo}}
+
+const DataWorkbook = () => {
+
+    const [activeTab, setActiveTab] = useState('');
+  
+    return (
+        <Container fluid className="p-3">
+                <Nav
+                    variant="tabs" 
+                    defaultActiveKey={activeTab}
+                    id="fill-tab"
+                    className="mb-3"
+                    fill
+                >
+                    <Nav.Item>
+                        <NavDropdown
+                            id="spec"
+                            title='Select Local API'
+                        >
+    {{#apiInfo}}{{#apis}}{{#operations}}
+
+                            <NavDropdown.Item
+                                title='{{{baseName}}}'
+                                active={ activeTab == '{{{baseName}}}' }
+                                onClick={() => {
+                                    setActiveTab("{{{baseName}}}");
+                                }}
+                                key={ '{{{baseName}}}' }
+                                    >
+                                {/* DataChart Section */}                  
+<h5>{{#lambda.uncamelize}}{{baseName}}{{/lambda.uncamelize}}</h5>
+{{{baseName}}}
+                            </NavDropdown.Item>
+{{/operations}}{{/apis}}{{/apiInfo}}
+                        </NavDropdown>
+                    </Nav.Item>
+            </Nav>
+
+            <Tabs>
+{{#apiInfo}}{{#apis}}{{#operations}}
+            <Tab
+             title={null}
+             eventKey="{{baseName}}" 
+             active={ activeTab == '{{{baseName}}}' }
+            >
+                <h1>{{baseName}}</h1>
+                <Tabs key={'{{baseName}}'}>
+                    <Tab title='{{baseName}} Chart'
+                            eventKey="{{baseName}}C"
+                    >
+                        <{{baseName}}Chart /> 
+                    </Tab>     
+                    <Tab title='{{baseName}} Table'
+                            eventKey="{{baseName}}T"
+                    >
+                        <{{baseName}}Table />
+                    </Tab>
+                    <Tab title='Edit {{baseName}}'
+                            eventKey="{{baseName}}F"
+                    >
+                        <{{baseName}}Form />
+                    </Tab>
+                </Tabs>
+            </Tab>
+{{/operations}}{{/apis}}{{/apiInfo}}
+            </Tabs>
+        </Container>
+    );
+};
+
+export default DataWorkbook;

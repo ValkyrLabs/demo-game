@@ -1,0 +1,8 @@
+/* ThorAPI builtins */
+export * from './DataObject';
+
+{{#models}}
+{{#model}}
+export * from './{{classname}}';
+{{/model}}
+{{/models}}

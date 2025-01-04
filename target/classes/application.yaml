@@ -1,0 +1,106 @@
+# Spring Framework Configuration
+
+# Database
+spring:
+  datasource:
+    hikari:
+      register-mbeans: true
+      idle-timeout: 9000000
+      # allow_update_outside_transaction: true
+      minimum-idle: 5 # Minimum number of idle connections
+      maximum-pool-size: 30 # Maximum pool size
+      max-lifetime: 1800000 # 30 minutes, maximum connection lifetime
+      connection-timeout: 30000 # 30 seconds timeout to get a connection
+      auto-commit: true # Enable autocommit
+      # isolation-level: TRANSACTION_READ_COMMITTED # Recommended default isolation level
+      pool-name: HikariCP-Pool # Name the pool for easier debugging
+
+    url: ""
+    username: ""
+    password: ""
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+  jpa:
+    show-sql: false
+    open-in-view: true
+    properties:
+      hibernate:
+        generate-statistics: false
+        format-sql: false
+        ddl-auto: update
+
+  web:
+    resources:
+      static-locations: file:${user.dir}/public/,classpath:/static/
+
+  # Redis Configuration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: redis_pass
+
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # Main Configuration
+  main:
+    allow-bean-definition-overriding: true
+
+  # Cache Configuration (if using EhCache)
+  cache:
+    type: ehcache
+
+  # liquibase:
+  #  change-log: classpath:liquibase/db/changelog/db.changelog-master.yaml
+
+# JWT Configuration
+jwt:
+  secret: 838b0a0b2bb9bba26e82d82ca4b472281339d2e9b61b68a645b537f35791dab5
+  expiration-days: 30
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com:
+      valkyrlabs:
+        springboot:
+          controller: DEBUG
+          service: DEBUG
+          repository: DEBUG
+          model: DEBUG
+          exception: DEBUG
+          security: DEBUG
+          config: TRACE
+          util: DEBUG
+          validation: DEBUG
+          dto: DEBUG
+    org:
+      hibernate:
+        stat: TRACE
+        SQL: TRACE
+      springframework:
+        security: DEBUG
+
+# Management Endpoints (for Prometheus)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+# Springdoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /v1/swagger-ui.html
+
+valkyrai:
+  file-storage:
+    base-dir: /public/userfiles

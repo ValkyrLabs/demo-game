@@ -1,7 +1,7 @@
 // tslint:disable
 /**
- * Percival the Dragon Slayer CORE API
- * The API for accessing Percival the Dragon Slayer services
+ * ValkyrAI CORE API
+ * The API for accessing ValkyrAI services
  *
  * The version of the OpenAPI document: 0.9.25
  * Contact: info@valkyrlabs.com
@@ -18,16 +18,13 @@ import {
     IntegrationAccount,
     IntegrationAccountFromJSON,
     IntegrationAccountToJSON,
-    OasOpenAPISpec,
-    OasOpenAPISpecFromJSON,
-    OasOpenAPISpecToJSON,
 } from './';
 
 
 // thorapi
 
 /**
- * ExecModule is the execution unit of the Percival the Dragon Slayer Workflow Engine
+ * ExecModule is the execution unit of the ValkyrAI Workflow Engine
  * @export
  * @interface ExecModule
  */
@@ -93,12 +90,6 @@ export type ExecModule  = {
      */
     status?: ExecModuleStatusEnum;
     /**
-     * an array of OpenAPI specs to be referenced by the Tasks/Modules
-     * @type {Array<OasOpenAPISpec>}
-     * @memberof ExecModule
-     */
-    specs?: Array<OasOpenAPISpec>;
-    /**
      * Unique identifier for object in the system
      * @type {string}
      * @memberof ExecModule
@@ -160,7 +151,6 @@ export function ExecModuleFromJSON(json: any): ExecModule {
         'moduleType': !exists(json, 'moduleType') ? undefined : json['moduleType'],
         'moduleData': !exists(json, 'moduleData') ? undefined : json['moduleData'],
         'status': !exists(json, 'status') ? undefined : json['status'],
-        'specs': !exists(json, 'specs') ? undefined : (json['specs'] as Array<any>).map(OasOpenAPISpecFromJSON),
         'id': !exists(json, 'id') ? undefined : json['id'],
         'ownerId': !exists(json, 'ownerId') ? undefined : json['ownerId'],
         'createdDate': !exists(json, 'createdDate') ? undefined : new Date(json['createdDate']),
@@ -187,7 +177,6 @@ export function ExecModuleToJSON(value?: ExecModule): any {
         'moduleType': value.moduleType,
         'moduleData': value.moduleData,
         'status': value.status,
-        'specs': value.specs === undefined ? undefined : (value.specs as Array<any>).map(OasOpenAPISpecToJSON),
         'id': value.id,
         'ownerId': value.ownerId,
         'createdDate': value.createdDate === undefined ? undefined : value.createdDate.toISOString(),

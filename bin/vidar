@@ -1,0 +1,301 @@
+#!/bin/bash
+
+# This script creates a self-extracting executable JAR file that contains an encrypted payload.
+# When executed, it will prompt the user for a password, decrypt the payload, extract it, and run the "vai" command.
+
+set -e
+
+# Colors for enhanced user experience
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+NC='\033[0m' # No Color
+
+# Variables
+PAYLOAD_DIR="generated/spring"       # Directory containing the payload files
+PAYLOAD_ZIP="payload.zip"
+ENCRYPTED_PAYLOAD="encrypted_payload.bin"
+
+# Help message
+function usage {
+    echo -e "${BLUE}Usage:${NC} $0 [options]"
+    echo -e "Options:"
+    echo -e "  -h, --help           Show this help message and exit"
+    echo -e "  -p, --password       Password for encryption (will prompt if not provided)"
+    echo -e "  -o, --output         Output JAR file name (default: vidar.jar)"
+    exit 1
+}
+
+# Default output file
+OUTPUT_JAR="vidar"
+
+# Parse command-line arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -p|--password) PASSWORD="$2"; shift ;;
+        -o|--output) OUTPUT_JAR="$2"; shift ;;
+        -h|--help) usage ;;
+        *) echo -e "${RED}Unknown parameter passed: $1${NC}"; usage ;;
+    esac
+    shift
+done
+
+# Prompt for password if not provided
+if [ -z "$PASSWORD" ]; then
+    echo -ne "${YELLOW}Enter a password for encryption: ${NC}"
+    read -s PASSWORD
+    echo
+fi
+
+# Step 1: Prepare the payload
+echo -e "${GREEN}Zipping the payload directory...${NC}"
+if [ ! -d "$PAYLOAD_DIR" ]; then
+    echo -e "${RED}Error: Payload directory '$PAYLOAD_DIR' does not exist.${NC}"
+    exit 1
+fi
+zip -r "$PAYLOAD_ZIP" "$PAYLOAD_DIR" >/dev/null
+
+# Step 2: Write encryptor.java
+echo -e "${GREEN}Creating encryptor.java...${NC}"
+cat > encryptor.java << EOF
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
+import java.io.*;
+import java.security.spec.KeySpec;
+
+public class encryptor {
+    public static void main(String[] args) throws Exception {
+        String password = System.getenv("ENCRYPT_PASSWORD");
+        if (password == null || password.isEmpty()) {
+            System.err.println("Encryption password not provided.");
+            System.exit(1);
+        }
+        FileInputStream inFile = new FileInputStream("$PAYLOAD_ZIP");
+        FileOutputStream outFile = new FileOutputStream("$ENCRYPTED_PAYLOAD");
+
+        // Read the payload.zip file
+        byte[] fileData = new byte[inFile.available()];
+        inFile.read(fileData);
+        inFile.close();
+
+        // Encryption parameters
+        byte[] salt = new byte[] { (byte)0xA9, (byte)0x9B, (byte)0xC8, (byte)0x32,
+                                   (byte)0x56, (byte)0x35, (byte)0xE3, (byte)0x03 };
+        int iterationCount = 65536;
+
+        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterationCount, 256);
+        SecretKey key = SecretKeyFactory.getInstance("PBEWithMD5AndDES").generateSecret(keySpec);
+
+        Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
+        cipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(salt, iterationCount));
+
+        byte[] encryptedData = cipher.doFinal(fileData);
+
+        outFile.write(encryptedData);
+        outFile.close();
+
+        System.out.println("Encryption completed.");
+    }
+}
+EOF
+
+# Step 3: Compile encryptor.java
+echo -e "${GREEN}Compiling encryptor.java...${NC}"
+javac encryptor.java
+
+# Step 4: Encrypt the payload
+echo -e "${GREEN}Encrypting the payload...${NC}"
+export ENCRYPT_PASSWORD="$PASSWORD"
+java encryptor
+
+# Step 5: Clean up encryptor files
+rm encryptor.java encryptor.class
+
+# Step 6: Write vidar.java
+echo -e "${GREEN}Creating vidar.java...${NC}"
+cat > vidar.java << EOF
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
+import java.io.*;
+import java.nio.file.*;
+import java.security.spec.KeySpec;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.nio.file.attribute.PosixFilePermissions;
+
+public class vidar {
+    public static void main(String[] args) {
+        try {
+            // Command-line argument handling
+            if (args.length > 0 && (args[0].equals("--help") || args[0].equals("-h"))) {
+                System.out.println("Usage: java -jar vidar.jar");
+                System.exit(0);
+            }
+
+            // Enhanced user experience with colors
+            String ANSI_RESET = "\\u001B[0m";
+            String ANSI_GREEN = "\\u001B[32m";
+            String ANSI_RED = "\\u001B[31m";
+            String ANSI_YELLOW = "\\u001B[33m";
+            String ANSI_BLUE = "\\u001B[34m";
+
+            Console console = System.console();
+            if(console == null) {
+                System.err.println(ANSI_RED + "Couldn't get Console instance" + ANSI_RESET);
+                System.exit(1);
+            }
+
+            String password = new String(console.readPassword(ANSI_YELLOW + "Enter password: " + ANSI_RESET));
+
+            InputStream encryptedInputStream = vidar.class.getResourceAsStream("/$ENCRYPTED_PAYLOAD");
+            if (encryptedInputStream == null) {
+                System.err.println(ANSI_RED + "Encrypted payload not found." + ANSI_RESET);
+                System.exit(1);
+            }
+
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] data = new byte[16384];
+            while ((nRead = encryptedInputStream.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            byte[] encryptedData = buffer.toByteArray();
+            encryptedInputStream.close();
+
+            // Decryption parameters
+            byte[] salt = new byte[] { (byte)0xA9, (byte)0x9B, (byte)0xC8, (byte)0x32,
+                                       (byte)0x56, (byte)0x35, (byte)0xE3, (byte)0x03 };
+            int iterationCount = 65536;
+
+            KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterationCount, 256);
+            SecretKey key = SecretKeyFactory.getInstance("PBEWithMD5AndDES").generateSecret(keySpec);
+
+            Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
+            cipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(salt, iterationCount));
+
+
+            byte[] decryptedData = null;
+            try {
+                decryptedData = cipher.doFinal(encryptedData);
+            } catch (Exception e) {
+                System.err.println(ANSI_RED + "Invalid password or decryption failed." + ANSI_RESET);
+                System.exit(1);
+            }
+
+            // Write decrypted data to a zip file
+            String outputZip = "output/payload_decrypted.zip";
+            File dirMaker = new File(outputZip);
+
+            // Create output folders
+            dirMaker.getParentFile().mkdirs();
+
+            FileOutputStream outFile = new FileOutputStream(outputZip);
+            outFile.write(decryptedData);
+            outFile.close();
+
+            // Unzip the decrypted payload
+            unzip(outputZip, "./output");
+
+            // Delete the decrypted zip file
+            new File(outputZip).delete();
+
+            // Set executable permission on 'vai' script
+            Path vaiPath = Paths.get("output/$PAYLOAD_DIR/vai");
+            if (Files.exists(vaiPath)) {
+                Files.setPosixFilePermissions(vaiPath, PosixFilePermissions.fromString("rwxr-xr-x"));
+            } else {
+                System.err.println(ANSI_RED + "'vai' script not found in the payload." + ANSI_RESET);
+                System.exit(1);
+            }
+
+            // Run the "vai" command
+            System.out.println(ANSI_GREEN + "Running 'vai' command..." + ANSI_RESET);
+            ProcessBuilder pb = new ProcessBuilder("./vai");
+            pb.directory(new File("output/$PAYLOAD_DIR"));
+            pb.inheritIO();
+            Process process = pb.start();
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                System.err.println(ANSI_RED + "Error: 'vai' command failed." + ANSI_RESET);
+                System.exit(exitCode);
+            }
+
+            System.out.println(ANSI_GREEN + "Decryption and extraction completed successfully." + ANSI_RESET);
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            System.exit(1);
+        }
+    }
+
+    private static void unzip(String zipFilePath, String destDir) throws IOException {
+        File dir = new File(destDir);
+        if(!dir.exists()) dir.mkdirs();
+        FileInputStream fis = new FileInputStream(zipFilePath);
+        ZipInputStream zipIn = new ZipInputStream(fis);
+        ZipEntry entry = zipIn.getNextEntry();
+        while(entry != null){
+            String filePath = destDir + File.separator + entry.getName();
+            if(!entry.isDirectory()){
+                extractFile(zipIn, filePath);
+            }else{
+                File dirEntry = new File(filePath);
+                dirEntry.mkdirs();
+            }
+            zipIn.closeEntry();
+            entry = zipIn.getNextEntry();
+        }
+        zipIn.close();
+        fis.close();
+    }
+
+    private static void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
+        File file = new File(filePath);
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+        byte[] bytesIn = new byte[4096];
+        int read;
+        while ((read = zipIn.read(bytesIn)) != -1) {
+            bos.write(bytesIn, 0, read);
+        }
+        bos.close();
+    }
+}
+EOF
+
+# Step 7: Compile vidar.java
+echo -e "${GREEN}Compiling vidar.java...${NC}"
+javac vidar.java
+
+# Step 8: Create manifest file
+echo -e "${GREEN}Creating manifest file...${NC}"
+cat > manifest.txt << EOF
+Main-Class: vidar
+EOF
+
+# DELETE THE UNENCRYPTED ZIP!
+rm "$PAYLOAD_ZIP"
+
+# Step 9: Package everything into an executable JAR
+echo -e "${GREEN}Packaging into executable JAR...${NC}"
+jar cfm "$OUTPUT_JAR" manifest.txt vidar.class $ENCRYPTED_PAYLOAD
+
+# Step 10: Clean up
+echo -e "${GREEN}Cleaning up...${NC}"
+
+rm vidar.java vidar.class manifest.txt "$ENCRYPTED_PAYLOAD"
+
+echo -e "${GREEN}Executable JAR file '$OUTPUT_JAR' has been created.${NC}"
+
+echo -e "${YELLOW}To run the self-extracting JAR, execute:${NC}"
+echo -e "${BLUE}java -jar $OUTPUT_JAR${NC}"
